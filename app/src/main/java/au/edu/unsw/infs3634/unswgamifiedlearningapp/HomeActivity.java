@@ -2,6 +2,7 @@ package au.edu.unsw.infs3634.unswgamifiedlearningapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -54,6 +55,8 @@ public class HomeActivity extends AppCompatActivity
                         break;
 
                     case R.id.menu_notes:
+                        Intent intent = new Intent(getApplicationContext(), Notes.class);
+                        startActivity(intent);
                         Toast.makeText(getApplicationContext(),"NotesPanel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
