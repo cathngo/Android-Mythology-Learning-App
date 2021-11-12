@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UNSWGamifiedLearningApp">
         <activity
+            android:name=".NotesActivity"
+            android:exported="true" />
+        <activity
+            android:name=".QuizActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ProgressActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LearnActivity"
+            android:exported="true" />
+        <activity
             android:name=".Leaderboard"
             android:exported="true" />
         <activity
