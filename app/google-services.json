@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "41179412359",
+    "project_id": "unsw-gamified-learning-a-2ccd8",
+    "storage_bucket": "unsw-gamified-learning-a-2ccd8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41179412359:android:b6e58eb46e1ed6d3b38522",
+        "android_client_info": {
+          "package_name": "au.edu.unsw.infs3634.unswgamifiedlearningapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41179412359-sha0l18nbqu614rildu1pul6221ls2b7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCDqK9BEQGySkTb1j5hS5FHExxCMwweVc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "41179412359-sha0l18nbqu614rildu1pul6221ls2b7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

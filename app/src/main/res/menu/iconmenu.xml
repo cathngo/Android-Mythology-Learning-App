@@ -22,7 +22,7 @@
 
     <item android:id="@+id/menu_friends"
         android:icon="@drawable/friends_icon"
-        android:title="Friends"/>
+        android:title="Leaderboard"/>
 
     <item android:id="@+id/menu_logout"
         android:icon="@drawable/logout_icon"
