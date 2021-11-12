@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UNSWGamifiedLearningApp">
         <activity
+            android:name=".Leaderboard"
+            android:exported="true" />
+        <activity
             android:name=".Register"
             android:exported="true" />
         <activity

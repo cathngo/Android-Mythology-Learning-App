@@ -66,6 +66,8 @@ public class Register extends AppCompatActivity {
                 .fallbackToDestructiveMigration()
                 .build();
 
+        //for testing purposes - need to get rid of this line later
+        //resetDatabase();
     }
 
     private void createUser(){
@@ -89,7 +91,7 @@ public class Register extends AppCompatActivity {
                         //insert into room Dao
                         DatabaseAll db  = DatabaseAll.getDbInstance(Register.this);
                         String id = mAuth.getCurrentUser().getUid();
-                        insertUserIntoDatabase(email,fName, lName, id, password);
+                        insertUserIntoDatabase(email,fName, lName, id, password, 0);
                         startActivity(new Intent(Register.this, Login.class));
                     }else{
                         Toast.makeText(Register.this, "Registration Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -99,21 +101,35 @@ public class Register extends AppCompatActivity {
         }
     }
 
-    private void insertUserIntoDatabase(String email, String firstName, String lastName, String id, String password) {
+    private void insertUserIntoDatabase(String email, String firstName, String lastName, String id, String password, int level) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                mDb.userDao().insert(new User(email, firstName, lastName, id, password));
+                mDb.userDao().insert(new User(email, firstName, lastName, id, password, level));
 
                 List<User> userAccounts = mDb.userDao().getUsers();
                 for(User userAccount : userAccounts) {
                     Log.d("Printing user emails" , userAccount.getEmail());
-                    Log.d("Printing user fname" , userAccount.getFirstName());
-                    Log.d("Printing userlnane" , userAccount.getLastName());
+                    Log.d("Printing user first nname" , userAccount.getFirstName());
+                    Log.d("Printing user last nnane" , userAccount.getLastName());
                     Log.d("Printing user uid" , userAccount.getUserId());
                     Log.d("Printing user pw" , userAccount.getPassword());
+                    Log.d("Printing user level" , String.valueOf(userAccount.getLevel()));
 
                 }
+
+            }
+        });
+
+    }
+
+
+    private void resetDatabase() {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.userDao().deleteAll();
+
 
             }
         });
