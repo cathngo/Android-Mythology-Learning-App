@@ -65,6 +65,8 @@ public class HomeActivity extends AppCompatActivity
                         break;
 
                     case R.id.menu_notes:
+                        Intent intent = new Intent(getApplicationContext(), Notes.class);
+                        startActivity(intent);
                         Toast.makeText(getApplicationContext(),"NotesPanel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(HomeActivity.this, NotesActivity.class));

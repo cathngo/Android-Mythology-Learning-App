@@ -17,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -31,25 +33,7 @@ public class Notes extends AppCompatActivity {
 
     //Source: https://www.youtube.com/watch?v=48EB4HeP1kI&fbclid=IwAR1ZZ8XrB1zuAcvkT3vG6Y1XsoJ6zH-TeWk0ZdwWUTCfUzLToSx6F2_Xle4
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.note_menu, menu);
-        
-        return super.onCreateOptionsMenu(menu);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item){
-        super.onOptionsItemSelected(item);
-        if (item.getItemId() == R.id.add_note){
-            Intent intent = new Intent(getApplicationContext(), NotesEditor.class);
-            startActivity(intent);
-            return true;
-        }
-        return false;
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +54,17 @@ public class Notes extends AppCompatActivity {
 
         arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, notes);
         notesList.setAdapter(arrayAdapter);
+
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), NotesEditor.class);
+                startActivity(intent);
+
+            }
+        });
 
 
         notesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -119,5 +114,28 @@ public class Notes extends AppCompatActivity {
             }
         });
 
+
+
+
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu){
+//        MenuInflater menuInflater = getMenuInflater();
+//        menuInflater.inflate(R.menu.note_menu, menu);
+//
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item){
+//        super.onOptionsItemSelected(item);
+//        if (item.getItemId() == R.id.add_note){
+//            Intent intent = new Intent(getApplicationContext(), NotesEditor.class);
+//            startActivity(intent);
+//            return true;
+//        }
+//        return false;
+//
+//    }
 }
