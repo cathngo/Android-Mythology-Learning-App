@@ -90,7 +90,6 @@ public class Leaderboard extends AppCompatActivity implements LeaderboardAdapter
                         Toast.makeText(getApplicationContext(),"Progress Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(Leaderboard.this, ProgressActivity.class));
-
                         break;
 
                     case R.id.menu_friends:
@@ -104,7 +103,6 @@ public class Leaderboard extends AppCompatActivity implements LeaderboardAdapter
                         startActivity(new Intent(Leaderboard.this, Login.class));
                         break;
                 }
-
                 return true;
             }
         });
@@ -136,14 +134,13 @@ public class Leaderboard extends AppCompatActivity implements LeaderboardAdapter
                         //adapter = new LeaderboardAdapter(new ArrayList<User>());
                         adapter = new LeaderboardAdapter(users);
                         recyclerView.setAdapter(adapter);
+                        //sort users by their rank
+                        adapter.sortByRank();
                         //adapter.setUser(users);
                     }
                 });
-
             }
-
         });
-
     }
 
     @Override
