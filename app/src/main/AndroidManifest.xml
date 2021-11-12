@@ -34,9 +34,6 @@
             android:name=".NotesEditor"
             android:exported="true" />
         <activity
-            android:name=".Notes"
-            android:exported="true" />
-        <activity
             android:name=".HomeActivity"
             android:exported="true" />
         <activity

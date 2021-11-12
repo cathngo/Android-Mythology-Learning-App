@@ -32,11 +32,11 @@ public class NotesEditor extends AppCompatActivity {
         //work out whether a new note or an old note (editnotes)
         if (noteID != -1){
 
-            editText.setText(Notes.notes.get(noteID));
+            editText.setText(NotesActivity.notes.get(noteID));
         } else {
-            Notes.notes.add("");
-            noteID = Notes.notes.size() - 1;
-            Notes.arrayAdapter.notifyDataSetChanged();
+            NotesActivity.notes.add("");
+            noteID = NotesActivity.notes.size() - 1;
+            NotesActivity.arrayAdapter.notifyDataSetChanged();
         }
 
 
@@ -50,12 +50,12 @@ public class NotesEditor extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                Notes.notes.set(noteID,String.valueOf(s));
-                Notes.arrayAdapter.notifyDataSetChanged();
+                NotesActivity.notes.set(noteID,String.valueOf(s));
+                NotesActivity.arrayAdapter.notifyDataSetChanged();
 
                 SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("au.edu.unsw.infs3634.unswgamifiedlearningapp", Context.MODE_PRIVATE);
 
-                HashSet<String> noteSet = new HashSet(Notes.notes);
+                HashSet<String> noteSet = new HashSet(NotesActivity.notes);
                 sharedPreferences.edit().putStringSet("notes",noteSet).apply();
 
             }
