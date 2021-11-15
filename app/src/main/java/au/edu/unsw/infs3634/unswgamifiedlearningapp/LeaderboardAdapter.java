@@ -46,11 +46,12 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         String name = firstName + " " + lastName;
         System.out.println("username is " + name);
         String level = String.valueOf(user.getLevel());
-
+        String username = user.getUsername();
         holder.txtName.setText(name);
-        holder.txtLevel.setText("Level " + level+".");
+        holder.txtLevel.setText("Level " + level);
+        holder.txtUsername.setText(username);
 
-        holder.txtRank.setText(String.valueOf(position + 1));
+        holder.txtRank.setText(String.valueOf(position + 1 + "."));
 
 
     }
@@ -65,12 +66,14 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         TextView txtRank;
         TextView txtName;
         TextView txtLevel;
+        TextView txtUsername;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             txtName = itemView.findViewById(R.id.txtName);
             txtLevel = itemView.findViewById(R.id.txtLevel);
             txtRank = itemView.findViewById(R.id.txtRank);
+            txtUsername = itemView.findViewById(R.id.txtUsername);
             this.userListener = userListener;
             itemView.setOnClickListener(this);
 

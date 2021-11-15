@@ -20,19 +20,22 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
 //Reference for sign up using Firebase: https://www.youtube.com/watch?v=iSsa9OlQJms&ab_channel=SoftCoding
 
 public class Register extends AppCompatActivity {
-
+    TextInputEditText etUserName;
     TextInputEditText etRegEmail;
     TextInputEditText  etRegPassword;
     TextInputEditText  editFirstName;
     TextInputEditText  editLastName;
     TextView txtLogin;
     Button btnRegister;
+
+    boolean username_taken = false;
 
     FirebaseAuth mAuth;
 
@@ -43,7 +46,7 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
 
-
+        etUserName = findViewById(R.id.editUserName);
         etRegEmail = findViewById(R.id.editEmailReg);
         etRegPassword = findViewById(R.id.editPasswordReg);
         txtLogin = findViewById(R.id.txtLogin);
@@ -67,21 +70,28 @@ public class Register extends AppCompatActivity {
                 .build();
 
         //for testing purposes - need to get rid of this line later
-        //resetDatabase();
+        resetDatabase();
     }
 
     private void createUser(){
+        String username = etUserName.getText().toString();
         String email = etRegEmail.getText().toString();
         String password = etRegPassword.getText().toString();
         String fName = editFirstName.getText().toString();
         String lName = editLastName.getText().toString();
 
+
+
         if (TextUtils.isEmpty(email)){
             etRegEmail.setError("Email cannot be empty");
             etRegEmail.requestFocus();
-        }else if (TextUtils.isEmpty(password)){
+        }else if (TextUtils.isEmpty(password)) {
             etRegPassword.setError("Password cannot be empty");
             etRegPassword.requestFocus();
+        }
+        else if (username_taken == true) {
+            etUserName.setError("Username is already taken");
+            etUserName.requestFocus();
         }else{
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
@@ -91,7 +101,7 @@ public class Register extends AppCompatActivity {
                         //insert into room Dao
                         DatabaseAll db  = DatabaseAll.getDbInstance(Register.this);
                         String id = mAuth.getCurrentUser().getUid();
-                        insertUserIntoDatabase(email,fName, lName, id, password, 0);
+                        insertUserIntoDatabase(email,fName, lName, id, password, 0, username);
                         startActivity(new Intent(Register.this, Login.class));
                     }else{
                         Toast.makeText(Register.this, "Registration Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -101,11 +111,11 @@ public class Register extends AppCompatActivity {
         }
     }
 
-    private void insertUserIntoDatabase(String email, String firstName, String lastName, String id, String password, int level) {
+    private void insertUserIntoDatabase(String email, String firstName, String lastName, String id, String password, int level, String username) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                mDb.userDao().insert(new User(email, firstName, lastName, id, password, level));
+                mDb.userDao().insert(new User(email, firstName, lastName, id, password, level, username));
 
                 List<User> userAccounts = mDb.userDao().getUsers();
                 for(User userAccount : userAccounts) {
@@ -115,9 +125,9 @@ public class Register extends AppCompatActivity {
                     Log.d("Printing user uid" , userAccount.getUserId());
                     Log.d("Printing user pw" , userAccount.getPassword());
                     Log.d("Printing user level" , String.valueOf(userAccount.getLevel()));
+                    Log.d("Printing username" , String.valueOf(userAccount.getUsername()));
 
                 }
-
             }
         });
 

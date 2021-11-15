@@ -23,6 +23,9 @@ public class User {
     @ColumnInfo(name = "password")
     private String password;
 
+    @ColumnInfo(name = "username")
+    private String username;
+
     @ColumnInfo(name = "level")
     private int level;
 
@@ -34,13 +37,14 @@ public class User {
         this.password = password;
     }
 
-    public User(String email, String firstName, String lastName, String userId, String password, int level){
+    public User(String email, String firstName, String lastName, String userId, String password, int level, String username){
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userId = userId;
         this.password = password;
         this.level = level;
+        this.username = username;
     }
 
     @NonNull
@@ -56,8 +60,15 @@ public class User {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstName(String username) {
+        this.username = username;
+    }
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getLastName() {
