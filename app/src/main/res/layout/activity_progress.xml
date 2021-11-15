@@ -23,6 +23,60 @@
             app:title="Progress"
             app:titleTextColor="@color/black" />
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="231dp"
+            android:layout_height="214dp"
+            android:layout_marginTop="44dp"
+            android:indeterminateOnly="false"
+            android:progressDrawable="@drawable/circle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            tools:progress="60" />
+
+        <TextView
+            android:id="@+id/txtLevel"
+            android:layout_width="96dp"
+            android:layout_height="29dp"
+            android:layout_marginTop="10dp"
+            android:text="Level 10"
+            android:textColor="@color/purple_700"
+            android:textSize="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+        <TextView
+            android:id="@+id/txtDesc"
+            android:layout_width="236dp"
+            android:layout_height="99dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="70% of level 10 completed. Keep up the good work!"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.514"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtLevel"
+            app:layout_constraintVertical_bias="0.085" />
+
+        <TextView
+            android:id="@+id/txtProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="70%"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+            app:layout_constraintEnd_toEndOf="@+id/progressBar"
+            app:layout_constraintStart_toStartOf="@+id/progressBar"
+            app:layout_constraintTop_toTopOf="@+id/progressBar" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView

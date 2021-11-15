@@ -29,6 +29,17 @@ public class User {
     @ColumnInfo(name = "level")
     private int level;
 
+    @ColumnInfo(name = "progress")
+    private int progress;
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -37,7 +48,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String email, String firstName, String lastName, String userId, String password, int level, String username){
+    public User(String email, String firstName, String lastName, String userId, String password, int level, String username, int progress){
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -45,6 +56,7 @@ public class User {
         this.password = password;
         this.level = level;
         this.username = username;
+        this.progress = progress;
     }
 
     @NonNull
