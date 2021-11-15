@@ -95,6 +95,7 @@ public class Leaderboard extends AppCompatActivity implements LeaderboardAdapter
                     case R.id.menu_friends:
                         Toast.makeText(getApplicationContext(),"Leaderboard Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        startActivity(new Intent(Leaderboard.this, Leaderboard.class));
                         break;
 
                     case R.id.menu_logout:

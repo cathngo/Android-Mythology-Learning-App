@@ -78,6 +78,7 @@ public class NotesActivity extends AppCompatActivity {
                     case R.id.menu_notes:
                         Toast.makeText(getApplicationContext(),"NotesPanel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        startActivity(new Intent(NotesActivity.this, NotesActivity.class));
                         break;
 
                     case R.id.menu_quiz:

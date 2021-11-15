@@ -3,6 +3,7 @@ package au.edu.unsw.infs3634.unswgamifiedlearningapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -17,8 +18,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +46,14 @@ public class HomeActivity extends AppCompatActivity
     TextView txtLevelDisplay;
     private DatabaseAll mDb;
     EditText searchText;
+
+    ProgressBar barEgyptian;
+    ProgressBar barGreece;
+    ProgressBar barRoman;
+    TextView pcEgyptian;
+    TextView pcGreece;
+    TextView pcRoman;
+    TextView txtQuiz;
 
 
 
@@ -71,6 +83,7 @@ public class HomeActivity extends AppCompatActivity
                 {
                     case R.id.menu_home :
                         Toast.makeText(getApplicationContext(),"Home Panel is Open",Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(HomeActivity.this, HomeActivity.class));
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
 
@@ -130,13 +143,20 @@ public class HomeActivity extends AppCompatActivity
             Executors.newSingleThreadExecutor().execute(new Runnable() {
                 @Override
                 public void run() {
-                    //find their current progress and level
+                    //find their current details
                     User currentUser = mDb.userDao().getUser(email);
                     String fName = currentUser.getFirstName();
                     String lName = currentUser.getLastName();
                     String name = fName + " " + lName;
                     String username = currentUser.getUsername();
                     String level = String.valueOf(currentUser.getLevel());
+
+                    int egyptianProgress = currentUser.getEgyptianProgress();
+                    int greekProgress = currentUser.getGreekProgress();
+                    int romanProgress = currentUser.getRomanProgress();
+
+                    int quizAttempts = currentUser.getQuizAttempts();
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -148,6 +168,26 @@ public class HomeActivity extends AppCompatActivity
                             txtLevelDisplay.setText("Level " + level);
                             txtNameDisplay.setText(name);
                             txtUsernameDisplay.setText(username);
+
+                            //set the progress bars to reflect user's progress
+                            barEgyptian = findViewById(R.id.barEgyptian);
+                            barGreece = findViewById(R.id.barGreece);
+                            barRoman = findViewById(R.id.barRoman);
+                            pcEgyptian = findViewById(R.id.pcEgyptian);
+                            pcGreece = findViewById(R.id.pcGreece);
+                            pcRoman = findViewById(R.id.pcRoman);
+
+                            barEgyptian.setProgress(egyptianProgress);
+                            barGreece.setProgress(greekProgress);
+                            barRoman.setProgress(romanProgress);
+                            pcEgyptian.setText(String.valueOf(egyptianProgress + "%"));
+                            pcGreece.setText(String.valueOf(greekProgress + "%"));
+                            pcRoman .setText(String.valueOf(romanProgress + "%"));
+
+                            //set quiz attempts
+                            txtQuiz = findViewById(R.id.txtQuiz);
+                            txtQuiz.setText("Total Attempts: " + String.valueOf(quizAttempts) + " tries");
+
                         }
                     });
                 }
@@ -163,7 +203,6 @@ public class HomeActivity extends AppCompatActivity
 
         //search function
         instantiateSearch();
-
 
     }
 

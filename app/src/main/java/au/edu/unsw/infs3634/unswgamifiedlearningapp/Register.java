@@ -100,7 +100,7 @@ public class Register extends AppCompatActivity {
                         //insert into room Dao
                         DatabaseAll db  = DatabaseAll.getDbInstance(Register.this);
                         String id = mAuth.getCurrentUser().getUid();
-                        insertUserIntoDatabase(email,fName, lName, id, password, 0, username, 0);
+                        insertUserIntoDatabase(email,fName, lName, id, password, 5, username, 0,0,0,0,0);
                         startActivity(new Intent(Register.this, Login.class));
                     }else{
                         Toast.makeText(Register.this, "Registration Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -110,11 +110,11 @@ public class Register extends AppCompatActivity {
         }
     }
 
-    private void insertUserIntoDatabase(String email, String firstName, String lastName, String id, String password, int level, String username, int progress) {
+    private void insertUserIntoDatabase(String email, String firstName, String lastName, String id, String password, int level, String username, int progress,int greekProgress, int egyptianProgress, int romanProgress, int quizAttempts) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                mDb.userDao().insert(new User(email, firstName, lastName, id, password, level, username, progress));
+                mDb.userDao().insert(new User(email, firstName, lastName, id, password, level, username, progress, greekProgress, egyptianProgress, romanProgress, quizAttempts));
 
                 List<User> userAccounts = mDb.userDao().getUsers();
                 for(User userAccount : userAccounts) {
@@ -125,7 +125,11 @@ public class Register extends AppCompatActivity {
                     Log.d("Printing user pw" , userAccount.getPassword());
                     Log.d("Printing user level" , String.valueOf(userAccount.getLevel()));
                     Log.d("Printing username" , String.valueOf(userAccount.getUsername()));
-                    Log.d("Printing username" , String.valueOf(userAccount.getProgress()));
+                    Log.d("Printing overall progress" , String.valueOf(userAccount.getProgress()));
+                    Log.d("Printing greek progress" , String.valueOf(userAccount.getGreekProgress()));
+                    Log.d("Printing egyptian progress" , String.valueOf(userAccount.getEgyptianProgress()));
+                    Log.d("Printing roman progress" , String.valueOf(userAccount.getRomanProgress()));
+                    Log.d("Printing quiz attempts" , String.valueOf(userAccount.getQuizAttempts()));
 
                 }
             }

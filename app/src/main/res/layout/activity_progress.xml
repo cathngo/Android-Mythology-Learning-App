@@ -42,6 +42,7 @@
             android:layout_height="29dp"
             android:layout_marginTop="10dp"
             android:text="Level 10"
+            android:gravity="center"
             android:textColor="@color/purple_700"
             android:textSize="25dp"
             app:layout_constraintEnd_toEndOf="parent"

@@ -32,6 +32,19 @@ public class User {
     @ColumnInfo(name = "progress")
     private int progress;
 
+    @ColumnInfo(name = "greekProgress")
+    private int greekProgress;
+
+    @ColumnInfo(name = "egyptianProgress")
+    private int egyptianProgress;
+
+    @ColumnInfo(name = "romanProgress")
+    private int romanProgress;
+
+    @ColumnInfo(name = "quizAttempts")
+    private int quizAttempts;
+
+
     public int getProgress() {
         return progress;
     }
@@ -48,7 +61,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String email, String firstName, String lastName, String userId, String password, int level, String username, int progress){
+    public User(String email, String firstName, String lastName, String userId, String password, int level, String username, int progress, int greekProgress, int egyptianProgress, int romanProgress, int quizAttempts){
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -57,11 +70,47 @@ public class User {
         this.level = level;
         this.username = username;
         this.progress = progress;
+        this.greekProgress = greekProgress;
+        this.egyptianProgress = egyptianProgress;
+        this.romanProgress = romanProgress;
+        this.quizAttempts = quizAttempts;
     }
 
     @NonNull
     public String getEmail() {
         return email;
+    }
+
+    public int getGreekProgress() {
+        return greekProgress;
+    }
+
+    public void setGreekProgress(int greekProgress) {
+        this.greekProgress = greekProgress;
+    }
+
+    public int getEgyptianProgress() {
+        return egyptianProgress;
+    }
+
+    public void setEgyptianProgress(int egyptianProgress) {
+        this.egyptianProgress = egyptianProgress;
+    }
+
+    public int getRomanProgress() {
+        return romanProgress;
+    }
+
+    public void setRomanProgress(int romanProgress) {
+        this.romanProgress = romanProgress;
+    }
+
+    public int getQuizAttempts() {
+        return quizAttempts;
+    }
+
+    public void setQuizAttempts(int quizAttempts) {
+        this.quizAttempts = quizAttempts;
     }
 
     public void setEmail(@NonNull String email) {
