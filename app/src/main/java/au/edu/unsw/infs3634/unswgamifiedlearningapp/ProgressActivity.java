@@ -28,6 +28,10 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 
+
+
+//reference https://www.youtube.com/watch?v=YsHHXg1vbcc&ab_channel=CodinginFlow
+
 public class ProgressActivity extends AppCompatActivity {
     /** navigation menu **/
     NavigationView nav;
@@ -39,13 +43,14 @@ public class ProgressActivity extends AppCompatActivity {
     TextView txtProgress;
     TextView txtLevel;
     TextView txtDesc;
-    Button btnInc;
+    Button btnShare;
 
     FirebaseAuth mAuth;
     private DatabaseAll mDb;
 
     int progress;
     int level;
+    String message;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -150,12 +155,29 @@ public class ProgressActivity extends AppCompatActivity {
                         txtLevel.setText("Level "+ String.valueOf(level));
                         if (progress != 0) {
                             txtDesc.setText(String.valueOf(progress) +"% of level " + String.valueOf(level)+ " completed. Keep up the good work!");
+                            message = "Check out my progress!" + " I have " + String.valueOf(progress) +"% of level " + String.valueOf(level)+ " completed.";
                         } else {
                             txtDesc.setText(String.valueOf(progress) +"% of level " + String.valueOf(level)+ " completed. Time to get started!");
+                            message = "Check out my progress!" + " I have " + String.valueOf(progress) +"% of level " + String.valueOf(level)+ " completed.";
                         }
 
                     }
                 });
+            }
+        });
+
+        btnShare = findViewById(R.id.btnShare);
+        btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                String Body = "download this app";
+                String Sub = message;
+                intent.putExtra(Intent.EXTRA_TEXT, Body);
+                intent.putExtra(Intent.EXTRA_TEXT, Sub);
+                startActivity(Intent.createChooser(intent, "Share results with"));
+
             }
         });
 
