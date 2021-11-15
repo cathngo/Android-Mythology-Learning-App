@@ -127,44 +127,56 @@ public class ProgressActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String email = user.getEmail();
 
-        //Search database for user given email as key
-        mDb = Room.databaseBuilder(getApplicationContext(), DatabaseAll.class, "database-all")
-                .fallbackToDestructiveMigration()
-                .build();
+        if (user != null) {
+            // user is signed in, show user data
+            //Search database for user given email as key
+            mDb = Room.databaseBuilder(getApplicationContext(), DatabaseAll.class, "database-all")
+                    .fallbackToDestructiveMigration()
+                    .build();
 
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                //find their current progress and level
-                User currentUser = mDb.userDao().getUser(email);
-                progress =currentUser.getProgress();
-                level = currentUser.getLevel();
-                System.out.println("progress is " + String.valueOf(progress));
-                System.out.println("level is " + String.valueOf(level));
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //set progress bar with user information
-                        progressBar = findViewById(R.id.progressBar);
-                        txtProgress = findViewById(R.id.txtProgress);
-                        txtLevel = findViewById(R.id.txtLevel);
-                        txtDesc = findViewById(R.id.txtDesc);
+            Executors.newSingleThreadExecutor().execute(new Runnable() {
+                @Override
+                public void run() {
+                    //find their current progress and level
+                    User currentUser = mDb.userDao().getUser(email);
+                    progress =currentUser.getProgress();
+                    level = currentUser.getLevel();
+                    System.out.println("progress is " + String.valueOf(progress));
+                    System.out.println("level is " + String.valueOf(level));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //set progress bar with user information
+                            progressBar = findViewById(R.id.progressBar);
+                            txtProgress = findViewById(R.id.txtProgress);
+                            txtLevel = findViewById(R.id.txtLevel);
+                            txtDesc = findViewById(R.id.txtDesc);
 
-                        progressBar.setProgress(progress);
-                        txtProgress.setText(String.valueOf(progress) + "%");
-                        txtLevel.setText("Level "+ String.valueOf(level));
-                        if (progress != 0) {
-                            txtDesc.setText(String.valueOf(progress) +"% of level " + String.valueOf(level)+ " completed. Keep up the good work!");
-                            message = "Check out my progress!" + " I have " + String.valueOf(progress) +"% of level " + String.valueOf(level)+ " completed.";
-                        } else {
-                            txtDesc.setText(String.valueOf(progress) +"% of level " + String.valueOf(level)+ " completed. Time to get started!");
-                            message = "Check out my progress!" + " I have " + String.valueOf(progress) +"% of level " + String.valueOf(level)+ " completed.";
+                            progressBar.setProgress(progress);
+                            txtProgress.setText(String.valueOf(progress) + "%");
+                            txtLevel.setText("Level "+ String.valueOf(level));
+                            if (progress != 0) {
+                                txtDesc.setText(String.valueOf(progress) +"% of level " + String.valueOf(level)+ " completed. Keep up the good work!");
+                                message = "Check out my progress!" + " I have " + String.valueOf(progress) +"% of level " + String.valueOf(level)+ " completed.";
+                            } else {
+                                txtDesc.setText(String.valueOf(progress) +"% of level " + String.valueOf(level)+ " completed. Time to get started!");
+                                message = "Check out my progress!" + " I have " + String.valueOf(progress) +"% of level " + String.valueOf(level)+ " completed.";
+                            }
+
                         }
+                    });
+                }
+            });
+        }
+        else {
+            // user is signed out, show sign-in form
+            // user is signed out, show sign-in form
+            Toast.makeText(this, "User has been signed out, please log in again", Toast.LENGTH_SHORT).show();
+            System.out.println("User is null");
+            startActivity(new Intent(ProgressActivity.this, Login.class));
+        }
 
-                    }
-                });
-            }
-        });
+
 
         btnShare = findViewById(R.id.btnShare);
         btnShare.setOnClickListener(new View.OnClickListener() {
@@ -182,4 +194,6 @@ public class ProgressActivity extends AppCompatActivity {
         });
 
     }
+
+
 }

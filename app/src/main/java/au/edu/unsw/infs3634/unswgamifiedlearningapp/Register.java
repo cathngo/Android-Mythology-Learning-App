@@ -69,7 +69,7 @@ public class Register extends AppCompatActivity {
                 .fallbackToDestructiveMigration()
                 .build();
 
-        resetDatabase();
+        //resetDatabase();
     }
 
     private void createUser(){
