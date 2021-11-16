@@ -15,6 +15,14 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class QuizActivity extends AppCompatActivity {
     /** navigation menu **/
     NavigationView nav;
@@ -94,5 +102,32 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
         /**navigation menu code end**/
+
+        /**retrofit api call to get open trivia questions**/
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://opentdb.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        QuestionService service = retrofit.create(QuestionService.class);
+        Call<Question> responseCall = service.getEasyQuestions();
+
+        responseCall.enqueue(new Callback<Question>() {
+            @Override
+            public void onResponse(Call<Question> call, Response<Question> response) {
+                Question question = response.body();
+                List<Result> results = question.getResults();
+                for (Result result: results) {
+                    System.out.println(result.getQuestion());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Question> call, Throwable t) {
+                System.out.println("failed");
+            }
+        });
     }
+
 }
