@@ -4,18 +4,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LearnActivity extends AppCompatActivity {
+public class LearnActivity extends AppCompatActivity implements View.OnClickListener {
     /** navigation menu **/
     NavigationView nav;
     ActionBarDrawerToggle toggle;
@@ -23,6 +25,7 @@ public class LearnActivity extends AppCompatActivity {
     /** navigation menu **/
 
     FirebaseAuth mAuth;
+    CardView greekCV, romanCV, egyptCV, otherCV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,5 +97,47 @@ public class LearnActivity extends AppCompatActivity {
             }
         });
         /**navigation menu code end**/
+
+
+        //making the cardviews clickable
+        greekCV = (CardView) findViewById(R.id.greekCV);
+        greekCV.setOnClickListener(this);
+        romanCV = (CardView) findViewById(R.id.romanCV);
+        romanCV.setOnClickListener(this);
+        egyptCV = (CardView) findViewById(R.id.egyptCV);
+        egyptCV.setOnClickListener(this);
+        otherCV = (CardView) findViewById(R.id.otherCV);
+        otherCV.setOnClickListener(this);
+
+
+    }
+
+
+    //implementing onclick method
+    @Override
+    public void onClick(View view) {
+
+        Intent intent;
+
+        switch (view.getId()){
+            case R.id.greekCV:
+                intent = new Intent(LearnActivity.this, GreekActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.romanCV:
+                intent = new Intent(LearnActivity.this, RomanActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.egyptCV:
+                intent = new Intent(LearnActivity.this, EgyptianActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.otherCV:
+                intent = new Intent(LearnActivity.this, OtherActivity.class);
+                startActivity(intent);
+                break;
+        }
+
+
     }
 }

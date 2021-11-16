@@ -100,7 +100,7 @@ public class Register extends AppCompatActivity {
                         //insert into room Dao
                         DatabaseAll db  = DatabaseAll.getDbInstance(Register.this);
                         String id = mAuth.getCurrentUser().getUid();
-                        insertUserIntoDatabase(email,fName, lName, id, password, 5, username, 0,0,0,0,0);
+                        insertUserIntoDatabase(email,fName, lName, id, password, 0, username, 0,0,0,0,0);
                         startActivity(new Intent(Register.this, Login.class));
                     }else{
                         Toast.makeText(Register.this, "Registration Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

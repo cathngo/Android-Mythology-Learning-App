@@ -170,7 +170,6 @@ public class ProgressActivity extends AppCompatActivity {
         }
         else {
             // user is signed out, show sign-in form
-            // user is signed out, show sign-in form
             Toast.makeText(this, "User has been signed out, please log in again", Toast.LENGTH_SHORT).show();
             System.out.println("User is null");
             startActivity(new Intent(ProgressActivity.this, Login.class));
