@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/txtName"
-        android:layout_width="239dp"
-        android:layout_height="30dp"
+        android:layout_width="115dp"
+        android:layout_height="27dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="4dp"
         android:text="John Doe"
@@ -37,7 +37,7 @@
         android:id="@+id/txtRank"
         android:layout_width="20dp"
         android:layout_height="28dp"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="40dp"
         android:text="1."
         android:textColor="@color/black"
         android:textSize="18dp"
@@ -59,6 +59,20 @@
         app:layout_constraintStart_toStartOf="@+id/txtName"
         app:layout_constraintTop_toBottomOf="@+id/txtName"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/txtUsername"
+        android:layout_width="113dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="50dp"
+        android:gravity="right"
+        android:text="TextView"
+        android:textColor="@color/purple_500"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtName"
+        app:layout_constraintTop_toTopOf="@+id/txtName" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
