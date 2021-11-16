@@ -56,6 +56,7 @@ public class LearnActivity extends AppCompatActivity {
                     case R.id.menu_learn:
                         Toast.makeText(getApplicationContext(),"Learn Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        startActivity(new Intent(LearnActivity.this,LearnActivity.class));
                         break;
 
                     case R.id.menu_notes:

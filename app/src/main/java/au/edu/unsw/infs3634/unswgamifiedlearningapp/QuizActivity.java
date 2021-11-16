@@ -67,6 +67,7 @@ public class QuizActivity extends AppCompatActivity {
                     case R.id.menu_quiz:
                         Toast.makeText(getApplicationContext(),"Quiz Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        startActivity(new Intent(QuizActivity.this,  QuizActivity.class));
                         break;
 
                     case R.id.menu_progress:
