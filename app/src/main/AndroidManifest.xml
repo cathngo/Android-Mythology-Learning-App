@@ -10,6 +10,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UNSWGamifiedLearningApp">
         <activity
+            android:name=".TopicQuiz"
+            android:exported="true" />
+        <activity
+            android:name=".LearningGreek"
+            android:exported="true" />
+        <activity
+            android:name=".EgyptianActivity"
+            android:exported="true" />
+        <activity
+            android:name=".OtherActivity"
+            android:exported="true" />
+        <activity
+            android:name=".RomanActivity"
+            android:exported="true" />
+        <activity
+            android:name=".GreekActivity"
+            android:exported="true" />
+        <activity
             android:name=".NotesActivity"
             android:exported="true" />
         <activity

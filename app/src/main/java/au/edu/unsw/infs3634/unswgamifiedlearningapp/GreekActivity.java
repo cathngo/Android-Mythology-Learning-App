@@ -15,23 +15,22 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 
-public class LearnActivity extends AppCompatActivity implements View.OnClickListener {
+public class GreekActivity extends AppCompatActivity implements View.OnClickListener {
+
     /** navigation menu **/
     NavigationView nav;
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
     /** navigation menu **/
 
-    FirebaseAuth mAuth;
-    CardView greekCV, romanCV, egyptCV, otherCV;
+    CardView greekLearnCV, greekQuizCV, greekNotesCV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_learn);
-        mAuth = FirebaseAuth.getInstance();
+        setContentView(R.layout.activity_greek);
+
 
         /**navigation menu code start**/
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
@@ -53,43 +52,43 @@ public class LearnActivity extends AppCompatActivity implements View.OnClickList
                     case R.id.menu_home :
                         Toast.makeText(getApplicationContext(),"Home Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(LearnActivity.this, HomeActivity.class));
+                        startActivity(new Intent(GreekActivity.this, HomeActivity.class));
                         break;
 
                     case R.id.menu_learn:
                         Toast.makeText(getApplicationContext(),"Learn Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(LearnActivity.this,LearnActivity.class));
+                        startActivity(new Intent(GreekActivity.this,LearnActivity.class));
                         break;
 
                     case R.id.menu_notes:
                         Toast.makeText(getApplicationContext(),"NotesPanel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(LearnActivity.this,NotesActivity.class));
+                        startActivity(new Intent(GreekActivity.this,NotesActivity.class));
                         break;
 
                     case R.id.menu_quiz:
                         Toast.makeText(getApplicationContext(),"Quiz Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(LearnActivity.this, QuizActivity.class));
+                        startActivity(new Intent(GreekActivity.this, QuizActivity.class));
                         break;
 
                     case R.id.menu_progress:
                         Toast.makeText(getApplicationContext(),"Progress Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(LearnActivity.this, ProgressActivity.class));
+                        startActivity(new Intent(GreekActivity.this, ProgressActivity.class));
 
                         break;
                     case R.id.menu_friends:
                         Toast.makeText(getApplicationContext(),"Leaderboard Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(LearnActivity.this, Leaderboard.class));
+                        startActivity(new Intent(GreekActivity.this, Leaderboard.class));
                         break;
 
                     case R.id.menu_logout:
                         Toast.makeText(getApplicationContext(),"Logout Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(LearnActivity.this,Login.class));
+                        startActivity(new Intent(GreekActivity.this,Login.class));
                         break;
                 }
 
@@ -99,41 +98,35 @@ public class LearnActivity extends AppCompatActivity implements View.OnClickList
         /**navigation menu code end**/
 
 
-        //making the cardviews clickable
-        greekCV = (CardView) findViewById(R.id.greekCV);
-        greekCV.setOnClickListener(this);
-        romanCV = (CardView) findViewById(R.id.romanCV);
-        romanCV.setOnClickListener(this);
-        egyptCV = (CardView) findViewById(R.id.egyptCV);
-        egyptCV.setOnClickListener(this);
-        otherCV = (CardView) findViewById(R.id.otherCV);
-        otherCV.setOnClickListener(this);
+        greekLearnCV = (CardView) findViewById(R.id.greekLearnCV);
+        greekLearnCV.setOnClickListener(this);
+        greekQuizCV = (CardView) findViewById(R.id.greekQuizCV);
+        greekQuizCV.setOnClickListener(this);
+        greekNotesCV = (CardView) findViewById(R.id.greekNotesCV);
+        greekNotesCV.setOnClickListener(this);
+
+
 
 
     }
 
-
-    //implementing onclick method
     @Override
     public void onClick(View view) {
 
         Intent intent;
 
         switch (view.getId()){
-            case R.id.greekCV:
-                intent = new Intent(LearnActivity.this, GreekActivity.class);
+            case R.id.greekLearnCV:
+                intent = new Intent(GreekActivity.this, LearningGreek.class);
                 startActivity(intent);
                 break;
-            case R.id.romanCV:
-                intent = new Intent(LearnActivity.this, RomanActivity.class);
+            case R.id.greekQuizCV:
+                intent = new Intent(GreekActivity.this, TopicQuiz.class);
+                intent.putExtra("Category", "Greek");
                 startActivity(intent);
                 break;
-            case R.id.egyptCV:
-                intent = new Intent(LearnActivity.this, EgyptianActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.otherCV:
-                intent = new Intent(LearnActivity.this, OtherActivity.class);
+            case R.id.greekNotesCV:
+                intent = new Intent(GreekActivity.this, NotesActivity.class);
                 startActivity(intent);
                 break;
         }

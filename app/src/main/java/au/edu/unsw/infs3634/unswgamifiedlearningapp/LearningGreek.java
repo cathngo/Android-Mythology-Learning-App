@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -12,26 +11,37 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 
-public class LearnActivity extends AppCompatActivity implements View.OnClickListener {
+public class LearningGreek extends AppCompatActivity implements View.OnClickListener {
+
     /** navigation menu **/
     NavigationView nav;
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
     /** navigation menu **/
 
-    FirebaseAuth mAuth;
-    CardView greekCV, romanCV, egyptCV, otherCV;
+    Button nextButton, previousButton;
+
+    int stringIDList[] = {R.string.Greeklearn1, R.string.Greeklearn2, R.string.Greeklearn3, R.string.Greeklearn4};
+    int stringListCounter = 0;
+    int pictureIDList[] = {R.drawable.zeus, R.drawable.dionysus, R.drawable.demetor, R.drawable.apollo_picture};
+
+
+    TextView greekText;
+    ImageView greekPicture;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_learn);
-        mAuth = FirebaseAuth.getInstance();
+        setContentView(R.layout.activity_learning_greek);
+
 
         /**navigation menu code start**/
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
@@ -53,43 +63,43 @@ public class LearnActivity extends AppCompatActivity implements View.OnClickList
                     case R.id.menu_home :
                         Toast.makeText(getApplicationContext(),"Home Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(LearnActivity.this, HomeActivity.class));
+                        startActivity(new Intent(LearningGreek.this, HomeActivity.class));
                         break;
 
                     case R.id.menu_learn:
                         Toast.makeText(getApplicationContext(),"Learn Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(LearnActivity.this,LearnActivity.class));
+                        startActivity(new Intent(LearningGreek.this,LearnActivity.class));
                         break;
 
                     case R.id.menu_notes:
                         Toast.makeText(getApplicationContext(),"NotesPanel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(LearnActivity.this,NotesActivity.class));
+                        startActivity(new Intent(LearningGreek.this,NotesActivity.class));
                         break;
 
                     case R.id.menu_quiz:
                         Toast.makeText(getApplicationContext(),"Quiz Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(LearnActivity.this, QuizActivity.class));
+                        startActivity(new Intent(LearningGreek.this, QuizActivity.class));
                         break;
 
                     case R.id.menu_progress:
                         Toast.makeText(getApplicationContext(),"Progress Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(LearnActivity.this, ProgressActivity.class));
+                        startActivity(new Intent(LearningGreek.this, ProgressActivity.class));
 
                         break;
                     case R.id.menu_friends:
                         Toast.makeText(getApplicationContext(),"Leaderboard Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(LearnActivity.this, Leaderboard.class));
+                        startActivity(new Intent(LearningGreek.this, Leaderboard.class));
                         break;
 
                     case R.id.menu_logout:
                         Toast.makeText(getApplicationContext(),"Logout Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(LearnActivity.this,Login.class));
+                        startActivity(new Intent(LearningGreek.this,Login.class));
                         break;
                 }
 
@@ -99,45 +109,50 @@ public class LearnActivity extends AppCompatActivity implements View.OnClickList
         /**navigation menu code end**/
 
 
-        //making the cardviews clickable
-        greekCV = (CardView) findViewById(R.id.greekCV);
-        greekCV.setOnClickListener(this);
-        romanCV = (CardView) findViewById(R.id.romanCV);
-        romanCV.setOnClickListener(this);
-        egyptCV = (CardView) findViewById(R.id.egyptCV);
-        egyptCV.setOnClickListener(this);
-        otherCV = (CardView) findViewById(R.id.otherCV);
-        otherCV.setOnClickListener(this);
+
+        nextButton = (Button) findViewById(R.id.nextButton);
+        nextButton.setOnClickListener(this);
+        previousButton = (Button) findViewById(R.id.previousButton);
+        previousButton.setOnClickListener(this);
+        greekText = (TextView) findViewById(R.id.greekText);
+        greekPicture = (ImageView) findViewById(R.id.greekPicture);
+
 
 
     }
 
-
-    //implementing onclick method
     @Override
     public void onClick(View view) {
 
-        Intent intent;
 
-        switch (view.getId()){
-            case R.id.greekCV:
-                intent = new Intent(LearnActivity.this, GreekActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.romanCV:
-                intent = new Intent(LearnActivity.this, RomanActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.egyptCV:
-                intent = new Intent(LearnActivity.this, EgyptianActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.otherCV:
-                intent = new Intent(LearnActivity.this, OtherActivity.class);
-                startActivity(intent);
-                break;
+        Intent intent;
+        int id = view.getId();
+
+
+
+        if(id == R.id.nextButton && stringListCounter < stringIDList.length - 1){
+            stringListCounter++;
+
+            if(stringListCounter == stringIDList.length - 1){
+                nextButton.setText("Go to Quiz");
+            }
+
+
+        } else if (id == R.id.previousButton && stringListCounter > 0) {
+            stringListCounter--;
+
+            if (stringListCounter < stringIDList.length) {
+                nextButton.setText("Next");
+            }
+        }else if (id == R.id.nextButton && stringListCounter == stringIDList.length - 1){
+            intent = new Intent(LearningGreek.this, TopicQuiz.class);
+            startActivity(intent);
+
+
         }
 
+        greekText.setText(stringIDList[stringListCounter]);
+        greekPicture.setImageDrawable(getResources().getDrawable(pictureIDList[stringListCounter]));
 
     }
 }
