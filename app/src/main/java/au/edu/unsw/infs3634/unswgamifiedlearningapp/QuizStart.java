@@ -10,6 +10,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.jsoup.Jsoup;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -28,12 +30,18 @@ public class QuizStart extends AppCompatActivity {
     RadioButton ansThree;
     RadioButton ansFour;
     Button btnNxt;
+    TextView txtTitle;
+    TextView txtChoose;
 
     List<String> answers;
     List<Result> results;
     Result curr;
     int correct;
     int incorrect;
+    Button btnSubmit;
+    boolean selected = false;
+    boolean submit = false;
+    TextView txtCorrectAns;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +80,12 @@ public class QuizStart extends AppCompatActivity {
                     System.out.println(result.getDifficulty());
                 }
 
+                txtTitle = findViewById(R.id.txtTitle);
+                txtChoose = findViewById(R.id.txtChoose);
+                txtChoose.setText("Please select your answer:");
+                int num = counter + 1;
+                txtTitle.setText("Question " + num);
+
                 //set textviews
                 txtQuestion = findViewById(R.id.txtQuestion);
                 ansOne = findViewById(R.id.ansOne);
@@ -81,7 +95,9 @@ public class QuizStart extends AppCompatActivity {
 
                 //get curr question
                 curr = results.get(counter);
-                txtQuestion.setText(curr.getQuestion());
+                String questionHtml = curr.getQuestion();
+                String htmlEscape = Jsoup.parse(questionHtml).text();
+                txtQuestion.setText(htmlEscape);
 
                 //get all the ans to the question
                 answers =  curr.getIncorrectAnswers();
@@ -104,83 +120,154 @@ public class QuizStart extends AppCompatActivity {
             }
         });
 
+        btnSubmit = findViewById(R.id.btnSubmit);
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                {
+                    submit = true;
+                    //check if user selected correct ans
+                    String correctAns = curr.getCorrectAnswer();
+                    txtCorrectAns = findViewById(R.id.txtCorrectAns);
+                    if (ansOne.isChecked()) {
+                        //make the buttons no longer clickable
+                        ansOne.setEnabled(false);
+                        ansTwo.setEnabled(false);
+                        ansThree.setEnabled(false);
+                        ansFour.setEnabled(false);
+                        selected = true;
+                        txtCorrectAns.setText("Correct! Good job");
+                        if (ansOne.getText().equals(correctAns)) {
+                            System.out.println("1 correct ans selected");
+                            ansOne.setBackgroundResource(R.drawable.correct);
+                            correct++;
+                            txtCorrectAns.setText("Correct! You selected the right answer");
+                        } else {
+                            incorrect++;
+                            System.out.println(" 1 incorrect ans selected");
+                            ansOne.setBackgroundResource(R.drawable.incorrect);
+                            txtCorrectAns.setText("Incorrect! The correct answer is " + correctAns);
+                        }
+
+                    } else if (ansTwo.isChecked()) {
+                        //make the buttons no longer clickable
+                        ansOne.setEnabled(false);
+                        ansTwo.setEnabled(false);
+                        ansThree.setEnabled(false);
+                        ansFour.setEnabled(false);
+                        selected = true;
+                        if (ansTwo.getText().equals(correctAns)) {
+                            System.out.println("2 correct ans selected");
+                            ansTwo.setBackgroundResource(R.drawable.correct);
+                            correct++;
+                            txtCorrectAns.setText("Correct! You selected the right answer");
+                        } else {
+                            incorrect++;
+                            System.out.println(" 2 incorrect ans selected");
+                            ansTwo.setBackgroundResource(R.drawable.incorrect);
+                            txtCorrectAns.setText("Incorrect! The correct answer is " + correctAns);
+                        }
+
+                    } else if (ansThree.isChecked()) {
+                        //make the buttons no longer clickable
+                        ansOne.setEnabled(false);
+                        ansTwo.setEnabled(false);
+                        ansThree.setEnabled(false);
+                        ansFour.setEnabled(false);
+                        selected = true;
+                        if (ansThree.getText().equals(correctAns)) {
+                            System.out.println("3 correct ans selected");
+                            ansThree.setBackgroundResource(R.drawable.correct);
+                            correct++;
+                            txtCorrectAns.setText("Correct! You selected the right answer");
+                        } else {
+                            incorrect++;
+                            System.out.println(" 3 incorrect ans selected");
+                            ansThree.setBackgroundResource(R.drawable.incorrect);
+                            txtCorrectAns.setText("Incorrect! The correct answer is " + correctAns);
+                        }
+
+                    } else if (ansFour.isChecked()) {
+                        //make the buttons no longer clickable
+                        ansOne.setEnabled(false);
+                        ansTwo.setEnabled(false);
+                        ansThree.setEnabled(false);
+                        ansFour.setEnabled(false);
+                        selected = true;
+                        if (ansFour.getText().equals(correctAns)) {
+                            System.out.println("4 correct ans selected");
+                            ansFour.setBackgroundResource(R.drawable.correct);
+                            correct++;
+                            txtCorrectAns.setText("Correct! You selected the right answer");
+                        } else {
+                            incorrect++;
+                            System.out.println(" 4 incorrect ans selected");
+                            ansFour.setBackgroundResource(R.drawable.incorrect);
+                            txtCorrectAns.setText("Incorrect! The correct answer is " + correctAns);
+                        }
+
+                    } else {
+                        Toast.makeText(QuizStart.this, "PLease select an answer", Toast.LENGTH_SHORT).show();
+                    }
+
+
+
+                }
+            }
+        });
+
+
         btnNxt = findViewById(R.id.btnNxt);
         btnNxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //check if user selected correct ans
-                String correctAns = curr.getCorrectAnswer();
+                if (submit == true) {
+                    counter++;
 
-                boolean selected = false;
-                if (ansOne.isChecked()) {
-                    selected = true;
-                    if (ansOne.getText().equals(correctAns)) {
-                        System.out.println("1 correct ans selected");
-                        correct++;
-                    } else {
-                        incorrect++;
-                        System.out.println(" 1 incorrect ans selected");
+                    if (counter < 10) {
+                        txtCorrectAns.setText("");
+                        submit = false;
+                        int num = counter + 1;
+                        txtTitle.setText("Question " + num);
+                        //get curr question
+                        curr = results.get(counter);
+                        String questionHtml = curr.getQuestion();
+                        String htmlEscape = Jsoup.parse(questionHtml).text();
+                        txtQuestion.setText(htmlEscape);
+
+
+                        //get all the ans to the question
+                        answers = curr.getIncorrectAnswers();
+                        String correctAnswer = curr.getCorrectAnswer();
+                        answers.add(correctAnswer);
+                        //shuffle list of ans to randomise where correct ans is
+                        Collections.shuffle(answers);
+
+                        ansOne.setText(answers.get(0));
+                        ansOne.setBackgroundResource(0);
+                        ansTwo.setText(answers.get(1));
+                        ansTwo.setBackgroundResource(0);
+                        ansThree.setText(answers.get(2));
+                        ansThree.setBackgroundResource(0);
+                        ansFour.setText(answers.get(3));
+                        ansFour.setBackgroundResource(0);
+
+                        //make the buttons clickable
+                        ansOne.setEnabled(true);
+                        ansTwo.setEnabled(true);
+                        ansThree.setEnabled(true);
+                        ansFour.setEnabled(true);
+
+                    } else if (counter >= 10){
+                        //quiz completed
+                        Intent intent = new Intent(QuizStart.this, QuizResult.class);
+                        intent.putExtra("Correct", correct);
+                        intent.putExtra("Difficulty", difficulty);
+                        intent.putExtra("Incorrect", incorrect);
+                        startActivity(intent);
                     }
-
-                } else if (ansTwo.isChecked()) {
-                    selected = true;
-                    if (ansTwo.getText().equals(correctAns)) {
-                        System.out.println("2 correct ans selected");
-                        correct++;
-                    } else {
-                        incorrect++;
-                        System.out.println(" 2 incorrect ans selected");
-                    }
-
-                } else if (ansThree.isChecked()) {
-                    selected = true;
-                    if (ansThree.getText().equals(correctAns)) {
-                        System.out.println("3 correct ans selected");
-                        correct++;
-                    } else {
-                        incorrect++;
-                        System.out.println(" 3 incorrect ans selected");
-                    }
-
-                } else if (ansFour.isChecked()) {
-                    selected = true;
-                    if (ansFour.getText().equals(correctAns)) {
-                        System.out.println("4 correct ans selected");
-                        correct++;
-                    } else {
-                        incorrect++;
-                        System.out.println(" 4 incorrect ans selected");
-                    }
-
-                }
-
-                counter++;
-
-                if (counter < 10 && selected == true) {
-                    //get curr question
-                    curr = results.get(counter);
-                    txtQuestion.setText(curr.getQuestion());
-
-                    //get all the ans to the question
-                    answers = curr.getIncorrectAnswers();
-                    String correctAnswer = curr.getCorrectAnswer();
-                    answers.add(correctAnswer);
-                    //shuffle list of ans to randomise where correct ans is
-                    Collections.shuffle(answers);
-
-                    ansOne.setText(answers.get(0));
-                    ansTwo.setText(answers.get(1));
-                    ansThree.setText(answers.get(2));
-                    ansFour.setText(answers.get(3));
-
-                } else if (counter >= 10 && selected == true){
-                    //quiz completed
-                    Intent intent = new Intent(QuizStart.this, QuizResult.class);
-                    intent.putExtra("Correct", correct);
-                    intent.putExtra("Incorrect", incorrect);
-                    startActivity(intent);
-                } else if (selected == false) {
-                    Toast.makeText(QuizStart.this, "PLease select an answer", Toast.LENGTH_SHORT).show();
+                } else{
+                    Toast.makeText(QuizStart.this, "Please submit an answer", Toast.LENGTH_SHORT).show();
                 }
 
             }

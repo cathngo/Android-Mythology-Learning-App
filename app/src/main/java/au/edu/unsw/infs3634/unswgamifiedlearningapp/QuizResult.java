@@ -30,6 +30,7 @@ public class QuizResult extends AppCompatActivity {
     TextView txtProgress;
     TextView txtLevel;
     TextView txtDesc;
+    TextView txtDifficulty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +107,7 @@ public class QuizResult extends AppCompatActivity {
         Intent incomingIntent = getIntent();
         int numCorrect = incomingIntent.getIntExtra("Correct",0);
         int numIncorrect = incomingIntent.getIntExtra("Incorrect",0);
+        String difficulty = incomingIntent.getStringExtra("Difficulty");
 
         double progress = (double)numCorrect /10 * 100;
         int new_prog = (int)progress;
@@ -114,6 +116,9 @@ public class QuizResult extends AppCompatActivity {
         txtProgress = findViewById(R.id.txtProgress);
         txtLevel = findViewById(R.id.txtLevel);
         txtDesc = findViewById(R.id.txtDesc);
+        txtDifficulty = findViewById(R.id.txtDifficulty);
+
+        txtDifficulty.setText("Quiz Difficulty: " + difficulty);
 
         progressBar.setProgress(new_prog);
         txtProgress.setText(String.valueOf(new_prog) + "%");
