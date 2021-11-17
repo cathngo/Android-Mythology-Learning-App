@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="au.edu.unsw.infs3634.unswgamifiedlearningapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UNSWGamifiedLearningApp">
+        <activity
+            android:name=".CongratulationsPage"
+            android:exported="true" />
+        <activity
+            android:name=".QuizResult"
+            android:exported="true" />
+        <activity
+            android:name=".QuizStart"
+            android:exported="true" />
         <activity
             android:name=".TopicQuiz"
             android:exported="true" />

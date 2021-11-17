@@ -75,43 +75,36 @@ public class ProgressActivity extends AppCompatActivity {
                 switch (menuItem.getItemId())
                 {
                     case R.id.menu_home :
-                        Toast.makeText(getApplicationContext(),"Home Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(ProgressActivity.this, HomeActivity.class));
                         break;
 
                     case R.id.menu_learn:
-                        Toast.makeText(getApplicationContext(),"Learn Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(ProgressActivity.this, LearnActivity.class));
                         break;
 
                     case R.id.menu_notes:
-                        Toast.makeText(getApplicationContext(),"NotesPanel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(ProgressActivity.this, NotesActivity.class));
                         break;
 
                     case R.id.menu_quiz:
-                        Toast.makeText(getApplicationContext(),"Quiz Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(ProgressActivity.this,  QuizActivity.class));
                         break;
 
                     case R.id.menu_progress:
-                        Toast.makeText(getApplicationContext(),"Progress Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(ProgressActivity.this, ProgressActivity.class));
                         break;
 
                     case R.id.menu_friends:
-                        Toast.makeText(getApplicationContext(),"Leaderboard Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(ProgressActivity.this,  Leaderboard.class));
                         break;
 
                     case R.id.menu_logout:
-                        Toast.makeText(getApplicationContext(),"Logout Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(ProgressActivity.this, Login.class));
                         break;
@@ -151,7 +144,9 @@ public class ProgressActivity extends AppCompatActivity {
                             txtProgress = findViewById(R.id.txtProgress);
                             txtLevel = findViewById(R.id.txtLevel);
                             txtDesc = findViewById(R.id.txtDesc);
-
+                            if (progress == 0) {
+                                progressBar.setProgress(0);
+                            }
                             progressBar.setProgress(progress);
                             txtProgress.setText(String.valueOf(progress) + "%");
                             txtLevel.setText("Level "+ String.valueOf(level));
@@ -169,7 +164,6 @@ public class ProgressActivity extends AppCompatActivity {
             });
         }
         else {
-            // user is signed out, show sign-in form
             // user is signed out, show sign-in form
             Toast.makeText(this, "User has been signed out, please log in again", Toast.LENGTH_SHORT).show();
             System.out.println("User is null");
