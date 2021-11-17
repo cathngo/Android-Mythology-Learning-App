@@ -96,6 +96,11 @@ public class Leaderboard extends AppCompatActivity implements LeaderboardAdapter
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(Leaderboard.this, Login.class));
                         break;
+
+                    case R.id.menu_game:
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        startActivity(new Intent(Leaderboard.this, GameHomepage.class));
+                        break;
                 }
                 return true;
             }

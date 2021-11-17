@@ -13,6 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UNSWGamifiedLearningApp">
         <activity
+            android:name=".GameHomepage"
+            android:exported="true" />
+        <activity
+            android:name=".GamePictureInstructions"
+            android:exported="true" />
+        <activity
+            android:name=".GamePictureActivity"
+            android:exported="true" />
+        <activity
+            android:name=".GameWordInstructions"
+            android:exported="true" />
+        <activity
             android:name=".GameWordActivity"
             android:exported="true" />
         <activity

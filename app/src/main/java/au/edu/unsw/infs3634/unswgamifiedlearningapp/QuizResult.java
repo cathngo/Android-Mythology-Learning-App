@@ -98,6 +98,11 @@ public class QuizResult extends AppCompatActivity {
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(QuizResult.this, Login.class));
                         break;
+
+                    case R.id.menu_game:
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        startActivity(new Intent(QuizResult.this, GameHomepage.class));
+                        break;
                 }
 
                 return true;
@@ -150,6 +155,8 @@ public class QuizResult extends AppCompatActivity {
 
         if (game == 1) {
             txtDifficulty.setText("Game: Myth Unscramble");
+        } else if (game == 2){
+            txtDifficulty.setText("Game: Monster Match");
         } else {
             txtDifficulty.setText("Quiz Difficulty: " + difficulty);
         }
@@ -157,16 +164,35 @@ public class QuizResult extends AppCompatActivity {
 
         progressBar.setProgress(new_prog);
         txtProgress.setText(String.valueOf(new_prog) + "%");
-        txtLevel.setText(String.valueOf(numCorrect) + " / 10 ");
 
-        if (numCorrect >= 0 && numCorrect  <= 4){
-            txtDesc.setText("You got " + numCorrect + " out of 10 questions correct. You should go back to the learn page to revise the content!");
-        } else if (numCorrect == 5) {
-            txtDesc.setText("You got " + numCorrect + " out of 10 questions correct. Half way there!");
-        } else if (numCorrect >= 6 && numCorrect  <= 9) {
-            txtDesc.setText("Well done! You got " + numCorrect + " out of 10 questions correct. Not bad!");
-        } else if (numCorrect == 10) {
-            txtDesc.setText("Congratulations! You got " + numCorrect + " out of 10 questions correct. Full marks!");
+        if (game == 2) {
+            txtLevel.setText(String.valueOf(numCorrect) + " / 5 ");
+        } else {
+            txtLevel.setText(String.valueOf(numCorrect) + " / 10 ");
+        }
+
+        if (game == 2) {
+            if (numCorrect >= 0 && numCorrect  <= 4){
+                txtDesc.setText("You got " + numCorrect + " out of 5 questions correct. You should go back to the learn page to revise the content!");
+            } else if (numCorrect == 5) {
+                txtDesc.setText("You got " + numCorrect + " out of 5 questions correct. Half way there!");
+            } else if (numCorrect >= 6 && numCorrect  <= 9) {
+                txtDesc.setText("Well done! You got " + numCorrect + " out of 5 questions correct. Not bad!");
+            } else if (numCorrect == 10) {
+                txtDesc.setText("Congratulations! You got " + numCorrect + " out of 5 questions correct. Full marks!");
+            }
+        } else {
+            if (numCorrect >= 0 && numCorrect  <= 4){
+                txtDesc.setText("You got " + numCorrect + " out of 10 questions correct. You should go back to the learn page to revise the content!");
+            } else if (numCorrect == 5) {
+                txtDesc.setText("You got " + numCorrect + " out of 10 questions correct. Half way there!");
+            } else if (numCorrect >= 6 && numCorrect  <= 9) {
+                txtDesc.setText("Well done! You got " + numCorrect + " out of 10 questions correct. Not bad!");
+            } else if (numCorrect == 10) {
+                txtDesc.setText("Congratulations! You got " + numCorrect + " out of 10 questions correct. Full marks!");
+            }
+
+
         }
 
         btnShare = findViewById(R.id.btnShare);

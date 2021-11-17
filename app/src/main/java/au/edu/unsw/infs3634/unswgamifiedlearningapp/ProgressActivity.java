@@ -108,6 +108,11 @@ public class ProgressActivity extends AppCompatActivity {
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(ProgressActivity.this, Login.class));
                         break;
+
+                    case R.id.menu_game:
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        startActivity(new Intent(ProgressActivity.this, GameHomepage.class));
+                        break;
                 }
 
                 return true;

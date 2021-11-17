@@ -91,6 +91,11 @@ public class QuizActivity extends AppCompatActivity {
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(QuizActivity.this,  Login.class));
                         break;
+
+                    case R.id.menu_game:
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        startActivity(new Intent(QuizActivity.this, GameHomepage.class));
+                        break;
                 }
 
                 return true;
