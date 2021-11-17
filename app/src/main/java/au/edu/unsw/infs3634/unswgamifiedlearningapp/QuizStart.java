@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -120,7 +119,7 @@ public class QuizStart extends AppCompatActivity {
             }
         });
 
-        btnSubmit = findViewById(R.id.btnSubmit);
+        btnSubmit = findViewById(R.id.btnAnswer);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

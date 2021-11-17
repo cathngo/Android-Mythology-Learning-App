@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UNSWGamifiedLearningApp">
         <activity
+            android:name=".GameWordActivity"
+            android:exported="true" />
+        <activity
             android:name=".CongratulationsPage"
             android:exported="true" />
         <activity

@@ -122,6 +122,10 @@ public class HomeActivity extends AppCompatActivity
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(HomeActivity.this, Login.class));
                         break;
+                    case R.id.menu_game:
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        startActivity(new Intent(HomeActivity.this, GameWordActivity.class));
+                        break;
                 }
 
                 return true;

@@ -2,7 +2,6 @@ package au.edu.unsw.infs3634.unswgamifiedlearningapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Database;
 import androidx.room.Room;
 
 import android.content.Intent;
@@ -20,7 +19,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
@@ -51,7 +49,7 @@ public class Register extends AppCompatActivity {
         etRegPassword = findViewById(R.id.editPasswordReg);
         txtLogin = findViewById(R.id.txtLogin);
         btnRegister = findViewById(R.id.btnRegister);
-        editFirstName = findViewById(R.id.editFirstName);
+        editFirstName = findViewById(R.id.txtAnswer);
         editLastName = findViewById(R.id.editLastName);
 
         mAuth = FirebaseAuth.getInstance();

@@ -109,12 +109,15 @@ public class QuizResult extends AppCompatActivity {
         //get the results
         Intent incomingIntent = getIntent();
         numCorrect = incomingIntent.getIntExtra("Correct",0);
-        int numIncorrect = incomingIntent.getIntExtra("Incorrect",0);
         difficulty = incomingIntent.getStringExtra("Difficulty");
+        int game = incomingIntent.getIntExtra("Game",0);
 
-        //increase quiz attempt
-        Context context = getApplicationContext();
-        LevelUp.increaseQuizAttempts(context);
+        if (game != 1) {
+            //increase quiz attempt
+            Context context = getApplicationContext();
+            LevelUp.increaseQuizAttempts(context);
+        }
+
 
         txtExp = findViewById(R.id.txtExp);
         //Add experience to the user
@@ -143,7 +146,14 @@ public class QuizResult extends AppCompatActivity {
         txtDesc = findViewById(R.id.txtDesc);
         txtDifficulty = findViewById(R.id.txtDifficulty);
 
-        txtDifficulty.setText("Quiz Difficulty: " + difficulty);
+
+
+        if (game == 1) {
+            txtDifficulty.setText("Game: Myth Unscramble");
+        } else {
+            txtDifficulty.setText("Quiz Difficulty: " + difficulty);
+        }
+
 
         progressBar.setProgress(new_prog);
         txtProgress.setText(String.valueOf(new_prog) + "%");
