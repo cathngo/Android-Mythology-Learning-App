@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.room.Room;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -17,6 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.concurrent.Executors;
 
 public class QuizResult extends AppCompatActivity {
     /** navigation menu **/
@@ -31,7 +37,12 @@ public class QuizResult extends AppCompatActivity {
     TextView txtLevel;
     TextView txtDesc;
     TextView txtDifficulty;
+    Button btnProg;
+    TextView txtExp;
 
+    int currentLevel;
+    int numCorrect;
+    String difficulty;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,12 +113,33 @@ public class QuizResult extends AppCompatActivity {
         /**navigation menu code end**/
 
 
-
         //get the results
         Intent incomingIntent = getIntent();
-        int numCorrect = incomingIntent.getIntExtra("Correct",0);
+        numCorrect = incomingIntent.getIntExtra("Correct",0);
         int numIncorrect = incomingIntent.getIntExtra("Incorrect",0);
-        String difficulty = incomingIntent.getStringExtra("Difficulty");
+        difficulty = incomingIntent.getStringExtra("Difficulty");
+
+        //increase quiz attempt
+        Context context = getApplicationContext();
+        LevelUp.increaseQuizAttempts(context);
+
+        txtExp = findViewById(R.id.txtExp);
+        //Add experience to the user
+        if (difficulty.equals("Easy")) {
+            checkIfLeveledUp(25);
+
+            txtExp.setText("You've earned 25 experience points! Check out your progress on your level or share your quiz results with others!");
+        } else if (difficulty.equals("Medium")) {
+            checkIfLeveledUp(50);
+
+            txtExp.setText("You've earned 50 experience points! Check out your progress on your level or share your quiz results with others!");
+        } else {
+            checkIfLeveledUp(75);
+            txtExp.setText("You've earned 75 experience points! Check out your progress on your level or share your quiz results with others!");
+        }
+
+
+
 
         double progress = (double)numCorrect /10 * 100;
         int new_prog = (int)progress;
@@ -148,8 +180,98 @@ public class QuizResult extends AppCompatActivity {
 
             }
         });
+        btnProg = findViewById(R.id.btnProg);
+        btnProg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(QuizResult.this, ProgressActivity.class));
+            }
+        });
+
+
+
     }
 
 
+    public void checkCurrentLevel() {
+        Context context = getApplicationContext();
+        DatabaseAll mDb;
+
+        mDb = Room.databaseBuilder(context, DatabaseAll.class, "database-all")
+                .fallbackToDestructiveMigration()
+                .build();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // user is signed in, show user data
+            String email = user.getEmail();
+
+
+            Executors.newSingleThreadExecutor().execute(new Runnable() {
+                @Override
+                public void run() {
+                    //find their current progress and level
+                    User currentUser = mDb.userDao().getUser(email);
+                    currentLevel = currentUser.getLevel();
+
+
+
+                }
+            });
+        } else {
+            // user is signed out, show sign-in form
+            Toast.makeText(context, "User has been signed out, please log in again", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void checkIfLeveledUp(int increase) {
+        Context context = getApplicationContext();
+
+        DatabaseAll mDb;
+
+        mDb = Room.databaseBuilder(context, DatabaseAll.class, "database-all")
+                .fallbackToDestructiveMigration()
+                .build();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // user is signed in, show user data
+            String email = user.getEmail();
+
+
+            Executors.newSingleThreadExecutor().execute(new Runnable() {
+                @Override
+                public void run() {
+                    //find their current progress and level
+                    User currentUser = mDb.userDao().getUser(email);
+                    int currProgress = currentUser.getProgress();
+                    int currLevel = currentUser.getLevel();
+                    int newProg = currProgress + increase;
+
+                    double newLevel = Math.floor((double)newProg/100.0);
+                    int inputLevel = (int)newLevel;
+                    int leveled = inputLevel + currLevel;
+                    System.out.println("currLevel is" + currLevel);
+                    System.out.println("currProgress is" + currProgress);
+                    System.out.println("newProg is" + newProg);
+                    System.out.println("neLevel is" + newLevel);
+                    System.out.println("inputlvl is " + inputLevel);
+                    System.out.println("leveled is" + leveled);
+                    if (inputLevel > 0) {
+
+                        Intent intent = new Intent(QuizResult.this, CongratulationsPage.class);
+                        intent.putExtra("Level", leveled);
+                        startActivity(intent);
+
+                    }
+
+                    LevelUp.lvlUserUp(context, increase);
+                }
+            });
+        } else {
+            // user is signed out, show sign-in form
+            Toast.makeText(context, "User has been signed out, please log in again", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
 }
+

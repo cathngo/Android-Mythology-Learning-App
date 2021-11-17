@@ -106,10 +106,10 @@ public class QuizStart extends AppCompatActivity {
                 //shuffle list of ans to randomise where correct ans is
                 Collections.shuffle(answers);
 
-                ansOne.setText(answers.get(0));
-                ansTwo.setText(answers.get(1));
-                ansThree.setText(answers.get(2));
-                ansFour.setText(answers.get(3));
+                ansOne.setText(Jsoup.parse(answers.get(0)).text());
+                ansTwo.setText(Jsoup.parse(answers.get(1)).text());
+                ansThree.setText(Jsoup.parse(answers.get(2)).text());
+                ansFour.setText(Jsoup.parse(answers.get(3)).text());
 
 
             }
@@ -146,7 +146,7 @@ public class QuizStart extends AppCompatActivity {
                             incorrect++;
                             System.out.println(" 1 incorrect ans selected");
                             ansOne.setBackgroundResource(R.drawable.incorrect);
-                            txtCorrectAns.setText("Incorrect! The correct answer is " + correctAns);
+                            txtCorrectAns.setText("Incorrect! The correct answer is " + (Jsoup.parse(correctAns).text()));
                         }
 
                     } else if (ansTwo.isChecked()) {
@@ -165,7 +165,7 @@ public class QuizStart extends AppCompatActivity {
                             incorrect++;
                             System.out.println(" 2 incorrect ans selected");
                             ansTwo.setBackgroundResource(R.drawable.incorrect);
-                            txtCorrectAns.setText("Incorrect! The correct answer is " + correctAns);
+                            txtCorrectAns.setText("Incorrect! The correct answer is " + (Jsoup.parse(correctAns).text()));
                         }
 
                     } else if (ansThree.isChecked()) {
@@ -184,7 +184,7 @@ public class QuizStart extends AppCompatActivity {
                             incorrect++;
                             System.out.println(" 3 incorrect ans selected");
                             ansThree.setBackgroundResource(R.drawable.incorrect);
-                            txtCorrectAns.setText("Incorrect! The correct answer is " + correctAns);
+                            txtCorrectAns.setText("Incorrect! The correct answer is " + (Jsoup.parse(correctAns).text()));
                         }
 
                     } else if (ansFour.isChecked()) {
@@ -203,7 +203,7 @@ public class QuizStart extends AppCompatActivity {
                             incorrect++;
                             System.out.println(" 4 incorrect ans selected");
                             ansFour.setBackgroundResource(R.drawable.incorrect);
-                            txtCorrectAns.setText("Incorrect! The correct answer is " + correctAns);
+                            txtCorrectAns.setText("Incorrect! The correct answer is " + (Jsoup.parse(correctAns).text()));
                         }
 
                     } else {
@@ -243,13 +243,15 @@ public class QuizStart extends AppCompatActivity {
                         //shuffle list of ans to randomise where correct ans is
                         Collections.shuffle(answers);
 
-                        ansOne.setText(answers.get(0));
+                        ansOne.setText(Jsoup.parse(answers.get(0)).text());
+                        ansTwo.setText(Jsoup.parse(answers.get(1)).text());
+                        ansThree.setText(Jsoup.parse(answers.get(2)).text());
+                        ansFour.setText(Jsoup.parse(answers.get(3)).text());
+
+
                         ansOne.setBackgroundResource(0);
-                        ansTwo.setText(answers.get(1));
                         ansTwo.setBackgroundResource(0);
-                        ansThree.setText(answers.get(2));
                         ansThree.setBackgroundResource(0);
-                        ansFour.setText(answers.get(3));
                         ansFour.setBackgroundResource(0);
 
                         //make the buttons clickable

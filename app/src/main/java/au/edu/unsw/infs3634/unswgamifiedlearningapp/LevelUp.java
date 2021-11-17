@@ -14,17 +14,15 @@ import java.util.concurrent.Executors;
 
 public class LevelUp {
 
-    //method which adds +25% to user's progress everytime module is completed, and levels the user up once reaches 100%
-    //Takes 4 modules to level up if call once every module completed. Can call multiple times if want
-    //to increase the percentage to the user's progress.
+    //method which adds increases the percentage to the user's progress. Levels the user up once reaches 100
     //to use this method, must pass in the context i.e write the code:
 
     /**
      * Context context = getApplicationContext();
-     * LevelUp.lvlUserUp(context);
+     * LevelUp.lvlUserUp(context, int increase);
      **/
 
-    public static void lvlUserUp(Context context) {
+    public static void lvlUserUp(Context context, int increase) {
 
         DatabaseAll mDb;
 
@@ -44,19 +42,16 @@ public class LevelUp {
                     User currentUser = mDb.userDao().getUser(email);
                     int currProgress = currentUser.getProgress();
                     int currLevel = currentUser.getLevel();
-                    int newProgress = currProgress + 25;
+                    int newProg = currProgress + increase;
 
-                    if (newProgress == 100) {
-                        int newLevel = currLevel + 1;
-                        newProgress = 0;
-                        currentUser.setProgress(newProgress);
-                        currentUser.setLevel(newLevel);
-                        mDb.userDao().updateUser(currentUser);
-                    } else {
-                        currentUser.setProgress(newProgress);
-                        mDb.userDao().updateUser(currentUser);
+                    double newLevel = Math.floor((double)newProg/100.0);
+                    int inputLevel = (int)newLevel;
+                    int actualprog = newProg % 100;
+                    int leveled = inputLevel + currLevel;
+                    currentUser.setProgress(actualprog);
+                    currentUser.setLevel(leveled);
+                    mDb.userDao().updateUser(currentUser);
 
-                    }
                 }
             });
         } else {
@@ -207,4 +202,11 @@ public class LevelUp {
             Toast.makeText(context, "User has been signed out, please log in again", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
+
+
+
 }
+

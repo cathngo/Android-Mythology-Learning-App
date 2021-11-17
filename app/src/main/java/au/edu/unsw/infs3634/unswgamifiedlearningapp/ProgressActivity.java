@@ -151,7 +151,9 @@ public class ProgressActivity extends AppCompatActivity {
                             txtProgress = findViewById(R.id.txtProgress);
                             txtLevel = findViewById(R.id.txtLevel);
                             txtDesc = findViewById(R.id.txtDesc);
-
+                            if (progress == 0) {
+                                progressBar.setProgress(0);
+                            }
                             progressBar.setProgress(progress);
                             txtProgress.setText(String.valueOf(progress) + "%");
                             txtLevel.setText("Level "+ String.valueOf(level));

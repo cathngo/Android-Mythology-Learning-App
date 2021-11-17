@@ -32,6 +32,7 @@ public class QuizActivity extends AppCompatActivity {
     RadioButton rHard;
     Button btnStartQuiz;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,4 +138,6 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

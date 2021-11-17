@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UNSWGamifiedLearningApp">
         <activity
+            android:name=".CongratulationsPage"
+            android:exported="true" />
+        <activity
             android:name=".QuizResult"
             android:exported="true" />
         <activity

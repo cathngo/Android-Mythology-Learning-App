@@ -40,8 +40,8 @@
             android:layout_width="96dp"
             android:layout_height="29dp"
             android:layout_marginTop="10dp"
-            android:text="Level 10"
             android:gravity="center"
+            android:text="Level 10"
             android:textColor="@color/purple_700"
             android:textSize="25dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -80,12 +80,13 @@
             android:id="@+id/btnShare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
             android:text="Share Results"
+            android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtDesc"
+            app:layout_constraintStart_toStartOf="@+id/txtDesc"
+            app:layout_constraintTop_toBottomOf="@+id/txtExp"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -112,6 +113,31 @@
             app:layout_constraintHorizontal_bias="0.481"
             app:layout_constraintStart_toStartOf="@+id/progressBar"
             app:layout_constraintTop_toBottomOf="@+id/txtLevel" />
+
+        <TextView
+            android:id="@+id/txtExp"
+            android:layout_width="313dp"
+            android:layout_height="64dp"
+            android:gravity="center"
+            android:text="You've earned 25 experience points! Check out your progress or share your results with other!"
+            android:textColor="@color/purple_700"
+            android:textSize="13dp"
+            app:layout_constraintEnd_toEndOf="@+id/txtDesc"
+            app:layout_constraintStart_toStartOf="@+id/txtDesc"
+            app:layout_constraintTop_toBottomOf="@+id/txtDesc" />
+
+        <Button
+            android:id="@+id/btnProg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View Progress"
+            android:textSize="13dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnShare"
+            app:layout_constraintEnd_toEndOf="@+id/txtDesc"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/btnShare"
+            app:layout_constraintTop_toTopOf="@+id/btnShare"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
