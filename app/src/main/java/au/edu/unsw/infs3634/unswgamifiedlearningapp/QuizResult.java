@@ -65,43 +65,36 @@ public class QuizResult extends AppCompatActivity {
                 switch (menuItem.getItemId())
                 {
                     case R.id.menu_home :
-                        Toast.makeText(getApplicationContext(),"Home Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(QuizResult.this, HomeActivity.class));
                         break;
 
                     case R.id.menu_learn:
-                        Toast.makeText(getApplicationContext(),"Learn Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(QuizResult.this, LearnActivity.class));
                         break;
 
                     case R.id.menu_notes:
-                        Toast.makeText(getApplicationContext(),"NotesPanel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(QuizResult.this, NotesActivity.class));
                         break;
 
                     case R.id.menu_quiz:
-                        Toast.makeText(getApplicationContext(),"Quiz Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(QuizResult.this,  QuizActivity.class));
                         break;
 
                     case R.id.menu_progress:
-                        Toast.makeText(getApplicationContext(),"Progress Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(QuizResult.this, ProgressActivity.class));
                         break;
 
                     case R.id.menu_friends:
-                        Toast.makeText(getApplicationContext(),"Leaderboard Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(QuizResult.this,  Leaderboard.class));
                         break;
 
                     case R.id.menu_logout:
-                        Toast.makeText(getApplicationContext(),"Logout Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(QuizResult.this, Login.class));
                         break;
@@ -205,15 +198,12 @@ public class QuizResult extends AppCompatActivity {
             // user is signed in, show user data
             String email = user.getEmail();
 
-
             Executors.newSingleThreadExecutor().execute(new Runnable() {
                 @Override
                 public void run() {
                     //find their current progress and level
                     User currentUser = mDb.userDao().getUser(email);
                     currentLevel = currentUser.getLevel();
-
-
 
                 }
             });
@@ -249,18 +239,10 @@ public class QuizResult extends AppCompatActivity {
                     double newLevel = Math.floor((double)newProg/100.0);
                     int inputLevel = (int)newLevel;
                     int leveled = inputLevel + currLevel;
-                    System.out.println("currLevel is" + currLevel);
-                    System.out.println("currProgress is" + currProgress);
-                    System.out.println("newProg is" + newProg);
-                    System.out.println("neLevel is" + newLevel);
-                    System.out.println("inputlvl is " + inputLevel);
-                    System.out.println("leveled is" + leveled);
                     if (inputLevel > 0) {
-
                         Intent intent = new Intent(QuizResult.this, CongratulationsPage.class);
                         intent.putExtra("Level", leveled);
                         startActivity(intent);
-
                     }
 
                     LevelUp.lvlUserUp(context, increase);
