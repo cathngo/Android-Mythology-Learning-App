@@ -102,21 +102,37 @@ public class GameWordActivity extends AppCompatActivity {
 
                     if (answer.equals(answerList[counter])) {
                         counter++;
-                        if (counter < 10) {
+                        if (counter <= 10) {
+                            if (counter == 10) {
+                                txtAnswer.setBackgroundResource(R.drawable.correct);
+                                correct++;
+                                txtHint.setText("Correct! You entered the right answer");
+                                Intent intent = new Intent(GameWordActivity.this, QuizResult.class);
+                                intent.putExtra("Correct", correct);
+                                intent.putExtra("Difficulty", "Easy");
+                                intent.putExtra("Game", 1);
+                                startActivity(intent);
+
+                            }
+
                             txtAnswer.setBackgroundResource(R.drawable.correct);
                             correct++;
                             txtHint.setText("Correct! You entered the right answer");
+
                             Handler handler = new Handler();
                             handler.postDelayed(new Runnable() {
                                 public void run() {
-                                    // yourMethod();
-                                    txtAnswer.setBackgroundResource(0);
-                                    txtAnswer.setText("");
-                                    txtWord.setText(questionList[counter]);
-                                    txtClue.setText(clueList[counter]);
-                                    int question = counter + 1;
-                                    txtNum.setText(String.valueOf(question) + "/10");
-                                    txtHint.setText("");
+                                    if (counter < 10) {
+                                        // yourMethod();
+                                        txtAnswer.setBackgroundResource(0);
+                                        txtAnswer.setText("");
+                                        txtWord.setText(questionList[counter]);
+                                        txtClue.setText(clueList[counter]);
+                                        int question = counter + 1;
+                                        txtNum.setText(String.valueOf(question) + "/10");
+                                        txtHint.setText("");
+                                    }
+
                                 }
                             }, 1000);
 

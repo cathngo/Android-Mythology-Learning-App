@@ -110,14 +110,14 @@ public class QuizResult extends AppCompatActivity {
         });
         /**navigation menu code end**/
 
-
+        int game = 0;
         //get the results
         Intent incomingIntent = getIntent();
         numCorrect = incomingIntent.getIntExtra("Correct",0);
         difficulty = incomingIntent.getStringExtra("Difficulty");
-        int game = incomingIntent.getIntExtra("Game",0);
+        game = incomingIntent.getIntExtra("Game",0);
 
-        if (game != 1) {
+        if (game == 0) {
             //increase quiz attempt
             Context context = getApplicationContext();
             LevelUp.increaseQuizAttempts(context);

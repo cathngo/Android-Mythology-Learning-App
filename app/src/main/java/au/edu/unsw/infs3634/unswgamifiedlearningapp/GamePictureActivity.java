@@ -50,20 +50,34 @@ public class GamePictureActivity extends AppCompatActivity {
                 if (correctList[counter] == 0) {
                     counter++;
                     //correct
-                    if (counter < 5) {
+                    if (counter <= 5) {
+                        if (counter == 5) {
+                            txtNotify.setText("Correct choice!");
+                            correct++;
+                            imgLeft.setBackgroundResource(R.drawable.correct);
+                            //end
+                            Intent intent = new Intent(GamePictureActivity.this, QuizResult.class);
+                            intent.putExtra("Correct", correct);
+                            intent.putExtra("Difficulty", "Easy");
+                            intent.putExtra("Game", 2);
+                            startActivity(intent);
+                        }
                         txtNotify.setText("Correct choice!");
                         correct++;
                         imgLeft.setBackgroundResource(R.drawable.correct);
                         Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             public void run() {
-                                int question = counter + 1;
-                                txtNumQ.setText(String.valueOf(question) + "/5");
-                                imgLeft.setBackgroundResource(0);
-                                txtNotify.setText("");
-                                txtMonsterQ.setText(questionList[counter]);
-                                imgLeft.setImageDrawable(getResources().getDrawable(leftList[counter]));
-                                imgRight.setImageDrawable(getResources().getDrawable(rightList[counter]));
+                                if (counter < 5) {
+                                    int question = counter + 1;
+                                    txtNumQ.setText(String.valueOf(question) + "/5");
+                                    imgLeft.setBackgroundResource(0);
+                                    txtNotify.setText("");
+                                    txtMonsterQ.setText(questionList[counter]);
+                                    imgLeft.setImageDrawable(getResources().getDrawable(leftList[counter]));
+                                    imgRight.setImageDrawable(getResources().getDrawable(rightList[counter]));
+                                }
+
                             }
                         }, 1000);
                     } else {
@@ -78,19 +92,32 @@ public class GamePictureActivity extends AppCompatActivity {
                 } else {
                     //incorrect
                     counter++;
-                    if (counter < 5) {
+                    if (counter <= 5) {
+                        if (counter == 5) {
+                            txtNotify.setText("incorrect choice!");
+                            imgLeft.setBackgroundResource(R.drawable.incorrect);
+                            //end
+                            Intent intent = new Intent(GamePictureActivity.this, QuizResult.class);
+                            intent.putExtra("Correct", correct);
+                            intent.putExtra("Difficulty", "Easy");
+                            intent.putExtra("Game", 2);
+                            startActivity(intent);
+                        }
                         txtNotify.setText("incorrect choice!");
                         imgLeft.setBackgroundResource(R.drawable.incorrect);
                         Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             public void run() {
-                                int question = counter + 1;
-                                txtNumQ.setText(String.valueOf(question) + "/5");
-                                imgLeft.setBackgroundResource(0);
-                                txtNotify.setText("");
-                                txtMonsterQ.setText(questionList[counter]);
-                                imgLeft.setImageDrawable(getResources().getDrawable(leftList[counter]));
-                                imgRight.setImageDrawable(getResources().getDrawable(rightList[counter]));
+                                if (counter < 5) {
+                                    int question = counter + 1;
+                                    txtNumQ.setText(String.valueOf(question) + "/5");
+                                    imgLeft.setBackgroundResource(0);
+                                    txtNotify.setText("");
+                                    txtMonsterQ.setText(questionList[counter]);
+                                    imgLeft.setImageDrawable(getResources().getDrawable(leftList[counter]));
+                                    imgRight.setImageDrawable(getResources().getDrawable(rightList[counter]));
+                                }
+
                             }
                         }, 1000);
 
@@ -117,20 +144,36 @@ public class GamePictureActivity extends AppCompatActivity {
                 if (correctList[counter] == 1) {
                     counter++;
                     //correct
-                    if (counter < 5) {
+                    if (counter <= 5) {
+                        if (counter == 5) {
+                            //last page
+                            txtNotify.setText("Correct choice!");
+                            correct++;
+                            imgRight.setBackgroundResource(R.drawable.correct);
+                            //end
+                            Intent intent = new Intent(GamePictureActivity.this, QuizResult.class);
+                            intent.putExtra("Correct", correct);
+                            intent.putExtra("Difficulty", "Easy");
+                            intent.putExtra("Game", 2);
+                            startActivity(intent);
+                        }
                         txtNotify.setText("Correct choice!");
                         correct++;
                         imgRight.setBackgroundResource(R.drawable.correct);
                         Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             public void run() {
-                                int question = counter + 1;
-                                txtNumQ.setText(String.valueOf(question) + "/5");
-                                imgRight.setBackgroundResource(0);
-                                txtNotify.setText("");
-                                txtMonsterQ.setText(questionList[counter]);
-                                imgLeft.setImageDrawable(getResources().getDrawable(leftList[counter]));
-                                imgRight.setImageDrawable(getResources().getDrawable(rightList[counter]));
+                                if (counter < 5) {
+                                    int question = counter + 1;
+                                    txtNumQ.setText(String.valueOf(question) + "/5");
+                                    imgRight.setBackgroundResource(0);
+                                    txtNotify.setText("");
+                                    txtMonsterQ.setText(questionList[counter]);
+                                    imgLeft.setImageDrawable(getResources().getDrawable(leftList[counter]));
+                                    imgRight.setImageDrawable(getResources().getDrawable(rightList[counter]));
+
+                                }
+
                             }
                         }, 1000);
                     } else {
@@ -145,19 +188,33 @@ public class GamePictureActivity extends AppCompatActivity {
                 } else {
                     //incorrect
                     counter++;
-                    if (counter < 5) {
+                    if (counter <= 5) {
+                        if (counter == 5) {
+                            txtNotify.setText("incorrect choice!");
+                            imgRight.setBackgroundResource(R.drawable.incorrect);
+                            //end
+                            Intent intent = new Intent(GamePictureActivity.this, QuizResult.class);
+                            intent.putExtra("Correct", correct);
+                            intent.putExtra("Difficulty", "Easy");
+                            intent.putExtra("Game", 2);
+                            startActivity(intent);
+
+                        }
                         txtNotify.setText("incorrect choice!");
                         imgRight.setBackgroundResource(R.drawable.incorrect);
                         Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             public void run() {
-                                int question = counter + 1;
-                                txtNumQ.setText(String.valueOf(question) + "/5");
-                                imgRight.setBackgroundResource(0);
-                                txtNotify.setText("");
-                                txtMonsterQ.setText(questionList[counter]);
-                                imgLeft.setImageDrawable(getResources().getDrawable(leftList[counter]));
-                                imgRight.setImageDrawable(getResources().getDrawable(rightList[counter]));
+                                if (counter < 5) {
+                                    int question = counter + 1;
+                                    txtNumQ.setText(String.valueOf(question) + "/5");
+                                    imgRight.setBackgroundResource(0);
+                                    txtNotify.setText("");
+                                    txtMonsterQ.setText(questionList[counter]);
+                                    imgLeft.setImageDrawable(getResources().getDrawable(leftList[counter]));
+                                    imgRight.setImageDrawable(getResources().getDrawable(rightList[counter]));
+                                }
+
                             }
                         }, 1000);
 
