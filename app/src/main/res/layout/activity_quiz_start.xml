@@ -93,6 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="Next Question"
+            app:cornerRadius="15dp"
             app:layout_constraintEnd_toEndOf="@+id/txtCorrectAns"
             app:layout_constraintStart_toEndOf="@+id/btnAnswer"
             app:layout_constraintTop_toBottomOf="@+id/txtCorrectAns" />
@@ -128,6 +129,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Submit"
+            app:cornerRadius="15dp"
             app:layout_constraintBottom_toBottomOf="@+id/btnNxt"
             app:layout_constraintStart_toStartOf="@+id/txtCorrectAns"
             app:layout_constraintTop_toTopOf="@+id/btnNxt" />

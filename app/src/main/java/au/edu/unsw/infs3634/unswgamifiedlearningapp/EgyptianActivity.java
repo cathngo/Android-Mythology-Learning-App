@@ -51,43 +51,36 @@ public class EgyptianActivity extends AppCompatActivity implements View.OnClickL
                 switch (menuItem.getItemId())
                 {
                     case R.id.menu_home :
-                        Toast.makeText(getApplicationContext(),"Home Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(EgyptianActivity.this, HomeActivity.class));
                         break;
 
                     case R.id.menu_learn:
-                        Toast.makeText(getApplicationContext(),"Learn Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(EgyptianActivity.this,LearnActivity.class));
                         break;
 
                     case R.id.menu_notes:
-                        Toast.makeText(getApplicationContext(),"NotesPanel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(EgyptianActivity.this,NotesActivity.class));
                         break;
 
                     case R.id.menu_quiz:
-                        Toast.makeText(getApplicationContext(),"Quiz Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(EgyptianActivity.this, QuizActivity.class));
                         break;
 
                     case R.id.menu_progress:
-                        Toast.makeText(getApplicationContext(),"Progress Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(EgyptianActivity.this, ProgressActivity.class));
 
                         break;
                     case R.id.menu_friends:
-                        Toast.makeText(getApplicationContext(),"Leaderboard Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(EgyptianActivity.this, Leaderboard.class));
                         break;
 
                     case R.id.menu_logout:
-                        Toast.makeText(getApplicationContext(),"Logout Panel is Open",Toast.LENGTH_LONG).show();
                         PageTracker.resetPageTracker();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(EgyptianActivity.this,Login.class));

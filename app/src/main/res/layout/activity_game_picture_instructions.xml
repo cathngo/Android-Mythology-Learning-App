@@ -65,6 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="PLAY"
+            app:cornerRadius="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/txtMonsterQ"
             app:layout_constraintStart_toStartOf="@+id/txtMonsterQ"
