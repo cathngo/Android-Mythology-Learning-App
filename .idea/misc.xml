@@ -3,33 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-
-        <entry key="app/src/main/res/drawable-v24/correct.xml" value="0.375" />
-        <entry key="app/src/main/res/drawable-v24/ic_search_black_24dp.xml" value="0.31145833333333334" />
-        <entry key="app/src/main/res/drawable-v24/incorrect.xml" value="0.375" />
-        <entry key="app/src/main/res/drawable-v24/scrambleBg.xml" value="0.4197916666666667" />
-        <entry key="app/src/main/res/drawable-v24/search_bg.xml" value="0.31145833333333334" />
-        <entry key="app/src/main/res/drawable/circle.xml" value="0.18802083333333333" />
         <entry key="app/src/main/res/drawable/custom_btn.xml" value="0.2611111111111111" />
         <entry key="app/src/main/res/drawable/custom_input.xml" value="0.23177083333333334" />
         <entry key="app/src/main/res/drawable/custom_welcome_btn.xml" value="0.31145833333333334" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1359375" />
         <entry key="app/src/main/res/layout/activity_egyptian.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/activity_greek.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_home3.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_leaderboard.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_learn.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_learning_egyptian.xml" value="0.10572916666666667" />
         <entry key="app/src/main/res/layout/activity_learning_greek.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_learning_other.xml" value="0.10572916666666667" />
         <entry key="app/src/main/res/layout/activity_learning_roman.xml" value="0.21388888888888888" />
-        <entry key="app/src/main/res/drawable/scramblebg.xml" value="0.3145833333333333" />
-        <entry key="app/src/main/res/layout/activity_congratulations_page.xml" value="0.29583333333333334" />
-        <entry key="app/src/main/res/layout/activity_game_homepage.xml" value="0.4036458333333333" />
-        <entry key="app/src/main/res/layout/activity_game_picture.xml" value="0.38958333333333334" />
-        <entry key="app/src/main/res/layout/activity_game_picture_instructions.xml" value="0.38958333333333334" />
-        <entry key="app/src/main/res/layout/activity_game_word.xml" value="0.38958333333333334" />
-        <entry key="app/src/main/res/layout/activity_game_word_instructions.xml" value="0.38958333333333334" />
-        <entry key="app/src/main/res/layout/activity_home3.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_leaderboard.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.262037037037037" />
         <entry key="app/src/main/res/layout/activity_notes.xml" value="0.23802083333333332" />
@@ -37,8 +23,8 @@
         <entry key="app/src/main/res/layout/activity_other.xml" value="0.11979166666666667" />
         <entry key="app/src/main/res/layout/activity_progress.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/activity_quiz.xml" value="0.2520833333333333" />
-        <entry key="app/src/main/res/layout/activity_quiz_result.xml" value="0.3171875" />
-        <entry key="app/src/main/res/layout/activity_quiz_start.xml" value="0.265625" />
+        <entry key="app/src/main/res/layout/activity_quiz_greek.xml" value="0.11979166666666667" />
+        <entry key="app/src/main/res/layout/activity_quiz_result.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_roman.xml" value="0.11979166666666667" />
         <entry key="app/src/main/res/layout/activity_topic_quiz.xml" value="0.25" />

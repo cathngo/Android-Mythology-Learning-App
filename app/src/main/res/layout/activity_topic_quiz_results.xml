@@ -12,6 +12,56 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/txtDesc2"
+            android:layout_width="324dp"
+            android:layout_height="106dp"
+            android:gravity="center"
+            android:text="You got 2 out of 10 questions correct. you should og back to the learn page to revise the content!"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textResult"
+            app:layout_constraintVertical_bias="0.138" />
+
+        <TextView
+            android:id="@+id/textResult"
+            android:layout_width="96dp"
+            android:layout_height="29dp"
+            android:gravity="center"
+            android:text="Level 10"
+            android:textColor="@color/purple_700"
+            android:textSize="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topicQuizProgressBar" />
+
+        <TextView
+            android:id="@+id/textPercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="70%"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="@+id/topicQuizProgressBar"
+            app:layout_constraintEnd_toEndOf="@+id/topicQuizProgressBar"
+            app:layout_constraintStart_toStartOf="@+id/topicQuizProgressBar"
+            app:layout_constraintTop_toTopOf="@+id/topicQuizProgressBar" />
+
+        <ProgressBar
+            android:id="@+id/topicQuizProgressBar"
+            android:layout_width="231dp"
+            android:layout_height="214dp"
+            android:indeterminateOnly="false"
+            android:progressDrawable="@drawable/circle"
+            app:layout_constraintEnd_toEndOf="@+id/resultsTitle"
+            app:layout_constraintStart_toStartOf="@+id/resultsTitle"
+            app:layout_constraintTop_toBottomOf="@+id/resultsTitle"
+            tools:progress="60" />
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -20,65 +70,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="Learn"
+            app:title="Score"
             app:titleTextColor="@color/black" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/topicResultsCV"
-            android:layout_width="365dp"
-            android:layout_height="541dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp"
+        <TextView
+            android:id="@+id/resultsTitle"
+            android:layout_width="354dp"
+            android:layout_height="101dp"
+            android:fontFamily="@font/roman"
+            android:gravity="center|center_horizontal"
+            android:text="Results"
+            android:textSize="60sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" >
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0.062" />
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/resultsTitle"
-                    android:layout_width="354dp"
-                    android:layout_height="101dp"
-                    android:fontFamily="@font/roman"
-                    android:gravity="center|center_horizontal"
-                    android:text="Results"
-                    android:textSize="60sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/resultsNumerals"
-                    android:layout_width="354dp"
-                    android:layout_height="101dp"
-                    android:layout_marginTop="52dp"
-                    android:fontFamily="@font/roman"
-                    android:gravity="center|center_horizontal"
-                    android:text="I"
-                    android:textSize="96sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.545"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/resultsTitle" />
-
-                <TextView
-                    android:id="@+id/resultsStatement"
-                    android:layout_width="350dp"
-                    android:layout_height="34dp"
-                    android:layout_marginTop="28dp"
-                    android:text="TextView"
-                    app:layout_constraintEnd_toEndOf="@+id/resultsNumerals"
-                    app:layout_constraintHorizontal_bias="0.25"
-                    app:layout_constraintStart_toStartOf="@+id/resultsNumerals"
-                    app:layout_constraintTop_toBottomOf="@+id/resultsNumerals" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+        <Button
+            android:id="@+id/button"
+            android:layout_width="209dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="24dp"
+            android:text="Back to learn"
+            app:layout_constraintEnd_toEndOf="@+id/txtDesc2"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="@+id/txtDesc2"
+            app:layout_constraintTop_toBottomOf="@+id/txtDesc2" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

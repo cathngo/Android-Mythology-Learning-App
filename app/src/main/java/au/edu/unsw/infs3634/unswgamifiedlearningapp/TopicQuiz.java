@@ -21,6 +21,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
+//Reference for some of Quiz logic: https://www.youtube.com/watch?v=vpT0eIUREC0&ab_channel=Learnoset-LearnCodingOnline
 //Reference for navigation drawer: https://www.youtube.com/watch?v=TifpldOStWI&ab_channel=MdJamal
 public class TopicQuiz extends AppCompatActivity implements View.OnClickListener {
 

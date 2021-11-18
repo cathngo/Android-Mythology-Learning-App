@@ -20,14 +20,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+
 //Reference for navigation drawer: https://www.youtube.com/watch?v=TifpldOStWI&ab_channel=MdJamal
 public class LearningRoman extends AppCompatActivity implements View.OnClickListener {
 
-    /** navigation menu **/
+    /**
+     * navigation menu
+     **/
     NavigationView nav;
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
-    /** navigation menu **/
+    /**
+     * navigation menu
+     **/
 
 
     Button nextButton, previousButton;
@@ -48,35 +53,33 @@ public class LearningRoman extends AppCompatActivity implements View.OnClickList
 
 
         /**navigation menu code start**/
-        Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        nav=(NavigationView)findViewById(R.id.navmenu);
-        drawerLayout=(DrawerLayout)findViewById(R.id.drawer);
+        nav = (NavigationView) findViewById(R.id.navmenu);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
-        toggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
-            {
-                switch (menuItem.getItemId())
-                {
-                    case R.id.menu_home :
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.menu_home:
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(LearningRoman.this, HomeActivity.class));
                         break;
 
                     case R.id.menu_learn:
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(LearningRoman.this,LearnActivity.class));
+                        startActivity(new Intent(LearningRoman.this, LearnActivity.class));
                         break;
 
                     case R.id.menu_notes:
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(LearningRoman.this,NotesActivity.class));
+                        startActivity(new Intent(LearningRoman.this, NotesActivity.class));
                         break;
 
                     case R.id.menu_quiz:
@@ -97,7 +100,7 @@ public class LearningRoman extends AppCompatActivity implements View.OnClickList
                     case R.id.menu_logout:
                         drawerLayout.closeDrawer(GravityCompat.START);
                         PageTracker.resetPageTracker();
-                        startActivity(new Intent(LearningRoman.this,Login.class));
+                        startActivity(new Intent(LearningRoman.this, Login.class));
                         break;
 
                     case R.id.menu_game:
@@ -110,7 +113,6 @@ public class LearningRoman extends AppCompatActivity implements View.OnClickList
             }
         });
         /**navigation menu code end**/
-
 
 
 //check these next buttons
@@ -126,24 +128,20 @@ public class LearningRoman extends AppCompatActivity implements View.OnClickList
         romanLearningCV.setOnClickListener(this);
 
 
-
-
     }
 
     @Override
     public void onClick(View view) {
 
 
-
         Intent intent;
         int id = view.getId();
 
 
-
-        if(id == R.id.nextButton && stringListCounter < stringIDList.length - 1){
+        if (id == R.id.nextButton && stringListCounter < stringIDList.length - 1) {
             stringListCounter++;
 
-            if(stringListCounter == stringIDList.length - 1){
+            if (stringListCounter == stringIDList.length - 1) {
                 nextButton.setText("Go to Quiz");
             }
 
@@ -154,12 +152,12 @@ public class LearningRoman extends AppCompatActivity implements View.OnClickList
             if (stringListCounter < stringIDList.length) {
                 nextButton.setText("Next");
             }
-        }else if (id == R.id.nextButton && stringListCounter == stringIDList.length - 1){
+        } else if (id == R.id.nextButton && stringListCounter == stringIDList.length - 1) {
             intent = new Intent(LearningRoman.this, TopicQuiz.class);
             intent.putExtra("Category", "Roman");
             startActivity(intent);
 
-        }else if (id ==R.id.greekLearningCV){
+        } else if (id == R.id.greekLearningCV) {
 
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.nationalgeographic.org/article/gods-and-goddesses-ancient-rome/"));
             startActivity(intent);
@@ -186,7 +184,7 @@ public class LearningRoman extends AppCompatActivity implements View.OnClickList
             }
 
         } else if (stringListCounter == 3) {
-            if (PageTracker.romanThree  == false) {
+            if (PageTracker.romanThree == false) {
                 PageTracker.romanThree = true;
                 LevelUp.increaseRomanProgress(context, 25);
             }
@@ -199,7 +197,6 @@ public class LearningRoman extends AppCompatActivity implements View.OnClickList
             }
 
         }
-
 
 
     }
