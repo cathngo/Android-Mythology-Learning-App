@@ -95,6 +95,7 @@ public class NotesActivity extends AppCompatActivity {
 
                     case R.id.menu_logout:
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        PageTracker.resetPageTracker();
                         startActivity(new Intent(NotesActivity.this,Login.class));
                         break;
 

@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-
+//Reference for navigation drawer: https://www.youtube.com/watch?v=TifpldOStWI&ab_channel=MdJamal
 public class GreekActivity extends AppCompatActivity implements View.OnClickListener {
 
     /** navigation menu **/
@@ -81,6 +81,7 @@ public class GreekActivity extends AppCompatActivity implements View.OnClickList
 
                     case R.id.menu_logout:
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        PageTracker.resetPageTracker();
                         startActivity(new Intent(GreekActivity.this,Login.class));
                         break;
 
@@ -88,6 +89,8 @@ public class GreekActivity extends AppCompatActivity implements View.OnClickList
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(GreekActivity.this, GameHomepage.class));
                         break;
+
+
                 }
 
                 return true;

@@ -111,6 +111,7 @@ public class QuizResult extends AppCompatActivity {
 
                     case R.id.menu_logout:
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        PageTracker.resetPageTracker();
                         startActivity(new Intent(QuizResult.this, Login.class));
                         break;
 

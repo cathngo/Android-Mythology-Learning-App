@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-
+//Reference for navigation drawer: https://www.youtube.com/watch?v=TifpldOStWI&ab_channel=MdJamal
 public class EgyptianActivity extends AppCompatActivity implements View.OnClickListener {
 
     /** navigation menu **/
@@ -88,8 +88,14 @@ public class EgyptianActivity extends AppCompatActivity implements View.OnClickL
 
                     case R.id.menu_logout:
                         Toast.makeText(getApplicationContext(),"Logout Panel is Open",Toast.LENGTH_LONG).show();
+                        PageTracker.resetPageTracker();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(EgyptianActivity.this,Login.class));
+                        break;
+
+                    case R.id.menu_game:
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        startActivity(new Intent(EgyptianActivity.this, GameHomepage.class));
                         break;
                 }
 

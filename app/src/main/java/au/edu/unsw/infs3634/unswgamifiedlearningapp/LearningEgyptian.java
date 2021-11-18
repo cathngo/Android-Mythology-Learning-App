@@ -8,6 +8,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-
+//Reference for navigation drawer: https://www.youtube.com/watch?v=TifpldOStWI&ab_channel=MdJamal
 public class LearningEgyptian extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -65,45 +66,44 @@ public class LearningEgyptian extends AppCompatActivity implements View.OnClickL
                 switch (menuItem.getItemId())
                 {
                     case R.id.menu_home :
-                        Toast.makeText(getApplicationContext(),"Home Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(LearningEgyptian.this, HomeActivity.class));
                         break;
 
                     case R.id.menu_learn:
-                        Toast.makeText(getApplicationContext(),"Learn Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(LearningEgyptian.this,LearnActivity.class));
                         break;
 
                     case R.id.menu_notes:
-                        Toast.makeText(getApplicationContext(),"NotesPanel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(LearningEgyptian.this,NotesActivity.class));
                         break;
 
                     case R.id.menu_quiz:
-                        Toast.makeText(getApplicationContext(),"Quiz Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(LearningEgyptian.this, QuizActivity.class));
                         break;
 
                     case R.id.menu_progress:
-                        Toast.makeText(getApplicationContext(),"Progress Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(LearningEgyptian.this, ProgressActivity.class));
 
                         break;
                     case R.id.menu_friends:
-                        Toast.makeText(getApplicationContext(),"Leaderboard Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(LearningEgyptian.this, Leaderboard.class));
                         break;
 
                     case R.id.menu_logout:
-                        Toast.makeText(getApplicationContext(),"Logout Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        PageTracker.resetPageTracker();
                         startActivity(new Intent(LearningEgyptian.this,Login.class));
+                        break;
+
+                    case R.id.menu_game:
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        startActivity(new Intent(LearningEgyptian.this, GameHomepage.class));
                         break;
                 }
 
@@ -167,7 +167,35 @@ public class LearningEgyptian extends AppCompatActivity implements View.OnClickL
         egyptText.setText(stringIDList[stringListCounter]);
         egyptPicture.setImageDrawable(getResources().getDrawable(pictureIDList[stringListCounter]));
 
+        Context context = getApplicationContext();
+        if (stringListCounter == 1) {
+            //mark the first page as completed
+            if (PageTracker.egyptianOne == false) {
+                PageTracker.egyptianOne = true;
+                //add progress to greek module by 25%
+                LevelUp.increaseEgyptianProgress(context, 20);
+            }
+        } else if (stringListCounter == 2) {
+            if (PageTracker.egyptianTwo == false) {
+                PageTracker.egyptianTwo = true;
+                //add progress to greek module by 25%
+                LevelUp.increaseEgyptianProgress(context, 20);
+            }
 
+        } else if (stringListCounter == 3) {
+            if (PageTracker.egyptianThree  == false) {
+                PageTracker.egyptianThree = true;
+                LevelUp.increaseEgyptianProgress(context, 20);
+            }
+
+        } else if (stringListCounter == 4) {
+
+            if (PageTracker.egyptianFour == false) {
+                PageTracker.egyptianFour = true;
+                LevelUp.increaseEgyptianProgress(context, 20);
+            }
+
+        }
 
 
 

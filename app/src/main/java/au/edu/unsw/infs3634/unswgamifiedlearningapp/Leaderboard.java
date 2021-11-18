@@ -97,6 +97,7 @@ public class Leaderboard extends AppCompatActivity implements LeaderboardAdapter
 
                     case R.id.menu_logout:
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        PageTracker.resetPageTracker();
                         startActivity(new Intent(Leaderboard.this, Login.class));
                         break;
 
