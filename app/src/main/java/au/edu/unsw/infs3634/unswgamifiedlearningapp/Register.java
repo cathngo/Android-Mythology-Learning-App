@@ -2,7 +2,6 @@ package au.edu.unsw.infs3634.unswgamifiedlearningapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Database;
 import androidx.room.Room;
 
 import android.content.Intent;
@@ -20,12 +19,11 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
 //Reference for sign up using Firebase: https://www.youtube.com/watch?v=iSsa9OlQJms&ab_channel=SoftCoding
-
+//Reference for saving data to room database: Week 9 Tutorial Covid Tracker: https://github.com/INFS3634/Covid19Tracker
 public class Register extends AppCompatActivity {
     TextInputEditText etUserName;
     TextInputEditText etRegEmail;
@@ -35,8 +33,6 @@ public class Register extends AppCompatActivity {
     TextView txtLogin;
     Button btnRegister;
 
-    boolean username_taken = false;
-
     FirebaseAuth mAuth;
 
     private DatabaseAll mDb;
@@ -45,13 +41,12 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-
         etUserName = findViewById(R.id.editUserName);
         etRegEmail = findViewById(R.id.editEmailReg);
         etRegPassword = findViewById(R.id.editPasswordReg);
         txtLogin = findViewById(R.id.txtLogin);
         btnRegister = findViewById(R.id.btnRegister);
-        editFirstName = findViewById(R.id.editFirstName);
+        editFirstName = findViewById(R.id.txtAnswer);
         editLastName = findViewById(R.id.editLastName);
 
         mAuth = FirebaseAuth.getInstance();
@@ -68,41 +63,39 @@ public class Register extends AppCompatActivity {
         mDb = Room.databaseBuilder(getApplicationContext(), DatabaseAll.class, "database-all")
                 .fallbackToDestructiveMigration()
                 .build();
-
-        //resetDatabase();
     }
 
     private void createUser(){
+        //Get username, email, password and name inputted from user
         String username = etUserName.getText().toString();
         String email = etRegEmail.getText().toString();
         String password = etRegPassword.getText().toString();
         String fName = editFirstName.getText().toString();
         String lName = editLastName.getText().toString();
 
-
-
+        //Check if user left any input boxes empty
         if (TextUtils.isEmpty(email)){
+            //Alert user has not filled out required information
             etRegEmail.setError("Email cannot be empty");
             etRegEmail.requestFocus();
         }else if (TextUtils.isEmpty(password)) {
+            //Alert user has not filled out required information
             etRegPassword.setError("Password cannot be empty");
             etRegPassword.requestFocus();
-        }
-        else if (username_taken == true) {
-            etUserName.setError("Username is already taken");
-            etUserName.requestFocus();
-        }else{
+        } else{
+            //Register user to firebase
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
                         Toast.makeText(Register.this, "User registered successfully", Toast.LENGTH_SHORT).show();
-                        //insert into room Dao
+                        //insert into user into room database
                         DatabaseAll db  = DatabaseAll.getDbInstance(Register.this);
                         String id = mAuth.getCurrentUser().getUid();
-                        insertUserIntoDatabase(email,fName, lName, id, password, 0, username, 0,0,0,0,0);
+                        insertUserIntoDatabase(email,fName, lName, id, password, 0, username, 0,0,0,0,0, -1, -1);
                         startActivity(new Intent(Register.this, Login.class));
                     }else{
+                        //Alert user was not registered successfully
                         Toast.makeText(Register.this, "Registration Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -110,41 +103,24 @@ public class Register extends AppCompatActivity {
         }
     }
 
-    private void insertUserIntoDatabase(String email, String firstName, String lastName, String id, String password, int level, String username, int progress,int greekProgress, int egyptianProgress, int romanProgress, int quizAttempts) {
+    //Helper method to insert the user into room database given their inputted information
+    private void insertUserIntoDatabase(String email, String firstName, String lastName, String id, String password, int level, String username, int progress,int greekProgress, int egyptianProgress, int romanProgress, int quizAttempts, int mythScore, int monsterScore) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                mDb.userDao().insert(new User(email, firstName, lastName, id, password, level, username, progress, greekProgress, egyptianProgress, romanProgress, quizAttempts));
-
-                List<User> userAccounts = mDb.userDao().getUsers();
-                for(User userAccount : userAccounts) {
-                    Log.d("Printing user emails" , userAccount.getEmail());
-                    Log.d("Printing user first nname" , userAccount.getFirstName());
-                    Log.d("Printing user last nnane" , userAccount.getLastName());
-                    Log.d("Printing user uid" , userAccount.getUserId());
-                    Log.d("Printing user pw" , userAccount.getPassword());
-                    Log.d("Printing user level" , String.valueOf(userAccount.getLevel()));
-                    Log.d("Printing username" , String.valueOf(userAccount.getUsername()));
-                    Log.d("Printing overall progress" , String.valueOf(userAccount.getProgress()));
-                    Log.d("Printing greek progress" , String.valueOf(userAccount.getGreekProgress()));
-                    Log.d("Printing egyptian progress" , String.valueOf(userAccount.getEgyptianProgress()));
-                    Log.d("Printing roman progress" , String.valueOf(userAccount.getRomanProgress()));
-                    Log.d("Printing quiz attempts" , String.valueOf(userAccount.getQuizAttempts()));
-
-                }
+                //Create new user object with the user's inputted information
+                mDb.userDao().insert(new User(email, firstName, lastName, id, password, level, username, progress, greekProgress, egyptianProgress, romanProgress, quizAttempts, mythScore, monsterScore));
             }
         });
 
     }
 
-
+    //Helper method to reset the room database
     private void resetDatabase() {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 mDb.userDao().deleteAll();
-
-
             }
         });
     }

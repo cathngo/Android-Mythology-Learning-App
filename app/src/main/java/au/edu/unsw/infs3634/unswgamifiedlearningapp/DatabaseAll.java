@@ -5,6 +5,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import android.content.Context;
 
+//Database to store the user's information
 @Database(entities = {User.class}, version = 1)
 public abstract class DatabaseAll extends RoomDatabase {
 

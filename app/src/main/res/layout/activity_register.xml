@@ -31,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editFirstName"
+            android:id="@+id/txtAnswer"
             android:layout_width="310dp"
             android:layout_height="50dp"
             android:background="@drawable/custom_input"

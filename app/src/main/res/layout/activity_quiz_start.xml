@@ -94,7 +94,7 @@
             android:layout_marginStart="16dp"
             android:text="Next Question"
             app:layout_constraintEnd_toEndOf="@+id/txtCorrectAns"
-            app:layout_constraintStart_toEndOf="@+id/btnSubmit"
+            app:layout_constraintStart_toEndOf="@+id/btnAnswer"
             app:layout_constraintTop_toBottomOf="@+id/txtCorrectAns" />
 
         <TextView
@@ -124,7 +124,7 @@
             app:layout_constraintTop_toBottomOf="@+id/txtQuestion" />
 
         <Button
-            android:id="@+id/btnSubmit"
+            android:id="@+id/btnAnswer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Submit"

@@ -18,7 +18,11 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+//Reference for navigation drawer: https://www.youtube.com/watch?v=TifpldOStWI&ab_channel=MdJamal
 public class QuizActivity extends AppCompatActivity {
+    /**This class includes the implementation of the Quiz homepage where the user selected the
+     * difficulty level they would like to be tested on**/
+
     /** navigation menu **/
     NavigationView nav;
     ActionBarDrawerToggle toggle;
@@ -91,6 +95,11 @@ public class QuizActivity extends AppCompatActivity {
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(QuizActivity.this,  Login.class));
                         break;
+
+                    case R.id.menu_game:
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        startActivity(new Intent(QuizActivity.this, GameHomepage.class));
+                        break;
                 }
 
                 return true;
@@ -100,16 +109,19 @@ public class QuizActivity extends AppCompatActivity {
 
 
 
-        //radio button values
+        //Radio buttons
         rEasy = findViewById(R.id.ansOne);
         rMedium = findViewById(R.id.ansTwo);
         rHard = findViewById(R.id.ansThree);
 
+        //Check if user pressed start button
         btnStartQuiz = findViewById(R.id.btnStartQuiz);
         btnStartQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                //Check which radio button the user selected for level of difficulty
+                //Then pass the difficulty level as an intent to the quiz class
+                //Then switch pages to the quiz start page
                 if (rEasy.isChecked()) {
                     System.out.println("easy selected");
                     Intent intent = new Intent(QuizActivity.this, QuizStart.class);
@@ -126,6 +138,7 @@ public class QuizActivity extends AppCompatActivity {
                     intent.putExtra("Difficulty", "Hard");
                     startActivity(intent);
                 } else {
+                    //Alert user has not selected a diffiulty level
                     Toast.makeText(QuizActivity.this, "Please select a difficulty", Toast.LENGTH_SHORT).show();
                 }
             }

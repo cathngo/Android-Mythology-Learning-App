@@ -16,6 +16,10 @@
         android:icon="@drawable/quiz_icon"
         android:title="Quiz"/>
 
+    <item android:id="@+id/menu_game"
+        android:icon="@drawable/console_menu"
+        android:title="Games"/>
+
     <item android:id="@+id/menu_progress"
         android:icon="@drawable/progress_icon"
         android:title="Progress"/>
