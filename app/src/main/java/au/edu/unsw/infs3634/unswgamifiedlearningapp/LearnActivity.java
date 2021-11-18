@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-
+//Reference for navigation drawer: https://www.youtube.com/watch?v=TifpldOStWI&ab_channel=MdJamal
 public class LearnActivity extends AppCompatActivity implements View.OnClickListener {
     /** navigation menu **/
     NavigationView nav;
@@ -82,6 +82,7 @@ public class LearnActivity extends AppCompatActivity implements View.OnClickList
 
                     case R.id.menu_logout:
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        PageTracker.resetPageTracker();
                         startActivity(new Intent(LearnActivity.this,Login.class));
                         break;
 

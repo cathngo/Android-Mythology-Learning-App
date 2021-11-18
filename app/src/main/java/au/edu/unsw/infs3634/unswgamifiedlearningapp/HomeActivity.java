@@ -116,10 +116,10 @@ public class HomeActivity extends AppCompatActivity
                     case R.id.menu_friends:
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(HomeActivity.this, Leaderboard.class));
-
                         break;
                     case R.id.menu_logout:
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        PageTracker.resetPageTracker();
                         startActivity(new Intent(HomeActivity.this, Login.class));
                         break;
 

@@ -111,6 +111,7 @@ public class ProgressActivity extends AppCompatActivity {
 
                     case R.id.menu_logout:
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        PageTracker.resetPageTracker();
                         startActivity(new Intent(ProgressActivity.this, Login.class));
                         break;
 
