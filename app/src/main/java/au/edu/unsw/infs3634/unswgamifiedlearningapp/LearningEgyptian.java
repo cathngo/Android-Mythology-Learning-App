@@ -9,14 +9,18 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class RomanActivity extends AppCompatActivity implements View.OnClickListener {
+public class LearningEgyptian extends AppCompatActivity implements View.OnClickListener {
 
 
     /** navigation menu **/
@@ -25,14 +29,22 @@ public class RomanActivity extends AppCompatActivity implements View.OnClickList
     DrawerLayout drawerLayout;
     /** navigation menu **/
 
-    CardView romanLearnCV, romanQuizCV, romanNotesCV;
+    Button nextButton, previousButton;
+
+    int stringIDList[] = {R.string.Egyptlearn1, R.string.Egyptlearn2, R.string.Egyptlearn3, R.string.Egyptlearn4, R.string.Egyptlearn5};
+    int stringListCounter = 0;
+    int pictureIDList[] = {R.drawable.osiris, R.drawable.isis, R.drawable.horus, R.drawable.anubis_learn, R.drawable.hathor};
+
+
+    TextView egyptText;
+    ImageView egyptPicture;
+    CardView egyptLearningCV;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_roman);
-
+        setContentView(R.layout.activity_learning_egyptian);
 
 
         /**navigation menu code start**/
@@ -55,43 +67,43 @@ public class RomanActivity extends AppCompatActivity implements View.OnClickList
                     case R.id.menu_home :
                         Toast.makeText(getApplicationContext(),"Home Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(RomanActivity.this, HomeActivity.class));
+                        startActivity(new Intent(LearningEgyptian.this, HomeActivity.class));
                         break;
 
                     case R.id.menu_learn:
                         Toast.makeText(getApplicationContext(),"Learn Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(RomanActivity.this,LearnActivity.class));
+                        startActivity(new Intent(LearningEgyptian.this,LearnActivity.class));
                         break;
 
                     case R.id.menu_notes:
                         Toast.makeText(getApplicationContext(),"NotesPanel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(RomanActivity.this,NotesActivity.class));
+                        startActivity(new Intent(LearningEgyptian.this,NotesActivity.class));
                         break;
 
                     case R.id.menu_quiz:
                         Toast.makeText(getApplicationContext(),"Quiz Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(RomanActivity.this, QuizActivity.class));
+                        startActivity(new Intent(LearningEgyptian.this, QuizActivity.class));
                         break;
 
                     case R.id.menu_progress:
                         Toast.makeText(getApplicationContext(),"Progress Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(RomanActivity.this, ProgressActivity.class));
+                        startActivity(new Intent(LearningEgyptian.this, ProgressActivity.class));
 
                         break;
                     case R.id.menu_friends:
                         Toast.makeText(getApplicationContext(),"Leaderboard Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(RomanActivity.this, Leaderboard.class));
+                        startActivity(new Intent(LearningEgyptian.this, Leaderboard.class));
                         break;
 
                     case R.id.menu_logout:
                         Toast.makeText(getApplicationContext(),"Logout Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        startActivity(new Intent(RomanActivity.this,Login.class));
+                        startActivity(new Intent(LearningEgyptian.this,Login.class));
                         break;
                 }
 
@@ -100,15 +112,16 @@ public class RomanActivity extends AppCompatActivity implements View.OnClickList
         });
         /**navigation menu code end**/
 
+        nextButton = (Button) findViewById(R.id.nextButton);
+        nextButton.setOnClickListener(this);
+        previousButton = (Button) findViewById(R.id.previousButton);
+        previousButton.setOnClickListener(this);
 
 
-        romanLearnCV = (CardView) findViewById(R.id.romanLearnCV);
-        romanLearnCV.setOnClickListener(this);
-        romanQuizCV = (CardView) findViewById(R.id.romanQuizCV);
-        romanQuizCV.setOnClickListener(this);
-        romanNotesCV = (CardView) findViewById(R.id.romanNotesCV);
-        romanNotesCV.setOnClickListener(this);
-
+        egyptText = (TextView) findViewById(R.id.egyptText);
+        egyptPicture = (ImageView) findViewById(R.id.egyptPicture);
+        egyptLearningCV = (CardView) findViewById(R.id.egyptLearningCV);
+        egyptLearningCV.setOnClickListener(this);
 
 
 
@@ -118,23 +131,43 @@ public class RomanActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
 
 
-        Intent intent;
 
-        switch (view.getId()){
-            case R.id.romanLearnCV:
-                intent = new Intent(RomanActivity.this, LearningRoman.class);
-                startActivity(intent);
-                break;
-            case R.id.romanQuizCV:
-                intent = new Intent(RomanActivity.this, TopicQuiz.class);
-                intent.putExtra("Category", "Roman");
-                startActivity(intent);
-                break;
-            case R.id.romanNotesCV:
-                intent = new Intent(RomanActivity.this, NotesActivity.class);
-                startActivity(intent);
-                break;
+        Intent intent;
+        int id = view.getId();
+
+
+
+        if(id == R.id.nextButton && stringListCounter < stringIDList.length - 1){
+            stringListCounter++;
+
+            if(stringListCounter == stringIDList.length - 1){
+                nextButton.setText("Go to Quiz");
+            }
+
+
+        } else if (id == R.id.previousButton && stringListCounter > 0) {
+            stringListCounter--;
+
+            if (stringListCounter < stringIDList.length) {
+                nextButton.setText("Next");
+            }
+        }else if (id == R.id.nextButton && stringListCounter == stringIDList.length - 1){
+            intent = new Intent(LearningEgyptian.this, TopicQuiz.class);
+            intent.putExtra("Category", "Egyptian");
+            startActivity(intent);
+
+        }else if (id ==R.id.egyptLearningCV){
+
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.britannica.com/list/11-egyptian-gods-and-goddesses"));
+            startActivity(intent);
+
+
         }
+
+        egyptText.setText(stringIDList[stringListCounter]);
+        egyptPicture.setImageDrawable(getResources().getDrawable(pictureIDList[stringListCounter]));
+
+
 
 
 
