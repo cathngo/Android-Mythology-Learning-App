@@ -74,9 +74,9 @@ public class GamePictureActivity extends AppCompatActivity {
 
     //Check if the user selected the left of right image, notifies if the image selected
     //was correct and then moves on to the next question.
-    public void checkIfImageSelected(ImageView image, int correct) {
+    public void checkIfImageSelected(ImageView image, int correctAns) {
         //Check if the correct answer is the left image
-        if (correctList[counter] == correct) {
+        if (correctList[counter] == correctAns) {
             //Increase the counter to skip to the next question
             counter++;
             //Check if there are still questions left
