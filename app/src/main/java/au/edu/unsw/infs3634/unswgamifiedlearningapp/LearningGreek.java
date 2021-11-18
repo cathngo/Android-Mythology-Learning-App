@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +37,7 @@ public class LearningGreek extends AppCompatActivity implements View.OnClickList
 
     TextView greekText;
     ImageView greekPicture;
+    CardView greekLearningCV;
 
 
     @Override
@@ -112,8 +115,12 @@ public class LearningGreek extends AppCompatActivity implements View.OnClickList
         nextButton.setOnClickListener(this);
         previousButton = (Button) findViewById(R.id.previousButton);
         previousButton.setOnClickListener(this);
+
+
         greekText = (TextView) findViewById(R.id.greekText);
         greekPicture = (ImageView) findViewById(R.id.greekPicture);
+        greekLearningCV = (CardView) findViewById(R.id.greekLearningCV);
+        greekLearningCV.setOnClickListener(this);
 
 
 
@@ -144,6 +151,12 @@ public class LearningGreek extends AppCompatActivity implements View.OnClickList
             }
         }else if (id == R.id.nextButton && stringListCounter == stringIDList.length - 1){
             intent = new Intent(LearningGreek.this, TopicQuiz.class);
+            intent.putExtra("Category", "Greek");
+            startActivity(intent);
+
+        }else if (id ==R.id.greekLearningCV){
+
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.theoi.com/greek-mythology/olympian-gods.html"));
             startActivity(intent);
 
 

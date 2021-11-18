@@ -13,6 +13,45 @@
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/greekLearnCV"
+            android:layout_width="313dp"
+            android:layout_height="127dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0.25">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/greekLearnPic"
+                    android:layout_width="251dp"
+                    android:layout_height="90dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/apollo" />
+
+                <TextView
+                    android:id="@+id/greekLearnTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roman"
+                    android:text="Learn"
+                    app:layout_constraintEnd_toEndOf="@+id/greekLearnPic"
+                    app:layout_constraintStart_toStartOf="@+id/greekLearnPic"
+                    app:layout_constraintTop_toBottomOf="@+id/greekLearnPic" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:id="@+id/greekQuizCV"
             android:layout_width="313dp"
             android:layout_height="127dp"
@@ -24,44 +63,31 @@
             app:layout_constraintTop_toBottomOf="@+id/greekLearnCV"
             app:layout_constraintVertical_bias="0.11">
 
-            <LinearLayout
-                android:layout_width="265dp"
-                android:layout_height="87dp"
-                android:layout_gravity="center|center_vertical"
-                android:orientation="vertical">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:id="@+id/greekQuizPic"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="251dp"
+                    android:layout_height="90dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/brain" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/greekLearnCV"
-            android:layout_width="313dp"
-            android:layout_height="127dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:layout_constraintVertical_bias="0.167">
-
-            <LinearLayout
-                android:layout_width="249dp"
-                android:layout_height="92dp"
-                android:layout_gravity="center|center_vertical"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/greeklearnPic"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@drawable/apollo" />
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/greekQuizTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roman"
+                    android:text="Quiz"
+                    app:layout_constraintEnd_toEndOf="@+id/greekQuizPic"
+                    app:layout_constraintStart_toStartOf="@+id/greekQuizPic"
+                    app:layout_constraintTop_toBottomOf="@+id/greekQuizPic" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -76,18 +102,31 @@
             app:layout_constraintTop_toBottomOf="@+id/greekQuizCV"
             app:layout_constraintVertical_bias="0.216">
 
-            <LinearLayout
-                android:layout_width="265dp"
-                android:layout_height="87dp"
-                android:layout_gravity="center|center_vertical"
-                android:orientation="vertical">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:id="@+id/greekNotesPic"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="251dp"
+                    android:layout_height="90dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/post_it" />
-            </LinearLayout>
+
+                <TextView
+                    android:id="@+id/greekNotesTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roman"
+                    android:text="Notes"
+                    app:layout_constraintEnd_toEndOf="@+id/greekNotesPic"
+                    app:layout_constraintStart_toStartOf="@+id/greekNotesPic"
+                    app:layout_constraintTop_toBottomOf="@+id/greekNotesPic" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.appcompat.widget.Toolbar
@@ -100,6 +139,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:title="Learn"
             app:titleTextColor="@color/black" />
+
+        <TextView
+            android:id="@+id/greekTitle"
+            android:layout_width="221dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/roman"
+            android:gravity="center|center_horizontal"
+            android:text="GREEK"
+            android:textSize="54sp"
+            app:layout_constraintBottom_toTopOf="@+id/greekLearnCV"
+            app:layout_constraintEnd_toEndOf="@+id/greekLearnCV"
+            app:layout_constraintStart_toStartOf="@+id/greekLearnCV"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

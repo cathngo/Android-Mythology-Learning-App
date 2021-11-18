@@ -13,6 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UNSWGamifiedLearningApp">
         <activity
+            android:name=".LearningOther"
+            android:exported="true" />
+        <activity
+            android:name=".LearningEgyptian"
+            android:exported="true" />
+        <activity
+            android:name=".LearningRoman"
+            android:exported="true" />
+        <activity
+            android:name=".TopicQuizResults"
+            android:exported="true" />
+        <activity
             android:name=".GameHomepage"
             android:exported="true" />
         <activity
