@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class CongratulationsPage extends AppCompatActivity {
+    /**This class includes the implementation of the congratulations page notifying the user has leveled up**/
     TextView message;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
