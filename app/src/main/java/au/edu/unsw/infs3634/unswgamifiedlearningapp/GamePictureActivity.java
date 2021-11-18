@@ -134,9 +134,6 @@ public class GamePictureActivity extends AppCompatActivity {
 
         });
 
-
-
-
         imgRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,7 +168,6 @@ public class GamePictureActivity extends AppCompatActivity {
                                     txtMonsterQ.setText(questionList[counter]);
                                     imgLeft.setImageDrawable(getResources().getDrawable(leftList[counter]));
                                     imgRight.setImageDrawable(getResources().getDrawable(rightList[counter]));
-
                                 }
 
                             }
@@ -214,7 +210,6 @@ public class GamePictureActivity extends AppCompatActivity {
                                     imgLeft.setImageDrawable(getResources().getDrawable(leftList[counter]));
                                     imgRight.setImageDrawable(getResources().getDrawable(rightList[counter]));
                                 }
-
                             }
                         }, 1000);
 

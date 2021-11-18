@@ -98,7 +98,7 @@ public class Register extends AppCompatActivity {
                         //insert into room Dao
                         DatabaseAll db  = DatabaseAll.getDbInstance(Register.this);
                         String id = mAuth.getCurrentUser().getUid();
-                        insertUserIntoDatabase(email,fName, lName, id, password, 0, username, 0,0,0,0,0);
+                        insertUserIntoDatabase(email,fName, lName, id, password, 0, username, 0,0,0,0,0, -1, -1);
                         startActivity(new Intent(Register.this, Login.class));
                     }else{
                         Toast.makeText(Register.this, "Registration Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -108,11 +108,11 @@ public class Register extends AppCompatActivity {
         }
     }
 
-    private void insertUserIntoDatabase(String email, String firstName, String lastName, String id, String password, int level, String username, int progress,int greekProgress, int egyptianProgress, int romanProgress, int quizAttempts) {
+    private void insertUserIntoDatabase(String email, String firstName, String lastName, String id, String password, int level, String username, int progress,int greekProgress, int egyptianProgress, int romanProgress, int quizAttempts, int mythScore, int monsterScore) {
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                mDb.userDao().insert(new User(email, firstName, lastName, id, password, level, username, progress, greekProgress, egyptianProgress, romanProgress, quizAttempts));
+                mDb.userDao().insert(new User(email, firstName, lastName, id, password, level, username, progress, greekProgress, egyptianProgress, romanProgress, quizAttempts, mythScore, monsterScore));
 
                 List<User> userAccounts = mDb.userDao().getUsers();
                 for(User userAccount : userAccounts) {

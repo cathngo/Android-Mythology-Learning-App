@@ -44,6 +44,13 @@ public class User {
     @ColumnInfo(name = "quizAttempts")
     private int quizAttempts;
 
+    @ColumnInfo(name = "mythScore")
+    private int mythScore;
+
+    @ColumnInfo(name = "monsterScore")
+    private int monsterScore;
+
+
 
     public int getProgress() {
         return progress;
@@ -61,7 +68,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String email, String firstName, String lastName, String userId, String password, int level, String username, int progress, int greekProgress, int egyptianProgress, int romanProgress, int quizAttempts){
+    public User(String email, String firstName, String lastName, String userId, String password, int level, String username, int progress, int greekProgress, int egyptianProgress, int romanProgress, int quizAttempts, int mythScore, int monsterScore){
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -74,6 +81,8 @@ public class User {
         this.egyptianProgress = egyptianProgress;
         this.romanProgress = romanProgress;
         this.quizAttempts = quizAttempts;
+        this.mythScore = mythScore;
+        this.monsterScore = monsterScore;
     }
 
     @NonNull
@@ -155,5 +164,21 @@ public class User {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public int getMythScore() {
+        return mythScore;
+    }
+
+    public void setMythScore(int mythScore) {
+        this.mythScore = mythScore;
+    }
+
+    public int getMonsterScore() {
+        return monsterScore;
+    }
+
+    public void setMonsterScore(int monsterScore) {
+        this.monsterScore = monsterScore;
     }
 }

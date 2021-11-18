@@ -54,6 +54,8 @@ public class HomeActivity extends AppCompatActivity
     TextView pcGreece;
     TextView pcRoman;
     TextView txtQuiz;
+    TextView txtMyth;
+    TextView txtMonster;
 
 
 
@@ -154,6 +156,11 @@ public class HomeActivity extends AppCompatActivity
 
                     int quizAttempts = currentUser.getQuizAttempts();
 
+                    int mythScore = currentUser.getMythScore();
+                    int monsterScore = currentUser.getMonsterScore();
+
+
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -161,6 +168,7 @@ public class HomeActivity extends AppCompatActivity
                             txtLevelDisplay = findViewById(R.id.txtLevelDisplay);
                             txtNameDisplay = findViewById(R.id.txtNameDisplay);
                             txtUsernameDisplay = findViewById(R.id.txtUsernameDisplay);
+
 
                             txtLevelDisplay.setText("Level " + level);
                             txtNameDisplay.setText(name);
@@ -184,6 +192,23 @@ public class HomeActivity extends AppCompatActivity
                             //set quiz attempts
                             txtQuiz = findViewById(R.id.txtQuiz);
                             txtQuiz.setText("Total Attempts: " + String.valueOf(quizAttempts) + " tries");
+
+                            //set game stats
+                            txtMonster = findViewById(R.id.txtMonster);
+                            txtMyth = findViewById(R.id.txtMyth);
+
+                            //set as empty if user hasnt played yet
+                            if (mythScore == -1) {
+                                txtMyth.setText("Myth Scramble: N/A");
+                            } else {
+                                txtMyth.setText("Myth Scramble: " + mythScore + "/10");
+                            }
+
+                            if (monsterScore == -1) {
+                                txtMonster.setText("Monster Match: N/A");
+                            } else {
+                                txtMonster.setText("Monster Match: "+monsterScore + "/5");
+                            }
 
                         }
                     });

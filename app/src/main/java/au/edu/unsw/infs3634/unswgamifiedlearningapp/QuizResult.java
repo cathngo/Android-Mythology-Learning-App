@@ -124,6 +124,17 @@ public class QuizResult extends AppCompatActivity {
         }
 
 
+        //if played game, save the game stats
+        if (game == 1) {
+            Context context = getApplicationContext();
+            LevelUp.saveMythScore(context, numCorrect);
+
+        } else if (game == 2) {
+            Context context = getApplicationContext();
+            LevelUp.saveMonsterScore(context, numCorrect);
+        }
+
+
         txtExp = findViewById(R.id.txtExp);
         //Add experience to the user
         if (difficulty.equals("Easy")) {

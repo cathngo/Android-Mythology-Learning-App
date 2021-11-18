@@ -204,6 +204,71 @@ public class LevelUp {
     }
 
 
+    //This method saves the user's score in games for myth
+    /**
+     * Context context = getApplicationContext();
+     * LevelUp.increaseQuizAttempts(context);
+     **/
+
+    public static void saveMythScore(Context context, int correct) {
+
+        DatabaseAll mDb;
+
+        mDb = Room.databaseBuilder(context, DatabaseAll.class, "database-all")
+                .fallbackToDestructiveMigration()
+                .build();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // user is signed in, show user data
+            String email = user.getEmail();
+
+            Executors.newSingleThreadExecutor().execute(new Runnable() {
+                @Override
+                public void run() {
+                    //find their current progress and level
+                    User currentUser = mDb.userDao().getUser(email);
+                    currentUser.setMythScore(correct);
+                    mDb.userDao().updateUser(currentUser);
+                }
+            });
+        } else {
+            // user is signed out, show sign-in form
+            Toast.makeText(context, "User has been signed out, please log in again", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //This method saves the user's score in games for monster match
+    /**
+     * Context context = getApplicationContext();
+     * LevelUp.increaseQuizAttempts(context);
+     **/
+
+    public static void saveMonsterScore(Context context, int correct) {
+
+        DatabaseAll mDb;
+
+        mDb = Room.databaseBuilder(context, DatabaseAll.class, "database-all")
+                .fallbackToDestructiveMigration()
+                .build();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // user is signed in, show user data
+            String email = user.getEmail();
+
+            Executors.newSingleThreadExecutor().execute(new Runnable() {
+                @Override
+                public void run() {
+                    //find their current progress and level
+                    User currentUser = mDb.userDao().getUser(email);
+                    currentUser.setMonsterScore(correct);
+                    mDb.userDao().updateUser(currentUser);
+                }
+            });
+        } else {
+            // user is signed out, show sign-in form
+            Toast.makeText(context, "User has been signed out, please log in again", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
 
