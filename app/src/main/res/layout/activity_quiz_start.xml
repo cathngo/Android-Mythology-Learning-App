@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawer"
+    tools:openDrawer="start"
+    tools:context=".QuizActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Quiz"
+            app:titleTextColor="@color/black" />
+
+        <TextView
+            android:id="@+id/txtQuestion"
+            android:layout_width="280dp"
+            android:layout_height="145dp"
+            android:gravity="center"
+            android:text="Loading question ..."
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="281dp"
+            android:layout_height="293dp"
+            android:layout_centerInParent="true"
+            app:layout_constraintEnd_toEndOf="@+id/txtQuestion"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/txtQuestion"
+            app:layout_constraintTop_toBottomOf="@+id/txtChoose">
+
+            <RadioButton
+                android:id="@+id/ansOne"
+                android:layout_width="275dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="20dp"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="@+id/textView10"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/txt1"
+                app:layout_constraintTop_toBottomOf="@+id/txt1" />
+
+            <RadioButton
+                android:id="@+id/ansTwo"
+                android:layout_width="275dp"
+                android:layout_height="65dp"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="@+id/ansOne"
+                app:layout_constraintStart_toStartOf="@+id/ansOne"
+                app:layout_constraintTop_toBottomOf="@+id/ansOne" />
+
+            <RadioButton
+                android:id="@+id/ansThree"
+                android:layout_width="275dp"
+                android:layout_height="65dp"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="@+id/ansTwo"
+                app:layout_constraintStart_toStartOf="@+id/ansTwo"
+                app:layout_constraintTop_toBottomOf="@+id/ansTwo" />
+
+            <RadioButton
+                android:id="@+id/ansFour"
+                android:layout_width="275dp"
+                android:layout_height="65dp"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="@+id/ansTwo"
+                app:layout_constraintStart_toStartOf="@+id/ansTwo"
+                app:layout_constraintTop_toBottomOf="@+id/ansTwo" />
+
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnNxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Next Question"
+            app:layout_constraintEnd_toEndOf="@+id/txtCorrectAns"
+            app:layout_constraintStart_toEndOf="@+id/btnAnswer"
+            app:layout_constraintTop_toBottomOf="@+id/txtCorrectAns" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <TextView
+            android:id="@+id/txtChoose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text=""
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="@+id/txtQuestion"
+            app:layout_constraintHorizontal_bias="0.025"
+            app:layout_constraintStart_toStartOf="@+id/txtQuestion"
+            app:layout_constraintTop_toBottomOf="@+id/txtQuestion" />
+
+        <Button
+            android:id="@+id/btnAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            app:layout_constraintBottom_toBottomOf="@+id/btnNxt"
+            app:layout_constraintStart_toStartOf="@+id/txtCorrectAns"
+            app:layout_constraintTop_toTopOf="@+id/btnNxt" />
+
+        <TextView
+            android:id="@+id/txtCorrectAns"
+            android:layout_width="278dp"
+            android:layout_height="36dp"
+            android:text=""
+            app:layout_constraintEnd_toEndOf="@+id/radioGroup"
+            app:layout_constraintStart_toStartOf="@+id/radioGroup"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navmenu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/navheader"
+        app:menu="@menu/iconmenu"
+        tools:visibility="gone" >
+
+    </com.google.android.material.navigation.NavigationView>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

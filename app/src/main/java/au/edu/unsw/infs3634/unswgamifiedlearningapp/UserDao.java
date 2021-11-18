@@ -10,6 +10,8 @@ import androidx.room.Update;
 import java.util.List;
 @Dao
 public interface UserDao {
+    /**This interface is used to retrieve user details from room database**/
+
     @Query("SELECT * FROM User")
     List<User> getUsers();
 

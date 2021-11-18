@@ -25,14 +25,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+//Reference for navigation drawer: https://www.youtube.com/watch?v=TifpldOStWI&ab_channel=MdJamal
 public class Leaderboard extends AppCompatActivity implements LeaderboardAdapter.UserListener{
+    /**This class includes the implementation of the Leaderboard page displaying a ranking of
+     * all existing users of the app, ranked by their level**/
+
     NavigationView nav;
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
     FirebaseAuth mAuth;
     DatabaseAll mDb;
 
-    //recycler adapter
     public static LeaderboardAdapter adapter;
     private LinearLayoutManager layoutManager;
     private RecyclerView recyclerView;
@@ -63,45 +66,43 @@ public class Leaderboard extends AppCompatActivity implements LeaderboardAdapter
                 switch (menuItem.getItemId())
                 {
                     case R.id.menu_home :
-                        Toast.makeText(getApplicationContext(),"Home Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(Leaderboard.this, HomeActivity.class));
                         break;
 
                     case R.id.menu_learn:
-                        Toast.makeText(getApplicationContext(),"Learn Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(Leaderboard.this, LearnActivity.class));
                         break;
 
                     case R.id.menu_notes:
-                        Toast.makeText(getApplicationContext(),"NotesPanel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(Leaderboard.this, NotesActivity.class));
                         break;
 
                     case R.id.menu_quiz:
-                        Toast.makeText(getApplicationContext(),"Quiz Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(Leaderboard.this, QuizActivity.class));
                         break;
 
                     case R.id.menu_progress:
-                        Toast.makeText(getApplicationContext(),"Progress Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(Leaderboard.this, ProgressActivity.class));
                         break;
 
                     case R.id.menu_friends:
-                        Toast.makeText(getApplicationContext(),"Leaderboard Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(Leaderboard.this, Leaderboard.class));
                         break;
 
                     case R.id.menu_logout:
-                        Toast.makeText(getApplicationContext(),"Logout Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(Leaderboard.this, Login.class));
+                        break;
+
+                    case R.id.menu_game:
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        startActivity(new Intent(Leaderboard.this, GameHomepage.class));
                         break;
                 }
                 return true;
@@ -109,14 +110,13 @@ public class Leaderboard extends AppCompatActivity implements LeaderboardAdapter
         });
         /**navigation menu code end**/
 
-        //set recycler view
+        //set the recycler view
         setLayout();
     }
     public void setLayout() {
         mDb = Room.databaseBuilder(getApplicationContext(), DatabaseAll.class, "database-all")
                 .fallbackToDestructiveMigration()
                 .build();
-
 
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
@@ -132,18 +132,15 @@ public class Leaderboard extends AppCompatActivity implements LeaderboardAdapter
                         recyclerView = findViewById(R.id.recyclerView);
                         recyclerView.setLayoutManager(layoutManager);
                         recyclerView.setItemAnimator(new DefaultItemAnimator());
-                        //adapter = new LeaderboardAdapter(new ArrayList<User>());
                         adapter = new LeaderboardAdapter(users);
                         recyclerView.setAdapter(adapter);
                         //sort users by their rank
                         adapter.sortByRank();
-                        //adapter.setUser(users);
                     }
                 });
             }
         });
     }
-
     @Override
     public void onClick(int position) {
         System.out.println("clicked");

@@ -30,9 +30,12 @@ import java.util.concurrent.Executors;
 
 
 
-//reference https://www.youtube.com/watch?v=YsHHXg1vbcc&ab_channel=CodinginFlow
-
+//Reference for progress circle: https://www.youtube.com/watch?v=YsHHXg1vbcc&ab_channel=CodinginFlow
+//Reference for navigation drawer: https://www.youtube.com/watch?v=TifpldOStWI&ab_channel=MdJamal
+//Reference for share feature: https://www.youtube.com/watch?v=i41rmT-GDXc&t=428s&ab_channel=MASKCourses
 public class ProgressActivity extends AppCompatActivity {
+    /**This class includes the implementation of the Monster Match game**/
+
     /** navigation menu **/
     NavigationView nav;
     ActionBarDrawerToggle toggle;
@@ -48,6 +51,7 @@ public class ProgressActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     private DatabaseAll mDb;
 
+    //Global variables to store the user's progress, level and custom message for share function
     int progress;
     int level;
     String message;
@@ -68,6 +72,7 @@ public class ProgressActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        //Set on click listener to navigate to the page the user selected
         nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
@@ -75,45 +80,43 @@ public class ProgressActivity extends AppCompatActivity {
                 switch (menuItem.getItemId())
                 {
                     case R.id.menu_home :
-                        Toast.makeText(getApplicationContext(),"Home Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(ProgressActivity.this, HomeActivity.class));
                         break;
 
                     case R.id.menu_learn:
-                        Toast.makeText(getApplicationContext(),"Learn Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(ProgressActivity.this, LearnActivity.class));
                         break;
 
                     case R.id.menu_notes:
-                        Toast.makeText(getApplicationContext(),"NotesPanel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(ProgressActivity.this, NotesActivity.class));
                         break;
 
                     case R.id.menu_quiz:
-                        Toast.makeText(getApplicationContext(),"Quiz Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(ProgressActivity.this,  QuizActivity.class));
                         break;
 
                     case R.id.menu_progress:
-                        Toast.makeText(getApplicationContext(),"Progress Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(ProgressActivity.this, ProgressActivity.class));
                         break;
 
                     case R.id.menu_friends:
-                        Toast.makeText(getApplicationContext(),"Leaderboard Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(ProgressActivity.this,  Leaderboard.class));
                         break;
 
                     case R.id.menu_logout:
-                        Toast.makeText(getApplicationContext(),"Logout Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(ProgressActivity.this, Login.class));
+                        break;
+
+                    case R.id.menu_game:
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        startActivity(new Intent(ProgressActivity.this, GameHomepage.class));
                         break;
                 }
 
@@ -122,7 +125,7 @@ public class ProgressActivity extends AppCompatActivity {
         });
         /**navigation menu code end**/
 
-        /** progress bar **/
+        /** progress bar code **/
         //Get the signed in user's email
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String email = user.getEmail();
@@ -151,10 +154,13 @@ public class ProgressActivity extends AppCompatActivity {
                             txtProgress = findViewById(R.id.txtProgress);
                             txtLevel = findViewById(R.id.txtLevel);
                             txtDesc = findViewById(R.id.txtDesc);
-
+                            if (progress == 0) {
+                                progressBar.setProgress(0);
+                            }
                             progressBar.setProgress(progress);
                             txtProgress.setText(String.valueOf(progress) + "%");
                             txtLevel.setText("Level "+ String.valueOf(level));
+                            //Set custom messages based on the progress of the user
                             if (progress != 0) {
                                 txtDesc.setText(String.valueOf(progress) +"% of level " + String.valueOf(level)+ " completed. Keep up the good work!");
                                 message = "Check out my progress!" + " I have " + String.valueOf(progress) +"% of level " + String.valueOf(level)+ " completed.";
@@ -170,18 +176,18 @@ public class ProgressActivity extends AppCompatActivity {
         }
         else {
             // user is signed out, show sign-in form
-            // user is signed out, show sign-in form
             Toast.makeText(this, "User has been signed out, please log in again", Toast.LENGTH_SHORT).show();
             System.out.println("User is null");
             startActivity(new Intent(ProgressActivity.this, Login.class));
         }
 
 
-
+        //Check if user selected share option
         btnShare = findViewById(R.id.btnShare);
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Create new intent to share custom message with other applications
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
                 String Body = "download this app";
