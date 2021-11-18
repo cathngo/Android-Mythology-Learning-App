@@ -10,6 +10,7 @@ import android.widget.Button;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
+    /**This class includes the implementation of the landing page of the application**/
     private FloatingActionButton btnNext;
 
     @Override
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnNext = findViewById(R.id.btnNext);
 
+        //Switch to log in screen if user clicked on the button
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

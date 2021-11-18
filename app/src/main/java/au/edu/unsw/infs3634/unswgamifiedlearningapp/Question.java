@@ -5,6 +5,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Question {
+    /**This class is the Question class created for the OpenTrivia database usaage through api**/
 
     @SerializedName("response_code")
     @Expose

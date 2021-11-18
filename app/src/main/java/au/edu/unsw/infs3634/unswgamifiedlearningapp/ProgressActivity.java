@@ -30,9 +30,12 @@ import java.util.concurrent.Executors;
 
 
 
-//reference https://www.youtube.com/watch?v=YsHHXg1vbcc&ab_channel=CodinginFlow
-
+//Reference for progress circle: https://www.youtube.com/watch?v=YsHHXg1vbcc&ab_channel=CodinginFlow
+//Reference for navigation drawer: https://www.youtube.com/watch?v=TifpldOStWI&ab_channel=MdJamal
+//Reference for share feature: https://www.youtube.com/watch?v=i41rmT-GDXc&t=428s&ab_channel=MASKCourses
 public class ProgressActivity extends AppCompatActivity {
+    /**This class includes the implementation of the Monster Match game**/
+
     /** navigation menu **/
     NavigationView nav;
     ActionBarDrawerToggle toggle;
@@ -48,6 +51,7 @@ public class ProgressActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     private DatabaseAll mDb;
 
+    //Global variables to store the user's progress, level and custom message for share function
     int progress;
     int level;
     String message;
@@ -68,6 +72,7 @@ public class ProgressActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        //Set on click listener to navigate to the page the user selected
         nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
@@ -120,7 +125,7 @@ public class ProgressActivity extends AppCompatActivity {
         });
         /**navigation menu code end**/
 
-        /** progress bar **/
+        /** progress bar code **/
         //Get the signed in user's email
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String email = user.getEmail();
@@ -155,6 +160,7 @@ public class ProgressActivity extends AppCompatActivity {
                             progressBar.setProgress(progress);
                             txtProgress.setText(String.valueOf(progress) + "%");
                             txtLevel.setText("Level "+ String.valueOf(level));
+                            //Set custom messages based on the progress of the user
                             if (progress != 0) {
                                 txtDesc.setText(String.valueOf(progress) +"% of level " + String.valueOf(level)+ " completed. Keep up the good work!");
                                 message = "Check out my progress!" + " I have " + String.valueOf(progress) +"% of level " + String.valueOf(level)+ " completed.";
@@ -176,11 +182,12 @@ public class ProgressActivity extends AppCompatActivity {
         }
 
 
-
+        //Check if user selected share option
         btnShare = findViewById(R.id.btnShare);
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Create new intent to share custom message with other applications
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
                 String Body = "download this app";

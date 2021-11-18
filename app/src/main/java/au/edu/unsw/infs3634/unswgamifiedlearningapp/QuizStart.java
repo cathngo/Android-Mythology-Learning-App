@@ -21,8 +21,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+//Reference for RetroFit API:  Week 6 and 7 Tutorial Covid Tracker: https://github.com/INFS3634/Covid19Tracker
+//Reference for html escape: https://stackoverflow.com/questions/6502759/how-to-strip-or-escape-html-tags-in-android
 public class QuizStart extends AppCompatActivity {
-    int counter = 0;
+    /**This class includes the implementation of the quiz feature, which tests the user on questions
+     * retrieved from OpenTrivia API call based on the level of difficulty the user selected prior**/
+
     TextView txtQuestion;
     RadioButton ansOne;
     RadioButton ansTwo;
@@ -32,15 +36,25 @@ public class QuizStart extends AppCompatActivity {
     TextView txtTitle;
     TextView txtChoose;
 
+    //List which contains the answers
     List<String> answers;
+    //List which contains the results from the API call
     List<Result> results;
+    //The current question
     Result curr;
+    //Number of questions correct/incorrect
     int correct;
     int incorrect;
-    Button btnSubmit;
+
+    //Boolean values to check if the user has selected or submitted an answer
     boolean selected = false;
     boolean submit = false;
+
     TextView txtCorrectAns;
+    Button btnSubmit;
+
+    //Global variable to keep track of the current question
+    int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +69,11 @@ public class QuizStart extends AppCompatActivity {
 
         QuestionService service = retrofit.create(QuestionService.class);
 
-        //check what difficulty user selected
+        //Check what difficulty user selected
         Intent incomingIntent = getIntent();
         String difficulty = incomingIntent.getStringExtra("Difficulty");
         Call<Question> responseCall;
+        //Call the api to retrieve the questions based on the difficulty the user selected
         if (difficulty.equals("Easy")) {
             responseCall = service.getEasyQuestions();
         } else if (difficulty.equals("Medium")) {
@@ -67,18 +82,14 @@ public class QuizStart extends AppCompatActivity {
             responseCall = service.getHardQuestions();
         }
 
-
-
+        //Enqueue the response
         responseCall.enqueue(new Callback<Question>() {
             @Override
             public void onResponse(Call<Question> call, Response<Question> response) {
+                //If call was successful, get the questions and set the information based on the
+                // retrieved question
                 Question question = response.body();
                 results = question.getResults();
-                for (Result result: results) {
-                    System.out.println(result.getQuestion());
-                    System.out.println(result.getDifficulty());
-                }
-
                 txtTitle = findViewById(R.id.txtTitle);
                 txtChoose = findViewById(R.id.txtChoose);
                 txtChoose.setText("Please select your answer:");
@@ -94,17 +105,20 @@ public class QuizStart extends AppCompatActivity {
 
                 //get curr question
                 curr = results.get(counter);
+                //Get rid of any html symbols
                 String questionHtml = curr.getQuestion();
                 String htmlEscape = Jsoup.parse(questionHtml).text();
+                //Set the clean text without html symbols
                 txtQuestion.setText(htmlEscape);
 
-                //get all the ans to the question
+                //get all the answers to the question
                 answers =  curr.getIncorrectAnswers();
                 String correctAns = curr.getCorrectAnswer();
                 answers.add(correctAns);
-                //shuffle list of ans to randomise where correct ans is
+                //shuffle list of answers to randomise where correct answer is
                 Collections.shuffle(answers);
 
+                //Set the answers in the textview after html escaping (ridding of html symbols)
                 ansOne.setText(Jsoup.parse(answers.get(0)).text());
                 ansTwo.setText(Jsoup.parse(answers.get(1)).text());
                 ansThree.setText(Jsoup.parse(answers.get(2)).text());
@@ -115,10 +129,12 @@ public class QuizStart extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Question> call, Throwable t) {
+                //Api call failed
                 System.out.println("failed");
             }
         });
 
+        //Check if user clicked submit
         btnSubmit = findViewById(R.id.btnAnswer);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +144,7 @@ public class QuizStart extends AppCompatActivity {
                     //check if user selected correct ans
                     String correctAns = curr.getCorrectAnswer();
                     txtCorrectAns = findViewById(R.id.txtCorrectAns);
+                    //Check if user selected the first option
                     if (ansOne.isChecked()) {
                         //make the buttons no longer clickable
                         ansOne.setEnabled(false);
@@ -135,19 +152,23 @@ public class QuizStart extends AppCompatActivity {
                         ansThree.setEnabled(false);
                         ansFour.setEnabled(false);
                         selected = true;
+                        //Alert user selected correct answer
                         txtCorrectAns.setText("Correct! Good job");
                         if (ansOne.getText().equals(correctAns)) {
-                            System.out.println("1 correct ans selected");
+                            //Reset the views to prepare for next question
                             ansOne.setBackgroundResource(R.drawable.correct);
+                            //increment counter keeping track of correct answers submitted
                             correct++;
+                            //Alert user selected correct answer
                             txtCorrectAns.setText("Correct! You selected the right answer");
                         } else {
+                            //Reset the views to prepare for next question
                             incorrect++;
-                            System.out.println(" 1 incorrect ans selected");
                             ansOne.setBackgroundResource(R.drawable.incorrect);
+                            //Alert user selected incorrect answer
                             txtCorrectAns.setText("Incorrect! The correct answer is " + (Jsoup.parse(correctAns).text()));
                         }
-
+                        //Check if user selected the second option
                     } else if (ansTwo.isChecked()) {
                         //make the buttons no longer clickable
                         ansOne.setEnabled(false);
@@ -156,17 +177,17 @@ public class QuizStart extends AppCompatActivity {
                         ansFour.setEnabled(false);
                         selected = true;
                         if (ansTwo.getText().equals(correctAns)) {
-                            System.out.println("2 correct ans selected");
+                            //Alert user selected correct answer, reset views for next question, increment correct tracker
                             ansTwo.setBackgroundResource(R.drawable.correct);
                             correct++;
                             txtCorrectAns.setText("Correct! You selected the right answer");
                         } else {
+                            //Alert user selected incorrect answer, reset views for next question, increment incorrect tracker
                             incorrect++;
-                            System.out.println(" 2 incorrect ans selected");
                             ansTwo.setBackgroundResource(R.drawable.incorrect);
                             txtCorrectAns.setText("Incorrect! The correct answer is " + (Jsoup.parse(correctAns).text()));
                         }
-
+                        //Check if user selected the third option
                     } else if (ansThree.isChecked()) {
                         //make the buttons no longer clickable
                         ansOne.setEnabled(false);
@@ -175,17 +196,17 @@ public class QuizStart extends AppCompatActivity {
                         ansFour.setEnabled(false);
                         selected = true;
                         if (ansThree.getText().equals(correctAns)) {
-                            System.out.println("3 correct ans selected");
+                            //Alert user selected correct answer, reset views for next question, increment correct tracker
                             ansThree.setBackgroundResource(R.drawable.correct);
                             correct++;
                             txtCorrectAns.setText("Correct! You selected the right answer");
                         } else {
+                            //Alert user selected incorrect answer, reset views for next question, increment incorrect tracker
                             incorrect++;
-                            System.out.println(" 3 incorrect ans selected");
                             ansThree.setBackgroundResource(R.drawable.incorrect);
                             txtCorrectAns.setText("Incorrect! The correct answer is " + (Jsoup.parse(correctAns).text()));
                         }
-
+                        //Check if user selected the fourth option
                     } else if (ansFour.isChecked()) {
                         //make the buttons no longer clickable
                         ansOne.setEnabled(false);
@@ -194,35 +215,34 @@ public class QuizStart extends AppCompatActivity {
                         ansFour.setEnabled(false);
                         selected = true;
                         if (ansFour.getText().equals(correctAns)) {
-                            System.out.println("4 correct ans selected");
+                            //Alert user selected correct answer, reset views for next question, increment correct tracker
                             ansFour.setBackgroundResource(R.drawable.correct);
                             correct++;
                             txtCorrectAns.setText("Correct! You selected the right answer");
                         } else {
+                            //Alert user selected incorrect answer, reset views for next question, increment incorrect tracker
                             incorrect++;
-                            System.out.println(" 4 incorrect ans selected");
                             ansFour.setBackgroundResource(R.drawable.incorrect);
                             txtCorrectAns.setText("Incorrect! The correct answer is " + (Jsoup.parse(correctAns).text()));
                         }
 
                     } else {
+                        //User did not select an answer, notify user
                         Toast.makeText(QuizStart.this, "PLease select an answer", Toast.LENGTH_SHORT).show();
                     }
-
-
 
                 }
             }
         });
 
-
+        //Check if user clicked next question
         btnNxt = findViewById(R.id.btnNxt);
         btnNxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Check if user first submitted an answer before clicking next
                 if (submit == true) {
                     counter++;
-
                     if (counter < 10) {
                         txtCorrectAns.setText("");
                         submit = false;
@@ -234,7 +254,6 @@ public class QuizStart extends AppCompatActivity {
                         String htmlEscape = Jsoup.parse(questionHtml).text();
                         txtQuestion.setText(htmlEscape);
 
-
                         //get all the ans to the question
                         answers = curr.getIncorrectAnswers();
                         String correctAnswer = curr.getCorrectAnswer();
@@ -242,12 +261,13 @@ public class QuizStart extends AppCompatActivity {
                         //shuffle list of ans to randomise where correct ans is
                         Collections.shuffle(answers);
 
+                        //Set the answers based on the question and remove all html symbols
                         ansOne.setText(Jsoup.parse(answers.get(0)).text());
                         ansTwo.setText(Jsoup.parse(answers.get(1)).text());
                         ansThree.setText(Jsoup.parse(answers.get(2)).text());
                         ansFour.setText(Jsoup.parse(answers.get(3)).text());
 
-
+                        //Reset the radio button views
                         ansOne.setBackgroundResource(0);
                         ansTwo.setBackgroundResource(0);
                         ansThree.setBackgroundResource(0);
@@ -260,7 +280,7 @@ public class QuizStart extends AppCompatActivity {
                         ansFour.setEnabled(true);
 
                     } else if (counter >= 10){
-                        //quiz completed
+                        //quiz completed, take user to the results screen
                         Intent intent = new Intent(QuizStart.this, QuizResult.class);
                         intent.putExtra("Correct", correct);
                         intent.putExtra("Difficulty", difficulty);
@@ -268,6 +288,7 @@ public class QuizStart extends AppCompatActivity {
                         startActivity(intent);
                     }
                 } else{
+                    //User did not select an answer, notify them
                     Toast.makeText(QuizStart.this, "Please submit an answer", Toast.LENGTH_SHORT).show();
                 }
 

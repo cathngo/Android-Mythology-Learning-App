@@ -7,6 +7,22 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class User {
+    /**This class is the User class representing all users whom contain the following attributes:
+     * email: the user's email
+     * firstName: the user's first name
+     * lastName: the user's last name
+     * userID: A unique ID of the user
+     * password; the user's password
+     * username: the user's handle
+     * level: the user's current level
+     * progress: How much of the user's current level they have completed
+     * greekProgress: How much of the greek mythology module they have completed
+     * romanProgress: How much of the roman mythology module they have completed
+     * egyptianProgress: How much of the egyptian mythology module they have completed
+     * quizAttempts: The number of attempts for the main quiz the user has taken
+     * mythScore: The user's latest score in the Myth Scramble game
+     * monsterScore; The user's latest score in the Monster Match game**/
+
     @PrimaryKey
     @NonNull
     private String email;
@@ -49,8 +65,6 @@ public class User {
 
     @ColumnInfo(name = "monsterScore")
     private int monsterScore;
-
-
 
     public int getProgress() {
         return progress;

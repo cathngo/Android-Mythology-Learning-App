@@ -12,10 +12,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.concurrent.Executors;
 
+//Reference for obtaining user details from firebase: https://firebase.google.com/docs/auth/web/manage-users
+//Reference for obtaining data from room database: Week 9 Tutorial Covid Tracker: https://github.com/INFS3634/Covid19Tracker
 public class LevelUp {
-
-    //method which adds increases the percentage to the user's progress. Levels the user up once reaches 100
-    //to use this method, must pass in the context i.e write the code:
+    /**This class includes helper methods to update and get user information from the room database **/
 
     /**
      * Context context = getApplicationContext();
@@ -33,7 +33,6 @@ public class LevelUp {
         if (user != null) {
             // user is signed in, show user data
             String email = user.getEmail();
-
 
             Executors.newSingleThreadExecutor().execute(new Runnable() {
                 @Override

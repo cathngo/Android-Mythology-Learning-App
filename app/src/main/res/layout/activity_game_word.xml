@@ -58,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
+            android:textColor="@color/purple_700"
             android:text=""
             app:layout_constraintEnd_toEndOf="@+id/txtWord"
             app:layout_constraintHorizontal_bias="0.491"

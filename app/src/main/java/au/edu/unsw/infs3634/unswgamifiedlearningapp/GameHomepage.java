@@ -16,13 +16,19 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+//Reference for navigation drawer: https://www.youtube.com/watch?v=TifpldOStWI&ab_channel=MdJamal
 public class GameHomepage extends AppCompatActivity {
-    CardView scrambleCV, monsterCV;
+    /**This class includes the implementation of the home page displaying the list of
+     * games the user can play **/
+
     /** navigation menu **/
     NavigationView nav;
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
     /** navigation menu **/
+
+    //Cardview options
+    CardView scrambleCV, monsterCV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +44,7 @@ public class GameHomepage extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        //Set on click listener to navigate to the page the user selected
         nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
@@ -96,17 +103,21 @@ public class GameHomepage extends AppCompatActivity {
         });
         /**navigation menu code end**/
 
-        //making the cardviews clickable
+
+        //Initialise the cardview icons
         scrambleCV = (CardView) findViewById(R.id.scrambleCV);
         monsterCV = (CardView) findViewById(R.id.monsterCV);
 
+        //Switch to the myth scramble game if the user selected it
         scrambleCV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(GameHomepage.this, GameWordInstructions.class));
             }
         });
-     monsterCV.setOnClickListener(new View.OnClickListener() {
+
+        //Switch to the monster game if the user selected it
+        monsterCV.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
              startActivity(new Intent(GameHomepage.this, GamePictureInstructions.class));

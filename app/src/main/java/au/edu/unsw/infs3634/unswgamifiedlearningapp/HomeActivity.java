@@ -32,8 +32,15 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.concurrent.Executors;
 
+
+//Reference for navigation drawer: https://www.youtube.com/watch?v=TifpldOStWI&ab_channel=MdJamal
+//Reference for obtaining user details from firebase: https://firebase.google.com/docs/auth/web/manage-users
+//Reference for search item: https://newbedev.com/android-edittext-finished-typing-event
+
 public class HomeActivity extends AppCompatActivity
 {
+    /**This class includes the implementation of the home page the user enters upon login**/
+
     /** navigation menu **/
     NavigationView nav;
     ActionBarDrawerToggle toggle;
@@ -57,8 +64,6 @@ public class HomeActivity extends AppCompatActivity
     TextView txtMyth;
     TextView txtMonster;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -77,6 +82,7 @@ public class HomeActivity extends AppCompatActivity
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        //Set on click listener to navigate to the page the user selected
         nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
@@ -128,7 +134,7 @@ public class HomeActivity extends AppCompatActivity
         });
         /**navigation menu code end**/
 
-
+        //Reference: https://firebase.google.com/docs/auth/web/manage-users
         //Get the signed in user's email
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -136,13 +142,13 @@ public class HomeActivity extends AppCompatActivity
             mDb = Room.databaseBuilder(getApplicationContext(), DatabaseAll.class, "database-all")
                     .fallbackToDestructiveMigration()
                     .build();
-            // user is signed in, show user data
+            //Get user's email
             String email = user.getEmail();
 
             Executors.newSingleThreadExecutor().execute(new Runnable() {
                 @Override
                 public void run() {
-                    //find their current details
+                    //Find the signed in user's current details
                     User currentUser = mDb.userDao().getUser(email);
                     String fName = currentUser.getFirstName();
                     String lName = currentUser.getLastName();
@@ -159,16 +165,13 @@ public class HomeActivity extends AppCompatActivity
                     int mythScore = currentUser.getMythScore();
                     int monsterScore = currentUser.getMonsterScore();
 
-
-
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            //set the username, name and level textviews
+                            //Set the username, name and level textviews
                             txtLevelDisplay = findViewById(R.id.txtLevelDisplay);
                             txtNameDisplay = findViewById(R.id.txtNameDisplay);
                             txtUsernameDisplay = findViewById(R.id.txtUsernameDisplay);
-
 
                             txtLevelDisplay.setText("Level " + level);
                             txtNameDisplay.setText(name);
@@ -189,24 +192,29 @@ public class HomeActivity extends AppCompatActivity
                             pcGreece.setText(String.valueOf(greekProgress + "%"));
                             pcRoman .setText(String.valueOf(romanProgress + "%"));
 
-                            //set quiz attempts
+                            //Set the textview to display the number of quiz attempts
                             txtQuiz = findViewById(R.id.txtQuiz);
                             txtQuiz.setText("Total Attempts: " + String.valueOf(quizAttempts) + " tries");
 
-                            //set game stats
+                            //Set the textview to display the number of quiz attempts
                             txtMonster = findViewById(R.id.txtMonster);
                             txtMyth = findViewById(R.id.txtMyth);
 
-                            //set as empty if user hasnt played yet
+                            //-1 indicated the user has not yet played a game
+                            //Therefore should set the score to N/A
                             if (mythScore == -1) {
                                 txtMyth.setText("Myth Scramble: N/A");
                             } else {
+                                //Otherwise, reflect the user's latest score
                                 txtMyth.setText("Myth Scramble: " + mythScore + "/10");
                             }
 
+                            //-1 indicated the user has not yet played a game
+                            //Therefore should set the score to N/A
                             if (monsterScore == -1) {
                                 txtMonster.setText("Monster Match: N/A");
                             } else {
+                                //Otherwise, reflect the user's latest score
                                 txtMonster.setText("Monster Match: "+monsterScore + "/5");
                             }
 
@@ -216,19 +224,17 @@ public class HomeActivity extends AppCompatActivity
             });
         }
         else {
-            // user is signed out, show sign-in form
+            //User is signed out, show sign-in form
             Toast.makeText(this, "User has been signed out, please log in again", Toast.LENGTH_SHORT).show();
             System.out.println("User is null");
             startActivity(new Intent(HomeActivity.this, Login.class));
         }
 
-
-        //search function
+        //Create the internet search function
         instantiateSearch();
-
     }
 
-    //reference https://newbedev.com/android-edittext-finished-typing-event
+    //Reference https://newbedev.com/android-edittext-finished-typing-event
     public void instantiateSearch() {
         searchText = findViewById(R.id.searchText);
 
@@ -241,29 +247,28 @@ public class HomeActivity extends AppCompatActivity
                                 keyEvent.getAction() == KeyEvent.ACTION_DOWN &&
                                 keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
                     if (keyEvent == null || !keyEvent.isShiftPressed()) {
-                        // the user is done typing.
+                        // User has finished typing
                         String query = String.valueOf(searchText.getText());
                         Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-                        intent.putExtra(SearchManager.QUERY, query); // query contains search string
+                        //Search the internet with the user input
+                        intent.putExtra(SearchManager.QUERY, query);
                         startActivity(intent);
-                        return true; // consume.
+                        return true;
                     }
                 }
-                return false; // pass on to other listeners.
+                return false;
             }
 
         });
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();
-
+        //Log the user out if the user is null
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null){
             startActivity(new Intent(HomeActivity.this, Login.class));
         }
     }
-
 }
