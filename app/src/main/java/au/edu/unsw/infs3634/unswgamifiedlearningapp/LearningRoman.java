@@ -178,8 +178,7 @@ public class LearningRoman extends AppCompatActivity implements View.OnClickList
         romanText.setText(stringIDList[stringListCounter]);
         romanPicture.setImageDrawable(getResources().getDrawable(pictureIDList[stringListCounter]));
 
-<<<<<<< Updated upstream
-=======
+
 
         //add progress to the specific topic for the user which is displayed on the dashboard
         Context context = getApplicationContext();
@@ -211,7 +210,7 @@ public class LearningRoman extends AppCompatActivity implements View.OnClickList
             }
 
         }
->>>>>>> Stashed changes
+
 
 
     }

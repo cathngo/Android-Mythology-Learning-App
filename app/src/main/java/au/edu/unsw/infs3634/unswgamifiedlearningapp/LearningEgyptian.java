@@ -171,8 +171,6 @@ public class LearningEgyptian extends AppCompatActivity implements View.OnClickL
         egyptText.setText(stringIDList[stringListCounter]);
         egyptPicture.setImageDrawable(getResources().getDrawable(pictureIDList[stringListCounter]));
 
-<<<<<<< Updated upstream
-=======
 
         //add progress to the specific topic for the user which is displayed on the dashboard
         Context context = getApplicationContext();
@@ -197,7 +195,6 @@ public class LearningEgyptian extends AppCompatActivity implements View.OnClickL
             }
 
         } else if (stringListCounter == 4) {
->>>>>>> Stashed changes
 
 
 

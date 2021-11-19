@@ -167,8 +167,6 @@ public class LearningGreek extends AppCompatActivity implements View.OnClickList
         greekText.setText(stringIDList[stringListCounter]);
         greekPicture.setImageDrawable(getResources().getDrawable(pictureIDList[stringListCounter]));
 
-<<<<<<< Updated upstream
-=======
 
         //add progress to the specific topic for the user which is displayed on the dashboard
         Context context = getApplicationContext();
@@ -202,6 +200,6 @@ public class LearningGreek extends AppCompatActivity implements View.OnClickList
         }
 
 
->>>>>>> Stashed changes
+
     }
 }
