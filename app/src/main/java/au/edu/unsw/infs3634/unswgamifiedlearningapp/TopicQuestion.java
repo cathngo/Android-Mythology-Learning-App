@@ -14,6 +14,8 @@ public class TopicQuestion {
     private String answer;
     private String userSelectedAnswer;
 
+
+    //constructor for the TopicQuestion class
     public TopicQuestion(String userSelectedAnswer, String question, String option1, String option2, String option3, String option4, String answer) {
 
         this.question = question;
@@ -25,6 +27,8 @@ public class TopicQuestion {
         this.userSelectedAnswer = userSelectedAnswer;
     }
 
+
+    //getters and setters
     public String getAnswer() {
         return answer;
     }
@@ -81,6 +85,9 @@ public class TopicQuestion {
         this.option4 = option4;
     }
 
+
+
+    //Add questions for each topic
 
     public static ArrayList<TopicQuestion> getGreekQuestions() {
         ArrayList<TopicQuestion> questions = new ArrayList<>();
@@ -156,6 +163,8 @@ public class TopicQuestion {
 
     }
 
+
+    //create a method that takes in the category desired and returns the matching List of questions
     public static List<TopicQuestion> getQuestions(String category){
 
         switch (category) {

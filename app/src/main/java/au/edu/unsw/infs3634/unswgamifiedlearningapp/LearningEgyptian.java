@@ -32,6 +32,8 @@ public class LearningEgyptian extends AppCompatActivity implements View.OnClickL
 
     Button nextButton, previousButton;
 
+    //make lists of that contain the string and image references of all the learning info/images
+
     int stringIDList[] = {R.string.Egyptlearn1, R.string.Egyptlearn2, R.string.Egyptlearn3, R.string.Egyptlearn4, R.string.Egyptlearn5};
     int stringListCounter = 0;
     int pictureIDList[] = {R.drawable.osiris, R.drawable.isis, R.drawable.horus, R.drawable.anubis_learn, R.drawable.hathor};
@@ -136,6 +138,7 @@ public class LearningEgyptian extends AppCompatActivity implements View.OnClickL
         int id = view.getId();
 
 
+        //determine what the buttons do and say depending on page of learning
 
         if(id == R.id.nextButton && stringListCounter < stringIDList.length - 1){
             stringListCounter++;
@@ -156,6 +159,7 @@ public class LearningEgyptian extends AppCompatActivity implements View.OnClickL
             intent.putExtra("Category", "Egyptian");
             startActivity(intent);
 
+            //cardView clicks through to specific information on the selected topic
         }else if (id ==R.id.egyptLearningCV){
 
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.britannica.com/list/11-egyptian-gods-and-goddesses"));
@@ -189,15 +193,12 @@ public class LearningEgyptian extends AppCompatActivity implements View.OnClickL
             }
 
         } else if (stringListCounter == 4) {
-
             if (PageTracker.egyptianFour == false) {
                 PageTracker.egyptianFour = true;
                 LevelUp.increaseEgyptianProgress(context, 20);
             }
 
         }
-
-
 
     }
 }

@@ -32,6 +32,8 @@ public class LearningGreek extends AppCompatActivity implements View.OnClickList
 
     Button nextButton, previousButton;
 
+
+    //make lists of that contain the string and image references of all the learning info/images
     int stringIDList[] = {R.string.Greeklearn1, R.string.Greeklearn2, R.string.Greeklearn3, R.string.Greeklearn4};
     int stringListCounter = 0;
     int pictureIDList[] = {R.drawable.zeus, R.drawable.dionysus, R.drawable.demetor, R.drawable.apollo_picture};
@@ -137,7 +139,7 @@ public class LearningGreek extends AppCompatActivity implements View.OnClickList
         int id = view.getId();
 
 
-
+        //determine what the buttons do and say depending on page of learning
         if(id == R.id.nextButton && stringListCounter < stringIDList.length - 1){
             stringListCounter++;
 
@@ -157,8 +159,8 @@ public class LearningGreek extends AppCompatActivity implements View.OnClickList
             intent.putExtra("Category", "Greek");
             startActivity(intent);
 
+            //cardView clicks through to specific information on the selected topic
         }else if (id ==R.id.greekLearningCV){
-
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.theoi.com/greek-mythology/olympian-gods.html"));
             startActivity(intent);
 
@@ -168,6 +170,7 @@ public class LearningGreek extends AppCompatActivity implements View.OnClickList
         greekText.setText(stringIDList[stringListCounter]);
         greekPicture.setImageDrawable(getResources().getDrawable(pictureIDList[stringListCounter]));
 
+        //add progress to the specific topic for the user which is displayed on the dashboard
         Context context = getApplicationContext();
         if (stringListCounter == 1) {
             //mark the first page as completed
@@ -197,7 +200,6 @@ public class LearningGreek extends AppCompatActivity implements View.OnClickList
             }
 
         }
-
 
     }
 }

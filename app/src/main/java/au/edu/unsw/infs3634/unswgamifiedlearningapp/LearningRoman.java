@@ -37,6 +37,8 @@ public class LearningRoman extends AppCompatActivity implements View.OnClickList
 
     Button nextButton, previousButton;
 
+    //make lists of that contain the string and image references of all the learning info/images
+
     int stringIDList[] = {R.string.Romanlearn1, R.string.Romanlearn2, R.string.Romanlearn3, R.string.Romanlearn4};
     int stringListCounter = 0;
     int pictureIDList[] = {R.drawable.jupiter, R.drawable.juno, R.drawable.neptune, R.drawable.romulus};
@@ -137,6 +139,7 @@ public class LearningRoman extends AppCompatActivity implements View.OnClickList
         Intent intent;
         int id = view.getId();
 
+        //determine what the buttons do and say depending on page of learning
 
         if (id == R.id.nextButton && stringListCounter < stringIDList.length - 1) {
             stringListCounter++;
@@ -157,17 +160,17 @@ public class LearningRoman extends AppCompatActivity implements View.OnClickList
             intent.putExtra("Category", "Roman");
             startActivity(intent);
 
+            //cardView clicks through to specific information on the selected topic
         } else if (id == R.id.greekLearningCV) {
-
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.nationalgeographic.org/article/gods-and-goddesses-ancient-rome/"));
             startActivity(intent);
-
-
         }
 
         romanText.setText(stringIDList[stringListCounter]);
         romanPicture.setImageDrawable(getResources().getDrawable(pictureIDList[stringListCounter]));
 
+
+        //add progress to the specific topic for the user which is displayed on the dashboard
         Context context = getApplicationContext();
         if (stringListCounter == 1) {
             //mark the first page as completed
@@ -197,7 +200,6 @@ public class LearningRoman extends AppCompatActivity implements View.OnClickList
             }
 
         }
-
 
     }
 }
