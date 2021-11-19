@@ -27,8 +27,8 @@
 
         <TextView
             android:id="@+id/txtMonsterQ"
-            android:layout_width="292dp"
-            android:layout_height="84dp"
+            android:layout_width="293dp"
+            android:layout_height="106dp"
             android:gravity="center"
             android:text="Unscramble the letters to form the name of the mythological God/Goddess given in the clue of each question."
             android:textColor="@color/black"
