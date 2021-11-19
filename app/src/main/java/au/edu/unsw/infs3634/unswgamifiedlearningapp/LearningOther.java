@@ -31,6 +31,8 @@ public class LearningOther extends AppCompatActivity implements View.OnClickList
 
     Button nextButton, previousButton;
 
+    //make lists of that contain the string and image references of all the learning info/images
+
     int stringIDList[] = {R.string.Otherlearn1, R.string.Otherlearn2, R.string.Otherlearn3, R.string.Otherlearn4, R.string.Otherlearn5, R.string.Otherlearn6};
     int stringListCounter = 0;
     int pictureIDList[] = {R.drawable.odin, R.drawable.thor_picture, R.drawable.vanir, R.drawable.japanese, R.drawable.mana, R.drawable.maui};
@@ -136,6 +138,7 @@ public class LearningOther extends AppCompatActivity implements View.OnClickList
         int id = view.getId();
 
 
+        //determine what the buttons do and say depending on page of learning
 
         if(id == R.id.nextButton && stringListCounter < stringIDList.length - 1){
             stringListCounter++;
@@ -156,6 +159,7 @@ public class LearningOther extends AppCompatActivity implements View.OnClickList
             intent.putExtra("Category", "Other");
             startActivity(intent);
 
+            //cardView clicks through to specific information based on what topic is being viewed on the specific cardview
         }else if (id ==R.id.otherLearningCV){
 
             if(stringListCounter == 0 || stringListCounter == 1 || stringListCounter == 2){
@@ -168,10 +172,6 @@ public class LearningOther extends AppCompatActivity implements View.OnClickList
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.mythencyclopedia.com/Pa-Pr/Polynesian-Mythology.html"));
                 startActivity(intent);
             }
-
-
-
-
 
 
         }

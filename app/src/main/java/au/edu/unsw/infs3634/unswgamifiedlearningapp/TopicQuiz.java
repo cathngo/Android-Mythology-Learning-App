@@ -108,7 +108,7 @@ public class TopicQuiz extends AppCompatActivity implements View.OnClickListener
         });
         /**navigation menu code end**/
 
-
+        //get the intent from the learning screen that determines the category shown
         category = getIntent().getStringExtra("Category");
         Log.d("TopicQuiz", category);
 
@@ -120,7 +120,7 @@ public class TopicQuiz extends AppCompatActivity implements View.OnClickListener
         nextButton = (Button) findViewById(R.id.nextQuestion);
 
         questionsList = TopicQuestion.getQuestions(category);
-        Log.d("Greek questions", questionsList.get(1).getQuestion());
+        Log.d("TopicQuiz", questionsList.get(1).getQuestion());
 
 
         question.setText(questionsList.get(0).getQuestion());
@@ -137,6 +137,8 @@ public class TopicQuiz extends AppCompatActivity implements View.OnClickListener
 
     }
 
+
+    //create the onClick method and make a case for each option
     @Override
     public void onClick(View view) {
 
@@ -255,6 +257,9 @@ public class TopicQuiz extends AppCompatActivity implements View.OnClickListener
 
     }
 
+
+    //create method that will be called on the onClick method.
+    //it changes the color of the correct answer and the wrong answer
     private void revealAnswer(){
 
         String answer = questionsList.get(currentQuestionPosition).getAnswer();
@@ -280,6 +285,9 @@ public class TopicQuiz extends AppCompatActivity implements View.OnClickListener
 
     }
 
+
+    //created a method that changes the question and resets the colors of the answer buttons
+    //on the last page changes the button to "Submit"
     private void changeNextQuestion(){
 
         currentQuestionPosition++;
@@ -312,7 +320,7 @@ public class TopicQuiz extends AppCompatActivity implements View.OnClickListener
             option4.setText(questionsList.get(currentQuestionPosition).getOption4());
 
 
-
+        //pass through the correct answers and the incorrect answers as an extra to the results page
         }else{
             Intent intent = new Intent(TopicQuiz.this, TopicQuizResults.class);
             intent.putExtra("Correct Answers", getCorrectAnswers());
@@ -327,6 +335,8 @@ public class TopicQuiz extends AppCompatActivity implements View.OnClickListener
         }
 
     }
+
+    //create  a method that returns an integer of the amount of questions that were answered correctly
     private int getCorrectAnswers(){
 
         int correctAnswers = 0;
@@ -345,6 +355,7 @@ public class TopicQuiz extends AppCompatActivity implements View.OnClickListener
     }
 
 
+    //same method as above but for incorrect answers
     private int getIncorrectAnswers(){
 
         int incorrectAnswers = 0;

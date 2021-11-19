@@ -31,6 +31,8 @@ public class LearningRoman extends AppCompatActivity implements View.OnClickList
 
     Button nextButton, previousButton;
 
+    //make lists of that contain the string and image references of all the learning info/images
+
     int stringIDList[] = {R.string.Romanlearn1, R.string.Romanlearn2, R.string.Romanlearn3, R.string.Romanlearn4};
     int stringListCounter = 0;
     int pictureIDList[] = {R.drawable.jupiter, R.drawable.juno, R.drawable.neptune, R.drawable.romulus};
@@ -138,6 +140,7 @@ public class LearningRoman extends AppCompatActivity implements View.OnClickList
         Intent intent;
         int id = view.getId();
 
+        //determine what the buttons do and say depending on page of learning
 
 
         if(id == R.id.nextButton && stringListCounter < stringIDList.length - 1){
@@ -159,7 +162,12 @@ public class LearningRoman extends AppCompatActivity implements View.OnClickList
             intent.putExtra("Category", "Roman");
             startActivity(intent);
 
+<<<<<<< Updated upstream
         }else if (id ==R.id.greekLearningCV){
+=======
+            //cardView clicks through to specific information on the selected topic
+        } else if (id == R.id.greekLearningCV) {
+>>>>>>> Stashed changes
 
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.nationalgeographic.org/article/gods-and-goddesses-ancient-rome/"));
             startActivity(intent);
@@ -170,6 +178,40 @@ public class LearningRoman extends AppCompatActivity implements View.OnClickList
         romanText.setText(stringIDList[stringListCounter]);
         romanPicture.setImageDrawable(getResources().getDrawable(pictureIDList[stringListCounter]));
 
+<<<<<<< Updated upstream
+=======
+
+        //add progress to the specific topic for the user which is displayed on the dashboard
+        Context context = getApplicationContext();
+        if (stringListCounter == 1) {
+            //mark the first page as completed
+            if (PageTracker.romanOne == false) {
+                PageTracker.romanOne = true;
+                //add progress to greek module by 25%
+                LevelUp.increaseRomanProgress(context, 25);
+            }
+        } else if (stringListCounter == 2) {
+            if (PageTracker.romanTwo == false) {
+                PageTracker.romanTwo = true;
+                //add progress to greek module by 25%
+                LevelUp.increaseRomanProgress(context, 25);
+            }
+
+        } else if (stringListCounter == 3) {
+            if (PageTracker.romanThree == false) {
+                PageTracker.romanThree = true;
+                LevelUp.increaseRomanProgress(context, 25);
+            }
+
+        } else if (stringListCounter == 4) {
+
+            if (PageTracker.romanFour == false) {
+                PageTracker.romanFour = true;
+                LevelUp.increaseRomanProgress(context, 25);
+            }
+
+        }
+>>>>>>> Stashed changes
 
 
     }
