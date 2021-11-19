@@ -93,6 +93,7 @@ public class QuizActivity extends AppCompatActivity {
 
                     case R.id.menu_logout:
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        PageTracker.resetPageTracker();
                         startActivity(new Intent(QuizActivity.this,  Login.class));
                         break;
 

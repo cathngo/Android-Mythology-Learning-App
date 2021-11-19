@@ -116,10 +116,10 @@ public class HomeActivity extends AppCompatActivity
                     case R.id.menu_friends:
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(HomeActivity.this, Leaderboard.class));
-
                         break;
                     case R.id.menu_logout:
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        PageTracker.resetPageTracker();
                         startActivity(new Intent(HomeActivity.this, Login.class));
                         break;
 
@@ -185,12 +185,28 @@ public class HomeActivity extends AppCompatActivity
                             pcGreece = findViewById(R.id.pcGreece);
                             pcRoman = findViewById(R.id.pcRoman);
 
+                            //cap the progress at 100%
+                            if (egyptianProgress >= 100) {
+                                pcEgyptian.setText("100%");
+                            } else {
+                                pcEgyptian.setText(String.valueOf(egyptianProgress + "%"));
+                            }
+
+                            if (greekProgress >= 100) {
+                                pcGreece.setText("100%");
+                            } else {
+                                pcGreece.setText(String.valueOf(greekProgress + "%"));
+                            }
+
+                            if (romanProgress >= 100) {
+                                pcRoman.setText("100%");
+                            } else{
+                                pcRoman.setText(String.valueOf(romanProgress + "%"));
+                            }
+
                             barEgyptian.setProgress(egyptianProgress);
                             barGreece.setProgress(greekProgress);
                             barRoman.setProgress(romanProgress);
-                            pcEgyptian.setText(String.valueOf(egyptianProgress + "%"));
-                            pcGreece.setText(String.valueOf(greekProgress + "%"));
-                            pcRoman .setText(String.valueOf(romanProgress + "%"));
 
                             //Set the textview to display the number of quiz attempts
                             txtQuiz = findViewById(R.id.txtQuiz);

@@ -59,7 +59,7 @@ public class GamePictureActivity extends AppCompatActivity {
         imgLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkIfImageSelected(imgLeft);
+                checkIfImageSelected(imgLeft,0);
             }
         });
 
@@ -67,16 +67,16 @@ public class GamePictureActivity extends AppCompatActivity {
         imgRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkIfImageSelected(imgRight);
+                checkIfImageSelected(imgRight,1);
             }
         });
     }
 
     //Check if the user selected the left of right image, notifies if the image selected
     //was correct and then moves on to the next question.
-    public void checkIfImageSelected(ImageView image) {
+    public void checkIfImageSelected(ImageView image, int correctAns) {
         //Check if the correct answer is the left image
-        if (correctList[counter] == 0) {
+        if (correctList[counter] == correctAns) {
             //Increase the counter to skip to the next question
             counter++;
             //Check if there are still questions left

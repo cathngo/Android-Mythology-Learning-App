@@ -21,7 +21,8 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//Reference for some of Quiz logic: https://www.youtube.com/watch?v=vpT0eIUREC0&ab_channel=Learnoset-LearnCodingOnline
+//Reference for navigation drawer: https://www.youtube.com/watch?v=TifpldOStWI&ab_channel=MdJamal
 public class TopicQuiz extends AppCompatActivity implements View.OnClickListener {
 
     /** navigation menu **/
@@ -61,45 +62,44 @@ public class TopicQuiz extends AppCompatActivity implements View.OnClickListener
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.menu_home:
-                        Toast.makeText(getApplicationContext(), "Home Panel is Open", Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(TopicQuiz.this, HomeActivity.class));
                         break;
 
                     case R.id.menu_learn:
-                        Toast.makeText(getApplicationContext(), "Learn Panel is Open", Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(TopicQuiz.this, LearnActivity.class));
                         break;
 
                     case R.id.menu_notes:
-                        Toast.makeText(getApplicationContext(), "NotesPanel is Open", Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(TopicQuiz.this, NotesActivity.class));
                         break;
 
                     case R.id.menu_quiz:
-                        Toast.makeText(getApplicationContext(), "Quiz Panel is Open", Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(TopicQuiz.this, QuizActivity.class));
                         break;
 
                     case R.id.menu_progress:
-                        Toast.makeText(getApplicationContext(), "Progress Panel is Open", Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(TopicQuiz.this, ProgressActivity.class));
 
                         break;
                     case R.id.menu_friends:
-                        Toast.makeText(getApplicationContext(), "Leaderboard Panel is Open", Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(TopicQuiz.this, Leaderboard.class));
                         break;
 
                     case R.id.menu_logout:
-                        Toast.makeText(getApplicationContext(), "Logout Panel is Open", Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        PageTracker.resetPageTracker();
                         startActivity(new Intent(TopicQuiz.this, Login.class));
+                        break;
+
+                    case R.id.menu_game:
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        startActivity(new Intent(TopicQuiz.this, GameHomepage.class));
                         break;
                 }
 
@@ -325,6 +325,8 @@ public class TopicQuiz extends AppCompatActivity implements View.OnClickListener
             Intent intent = new Intent(TopicQuiz.this, TopicQuizResults.class);
             intent.putExtra("Correct Answers", getCorrectAnswers());
             intent.putExtra("Incorrect Answers", getIncorrectAnswers());
+            intent.putExtra("Incorrect Answers", getIncorrectAnswers());
+            intent.putExtra("Category", category);
 
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);

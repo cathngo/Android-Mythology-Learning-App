@@ -8,7 +8,9 @@ import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -19,7 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-
+//Reference for navigation drawer: https://www.youtube.com/watch?v=TifpldOStWI&ab_channel=MdJamal
 public class LearningGreek extends AppCompatActivity implements View.OnClickListener {
 
     /** navigation menu **/
@@ -97,6 +99,7 @@ public class LearningGreek extends AppCompatActivity implements View.OnClickList
 
                     case R.id.menu_logout:
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        PageTracker.resetPageTracker();
                         startActivity(new Intent(LearningGreek.this,Login.class));
                         break;
 
@@ -167,7 +170,6 @@ public class LearningGreek extends AppCompatActivity implements View.OnClickList
         greekText.setText(stringIDList[stringListCounter]);
         greekPicture.setImageDrawable(getResources().getDrawable(pictureIDList[stringListCounter]));
 
-
         //add progress to the specific topic for the user which is displayed on the dashboard
         Context context = getApplicationContext();
         if (stringListCounter == 1) {
@@ -198,8 +200,6 @@ public class LearningGreek extends AppCompatActivity implements View.OnClickList
             }
 
         }
-
-
 
     }
 }

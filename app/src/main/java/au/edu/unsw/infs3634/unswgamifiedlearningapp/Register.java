@@ -63,6 +63,7 @@ public class Register extends AppCompatActivity {
         mDb = Room.databaseBuilder(getApplicationContext(), DatabaseAll.class, "database-all")
                 .fallbackToDestructiveMigration()
                 .build();
+
     }
 
     private void createUser(){
@@ -82,6 +83,20 @@ public class Register extends AppCompatActivity {
             //Alert user has not filled out required information
             etRegPassword.setError("Password cannot be empty");
             etRegPassword.requestFocus();
+        }
+        else if (TextUtils.isEmpty(username)) {
+            //Alert user has not filled out required information
+            etUserName.setError("Username cannot be empty");
+            etUserName.requestFocus();
+        }else if (TextUtils.isEmpty(lName)) {
+            //Alert user has not filled out required information
+            editLastName.setError("Last name cannot be empty");
+            editLastName.requestFocus();
+        }
+        else if (TextUtils.isEmpty(fName)) {
+            //Alert user has not filled out required information
+            editFirstName.setError("First name cannot be empty");
+            editFirstName.requestFocus();
         } else{
             //Register user to firebase
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

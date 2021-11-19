@@ -96,6 +96,15 @@ public class TopicQuestion {
         questions.add(new TopicQuestion("", "Who is the god of kings and princes?", "Zeus", "Thor", "Apollo", "Dike", "Zeus"));
         questions.add(new TopicQuestion("", "What were the gods of feats and banquets?", "The Theoi Olympioi", "The Theoi Daitioi", "The Theoi Georgikoi", "The Theoi Iatrikoi", "The Theoi Daitioi"));
         questions.add(new TopicQuestion("", "Who was the leader of the gods of agriculture?", "Zeus", "Hestia", "Demetor", "Poseidon", "Demetor"));
+        questions.add(new TopicQuestion("", "Who is the god of wine?", "Zeus", "Dionysus", "Apollo", "Dike", "Dionysus"));
+        questions.add(new TopicQuestion("", "Who was the goddess of feasting?", "Harmonia", "Aphrodite", "Hygeia", "Hestia", "Hestia"));
+        questions.add(new TopicQuestion("", "Who led the gods of the sea?", "Poseidon", "Aegyle", "Dike", "Epione", "Poseidon"));
+        questions.add(new TopicQuestion("", "What was Hermes god of?", "Crabs", "Food", "Marketplace", "Commerce", "Commerce"));
+        questions.add(new TopicQuestion("", "Which god is also known as protecter of the home?", "Poseidon", "Zeus", "Iaso", "Aceso", "Zeus"));
+
+
+
+
 
         return questions;
 

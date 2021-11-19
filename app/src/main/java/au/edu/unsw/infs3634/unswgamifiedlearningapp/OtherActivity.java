@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-
+//Reference for navigation drawer: https://www.youtube.com/watch?v=TifpldOStWI&ab_channel=MdJamal
 public class OtherActivity extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -52,45 +52,44 @@ public class OtherActivity extends AppCompatActivity implements View.OnClickList
                 switch (menuItem.getItemId())
                 {
                     case R.id.menu_home :
-                        Toast.makeText(getApplicationContext(),"Home Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(OtherActivity.this, HomeActivity.class));
                         break;
 
                     case R.id.menu_learn:
-                        Toast.makeText(getApplicationContext(),"Learn Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(OtherActivity.this,LearnActivity.class));
                         break;
 
                     case R.id.menu_notes:
-                        Toast.makeText(getApplicationContext(),"NotesPanel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(OtherActivity.this,NotesActivity.class));
                         break;
 
                     case R.id.menu_quiz:
-                        Toast.makeText(getApplicationContext(),"Quiz Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(OtherActivity.this, QuizActivity.class));
                         break;
 
                     case R.id.menu_progress:
-                        Toast.makeText(getApplicationContext(),"Progress Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(OtherActivity.this, ProgressActivity.class));
 
                         break;
                     case R.id.menu_friends:
-                        Toast.makeText(getApplicationContext(),"Leaderboard Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(OtherActivity.this, Leaderboard.class));
                         break;
 
                     case R.id.menu_logout:
-                        Toast.makeText(getApplicationContext(),"Logout Panel is Open",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        PageTracker.resetPageTracker();
                         startActivity(new Intent(OtherActivity.this,Login.class));
+                        break;
+
+                    case R.id.menu_game:
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        startActivity(new Intent(OtherActivity.this, GameHomepage.class));
                         break;
                 }
 

@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="44dp"
-            android:text="Select Difficulty"
+            android:text="Select Difficulty:"
             android:textColor="@color/black"
             android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="@+id/textView10"
@@ -82,28 +82,43 @@
             android:id="@+id/textView10"
             android:layout_width="320dp"
             android:layout_height="79dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="Ready to test yourself? This is the ultimate quiz that will test you
 on every topic."
             android:textColor="@color/black"
             android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
         <Button
             android:id="@+id/btnStartQuiz"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="324dp"
+            android:layout_height="48dp"
             android:layout_marginBottom="92dp"
             android:text="Start Quiz"
+            app:cornerRadius="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/radioGroup"
             app:layout_constraintHorizontal_bias="0.019"
             app:layout_constraintStart_toStartOf="@+id/txt1"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup"
             app:layout_constraintVertical_bias="0.161" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="46dp"
+            android:textSize="35dp"
+            android:gravity="center"
+            android:text="Ultimate Quiz"
+            android:fontFamily="@font/roman"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

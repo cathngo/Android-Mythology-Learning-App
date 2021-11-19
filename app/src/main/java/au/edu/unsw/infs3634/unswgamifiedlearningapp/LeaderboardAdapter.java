@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,17 +42,27 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         //Set the views with the respective user's information including their name, level
         //username, rank.
         User user = users.get(position);
+        //only display top 5
+        if (position < 5) {
+            String firstName = user.getFirstName();
+            String lastName = user.getLastName();
+            String name = firstName + " " + lastName;
+            System.out.println("username is " + name);
+            String level = String.valueOf(user.getLevel());
+            String username = user.getUsername();
+            holder.txtName.setText(name);
+            holder.txtLevel.setText("Level " + level);
+            holder.txtUsername.setText(username);
+            holder.txtRank.setText(String.valueOf(position + 1 + "."));
 
-        String firstName = user.getFirstName();
-        String lastName = user.getLastName();
-        String name = firstName + " " + lastName;
-        System.out.println("username is " + name);
-        String level = String.valueOf(user.getLevel());
-        String username = user.getUsername();
-        holder.txtName.setText(name);
-        holder.txtLevel.setText("Level " + level);
-        holder.txtUsername.setText(username);
-        holder.txtRank.setText(String.valueOf(position + 1 + "."));
+        } else {
+            holder.txtName.setText("");
+            holder.txtLevel.setText("");
+            holder.txtUsername.setText("");
+            holder.txtRank.setText("");
+            holder.imgProfile.setImageDrawable(null);
+        }
+
     }
 
     //Return size of the users list
@@ -67,6 +78,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         TextView txtName;
         TextView txtLevel;
         TextView txtUsername;
+        ImageView imgProfile;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
@@ -75,6 +87,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
             txtLevel = itemView.findViewById(R.id.txtLevel);
             txtRank = itemView.findViewById(R.id.txtRank);
             txtUsername = itemView.findViewById(R.id.txtUsername);
+            imgProfile = itemView.findViewById(R.id.imgProfile);
             itemView.setOnClickListener(this);
         }
 
